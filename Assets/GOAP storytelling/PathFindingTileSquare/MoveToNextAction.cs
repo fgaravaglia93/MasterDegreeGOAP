@@ -142,7 +142,7 @@ public class MoveToNextAction : MonoBehaviour
                // Debug.Log("collisione");
             }
                 
-            transform.GetComponent<Person>().targetReached = true;
+            transform.GetComponent<PersonalityAgent>().targetReached = true;
             followPath = false;
         }
 

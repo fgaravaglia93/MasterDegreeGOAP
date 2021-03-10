@@ -2,49 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DeliverPotion : GoapAction
+public class DeliverPotion : PersonalityAction
 {
 
-    private bool deliver = false;
-    //private WorkStation workstation; // where we forge tools
-    private float startTime = 0;
-    public float duration = 2; // seconds
     private Transform targetDeliver;
 
     public DeliverPotion()
     {
         AddPrecondition("potionIsReady", true);
         AddEffect("potionIsDelivered", true);
-    }
 
-    public override void OnReset()
-    {
-        deliver = false;
-        // workstation = null;
-        startTime = 0;
-    }
-
-    public override bool Perform(GameObject agent)
-    {
-        if (startTime == 0)
-        {
-            startTime = Time.time;
-            DisplayController.instance.ShowOnConsole("Action: Deliver potion");
-        }
-
-        if (Time.time - startTime > duration)
-        {
-            // finished forging a tool
-            deliver = true;
-            Debug.Log("Deliver Potion: Potion Delivered");
-            
-        }
-        return true;
-    }
-
-    public override bool IsDone()
-    {
-        return deliver;
+        console = console + "Deliver potion";
     }
 
     public override bool RequiresInRange()

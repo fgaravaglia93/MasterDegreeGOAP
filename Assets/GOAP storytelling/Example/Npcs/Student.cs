@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Student : Person
+public class Student : PersonalityAgent
 {
     /**
 	 * Our only goal will ever be to chop logs.

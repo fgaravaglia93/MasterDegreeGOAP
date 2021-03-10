@@ -65,22 +65,28 @@ public class DisplayController : MonoBehaviour
 
     public void ChangeMoodToJoy()
     {
-        npc.GetComponent<Person>().durationChange = 0.5f;
+        npc.GetComponent<PersonalityAgent>().durationActionInfluence = 0.5f;
         npc.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/tile_npc_joy");
 
     }
 
     public void ChangeMoodToSad()
     {
-        npc.GetComponent<Person>().durationChange = 2f;
+        npc.GetComponent<PersonalityAgent>().durationActionInfluence = 2f;
         npc.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/tile_npc_sad");
     }
 
     public void ChangeMoodToFear()
     {
-        npc.GetComponent<Person>().durationChange = 2f;
         npc.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/tile_npc_fear");
         StartCoroutine("CooldownFear");
+    }
+
+    public void ChangeMoodToAngry()
+    {
+        npc.GetComponent<PersonalityAgent>().durationActionInfluence = 0.5f;
+        npc.GetComponent<PersonalityAgent>().successActionInfluence = 0.5f;
+        npc.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/tile_npc_angry");
     }
 
     IEnumerator CooldownFear()

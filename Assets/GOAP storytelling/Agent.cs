@@ -156,10 +156,19 @@ public class Agent : MonoBehaviour
 
 		GoapAction action = m_currentActions.Peek();
         if(action.IsDone()) {
-			m_currentActions.Dequeue();
-		}
 
-		if(HasActionPlan()) {
+            if (action.CalculateSuccess()) 
+                m_currentActions.Dequeue();
+            else
+            {
+                Debug.Log("Action failed, repeat");
+                action.OnReset();
+            }
+
+            
+        }
+
+        if (HasActionPlan()) {
 
 			action = m_currentActions.Peek();
 			bool inRange = action.RequiresInRange() ? action.InRange : true;
@@ -189,7 +198,7 @@ public class Agent : MonoBehaviour
         if(m_eqsEventOccurred) {
             //FRA
             GetComponent<MoveToNextAction>().followPath = false;
-            GetComponent<Person>().pathCalculated = false;
+            GetComponent<PersonalityAgent>().pathCalculated = false;
             //FRA to put aside
             Debug.Log("<color=yellow>EQS Event Occurred: Recaculate Plan</color>");
             DisplayController.instance.ChangeMoodToFear();

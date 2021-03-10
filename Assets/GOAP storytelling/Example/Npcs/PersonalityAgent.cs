@@ -8,7 +8,9 @@ using System.Collections.Generic;
  * the createGoalState() method that will populate the goal for the GOAP
  * planner.
  */
-public abstract class Person : MonoBehaviour, IGoap
+public enum Mood {Neutral, Joy, Sad, Angry, Fear, Disgust}
+
+public abstract class PersonalityAgent : MonoBehaviour, IGoap
 {
     const float minPathUpdateTime = 0.3f;
     const float pathUpdateMoveThreshold = 0.5f;
@@ -16,19 +18,16 @@ public abstract class Person : MonoBehaviour, IGoap
     public float moveSpeed = 1;
     public bool workstationFree;
     public bool targetReached;
-    public float durationChange = 1;
 
+    //Emotions and change on actions parameters
+    public Mood mood;
+    public float durationActionInfluence = 1;
+    public float successActionInfluence = 1;
+
+    //Movement on a Tilemap
     public TileNode start;
     public TileNode end;
-
     public bool pathCalculated;
-
-    // public Dictionary<HexTile, int> tilesEQSCosts = new Dictionary<HexTile, int>();
-
-    void Start()
-    {
-
-    }
 
     /**
 	 * Key-Value data that will feed the GOAP actions and system while planning.
@@ -37,8 +36,7 @@ public abstract class Person : MonoBehaviour, IGoap
     {
         HashSet<KeyValuePair<string, bool>> worldData = new HashSet<KeyValuePair<string, bool>>();
 
-        //nel mio esempio voglio solo fare i test sulla vicinanza
-        // persona vicina? (in range)
+   
         // worldData.Add(new KeyValuePair<string, bool>("hasSomething, (condition)));
         worldData.Add(new KeyValuePair<string, bool>("hasIngredient", false));
         worldData.Add(new KeyValuePair<string, bool>("workstationIsFree", workstationFree));
@@ -53,6 +51,7 @@ public abstract class Person : MonoBehaviour, IGoap
     /**
 	 * Implement in subclasses
 	 */
+
     public abstract Goal CreateGoalStates();
     public abstract GoalStack GetAllGoals();
 

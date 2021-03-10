@@ -33,6 +33,8 @@ public abstract class GoapAction : MonoBehaviour
 
 	public abstract bool RequiresInRange();
 
+    public abstract bool CalculateSuccess();
+
 	public void Reset() {
 		_inRange = false;
 		target = null;
