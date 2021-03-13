@@ -10,6 +10,8 @@ TagManager:
   - Pot
   - Spider
   - Delivery
+  - Helper
+  - Book
   layers:
   - Default
   - TransparentFX

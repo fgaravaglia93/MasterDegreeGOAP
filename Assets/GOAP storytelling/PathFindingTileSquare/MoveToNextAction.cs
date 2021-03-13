@@ -132,7 +132,8 @@ public class MoveToNextAction : MonoBehaviour
     {
        
         if (collision.gameObject.tag == "Wardrobe" || collision.gameObject.tag == "Workstation" || collision.gameObject.tag == "Fridge"
-            || collision.gameObject.tag == "Pot" || collision.gameObject.tag == "Delivery")
+            || collision.gameObject.tag == "Pot" || collision.gameObject.tag == "Delivery" || collision.gameObject.tag == "Book"
+            || collision.gameObject.tag == "Helper")
         {
             Debug.Log("Collisione"+ collision.gameObject.tag);
             if (collision.gameObject.tag == "Delivery")
@@ -142,7 +143,7 @@ public class MoveToNextAction : MonoBehaviour
                // Debug.Log("collisione");
             }
                 
-            transform.GetComponent<PersonalityAgent>().targetReached = true;
+            transform.GetComponent<HogwartsStudent>().targetReached = true;
             followPath = false;
         }
 

@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEditorInternal;
 
-[CustomEditor(typeof(Agent)), CanEditMultipleObjects, ExecuteInEditMode]
+[CustomEditor(typeof(PersonalityAgent)), CanEditMultipleObjects, ExecuteInEditMode]
 public class AgentEditor : Editor
 {
 	private ReorderableList reorderableTestList;

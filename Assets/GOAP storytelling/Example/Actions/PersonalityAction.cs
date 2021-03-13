@@ -26,9 +26,9 @@ public class PersonalityAction : GoapAction
             DisplayController.instance.ShowOnConsole(console);
             GetComponentInChildren<CompletionBar>().gameObject.GetComponent<Canvas>().enabled = true;
             //GetComponentInChildren<CompletionBar>().gameObject.transform.position = new Vector3(transform.position.x,transform.position.y+1f,transform.position.z);
-            GetComponentInChildren<CompletionBar>().StartTaskBar(GetComponent<PersonalityAgent>().durationActionInfluence * duration);
+            GetComponentInChildren<CompletionBar>().StartTaskBar(GetComponent<HogwartsStudent>().durationActionInfluence * duration);
         }
-        if (Time.time - startTime > duration * GetComponent<PersonalityAgent>().durationActionInfluence)
+        if (Time.time - startTime > duration * GetComponent<HogwartsStudent>().durationActionInfluence)
         {
             performed = true;
           
@@ -62,7 +62,7 @@ public class PersonalityAction : GoapAction
 
     public override bool CalculateSuccess()
     {
-        float percentage = percentageSuccess * GetComponent<PersonalityAgent>().successActionInfluence;
+        float percentage = percentageSuccess * GetComponent<HogwartsStudent>().successActionInfluence;
         float success = Random.Range(0.0f,1.0f);
 
         if (success <= percentage)

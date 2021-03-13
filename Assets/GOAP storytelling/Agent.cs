@@ -117,9 +117,9 @@ public class Agent : MonoBehaviour
 		return m_currentActions.Count > 0;
 	}
 
-	private void IdleState(FSM fsm, GameObject agent) {
+	public virtual void IdleState(FSM fsm, GameObject agent) {
 
-		HashSet<KeyValuePair<string, bool>> worldState = m_dataProvider.getWorldState();
+        HashSet<KeyValuePair<string, bool>> worldState = m_dataProvider.getWorldState();
 		Goal goal = m_goalStack.Peek();
 		Queue<GoapAction> plan = m_planner.Plan(agent, m_availableActions, worldState, goal.GoalStates);
         print(plan.Peek().nameAction);
@@ -198,7 +198,7 @@ public class Agent : MonoBehaviour
         if(m_eqsEventOccurred) {
             //FRA
             GetComponent<MoveToNextAction>().followPath = false;
-            GetComponent<PersonalityAgent>().pathCalculated = false;
+            GetComponent<HogwartsStudent>().pathCalculated = false;
             //FRA to put aside
             Debug.Log("<color=yellow>EQS Event Occurred: Recaculate Plan</color>");
             DisplayController.instance.ChangeMoodToFear();

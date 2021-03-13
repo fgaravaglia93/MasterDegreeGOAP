@@ -18,6 +18,9 @@ public class DisplayController : MonoBehaviour
     //to redefine later
     public GameObject npc;
 
+    private float cooldownTime = 5f;
+    private int countClicks;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -28,7 +31,6 @@ public class DisplayController : MonoBehaviour
             RenderGameScene.Create();
             GameCamera.GetComponent<Camera>().targetTexture = RenderGameScene;
             RenderGameScene.name = "RT_Game";
-
         }
         else
         {
@@ -41,6 +43,7 @@ public class DisplayController : MonoBehaviour
 
     void Start()
     {
+        countClicks = 0;
         SlotCamera.GetComponent<RawImage>().texture = RenderGameScene;
         GameCamera.orthographicSize = SmallCameraSize;
     }
@@ -65,34 +68,52 @@ public class DisplayController : MonoBehaviour
 
     public void ChangeMoodToJoy()
     {
-        npc.GetComponent<PersonalityAgent>().durationActionInfluence = 0.5f;
-        npc.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/tile_npc_joy");
+        countClicks += 1;
+        print(npc.GetComponent<PersonalityAgent>().CalculateSwitchEmotionFactor(2));
+
+        if (countClicks >= npc.GetComponent<PersonalityAgent>().CalculateSwitchEmotionFactor(2))
+        {
+            npc.GetComponent<PersonalityAgent>().mood = Mood.Joy;
+            npc.GetComponent<HogwartsStudent>().durationActionInfluence = 0.5f;
+            npc.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/tile_npc_joy");
+            cooldownTime = 5f;
+            StartCoroutine("CooldownEmotion");
+            countClicks = 0;
+        }
 
     }
 
     public void ChangeMoodToSad()
     {
-        npc.GetComponent<PersonalityAgent>().durationActionInfluence = 2f;
+        npc.GetComponent<PersonalityAgent>().mood = Mood.Sad;
+        npc.GetComponent<HogwartsStudent>().durationActionInfluence = 2f;
         npc.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/tile_npc_sad");
+        cooldownTime = 5f;
+        StartCoroutine("CooldownEmotion");
     }
 
     public void ChangeMoodToFear()
     {
+        npc.GetComponent<PersonalityAgent>().mood = Mood.Fear;
         npc.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/tile_npc_fear");
-        StartCoroutine("CooldownFear");
+        cooldownTime = 2f;
+        StartCoroutine("CooldownEmotion");
     }
 
     public void ChangeMoodToAngry()
     {
-        npc.GetComponent<PersonalityAgent>().durationActionInfluence = 0.5f;
-        npc.GetComponent<PersonalityAgent>().successActionInfluence = 0.5f;
+        npc.GetComponent<PersonalityAgent>().mood = Mood.Angry;
+        npc.GetComponent<HogwartsStudent>().durationActionInfluence = 0.5f;
+        npc.GetComponent<HogwartsStudent>().successActionInfluence = 0.5f;
         npc.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/tile_npc_angry");
+        cooldownTime = 5f;
+        StartCoroutine("CooldownEmotion");
     }
 
-    IEnumerator CooldownFear()
+    IEnumerator CooldownEmotion()
     {
-
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(cooldownTime);
+        npc.GetComponent<PersonalityAgent>().mood = Mood.Neutral;
         npc.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/tile_npc");
 
     }

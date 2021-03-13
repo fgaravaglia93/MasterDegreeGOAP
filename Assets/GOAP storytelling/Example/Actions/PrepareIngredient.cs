@@ -10,10 +10,10 @@ public class PrepareIngredient : PersonalityAction
 
     public PrepareIngredient()
     {
+        AddPrecondition("recipeIsKnown", true);
         AddPrecondition("hasIngredient", true);
         AddPrecondition("workstationIsFree", true);
         AddEffect("preparedIngredient", true);
-
         console = console + "Prepare ingredient";
     }
 
@@ -28,6 +28,5 @@ public class PrepareIngredient : PersonalityAction
         targetPrepare = GameObject.FindGameObjectsWithTag("Workstation")[0].transform;
         target = targetPrepare.gameObject;
         return target != null;
-
     }
 }

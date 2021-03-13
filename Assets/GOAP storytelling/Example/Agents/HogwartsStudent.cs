@@ -8,9 +8,8 @@ using System.Collections.Generic;
  * the createGoalState() method that will populate the goal for the GOAP
  * planner.
  */
-public enum Mood {Neutral, Joy, Sad, Angry, Fear, Disgust}
 
-public abstract class PersonalityAgent : MonoBehaviour, IGoap
+public abstract class HogwartsStudent : MonoBehaviour, IGoap
 {
     const float minPathUpdateTime = 0.3f;
     const float pathUpdateMoveThreshold = 0.5f;
@@ -19,8 +18,9 @@ public abstract class PersonalityAgent : MonoBehaviour, IGoap
     public bool workstationFree;
     public bool targetReached;
 
+    
+
     //Emotions and change on actions parameters
-    public Mood mood;
     public float durationActionInfluence = 1;
     public float successActionInfluence = 1;
 
@@ -39,12 +39,12 @@ public abstract class PersonalityAgent : MonoBehaviour, IGoap
    
         // worldData.Add(new KeyValuePair<string, bool>("hasSomething, (condition)));
         worldData.Add(new KeyValuePair<string, bool>("hasIngredient", false));
+        worldData.Add(new KeyValuePair<string, bool>("recipeIsKnown", false));
         worldData.Add(new KeyValuePair<string, bool>("workstationIsFree", workstationFree));
         worldData.Add(new KeyValuePair<string, bool>("preparedIngredient", false));
         worldData.Add(new KeyValuePair<string, bool>("potIsFree", true));
         worldData.Add(new KeyValuePair<string, bool>("potionIsReady", false));
         worldData.Add(new KeyValuePair<string, bool>("potionIsDelivered", false));
-
         return worldData;
     }
 
@@ -54,7 +54,6 @@ public abstract class PersonalityAgent : MonoBehaviour, IGoap
 
     public abstract Goal CreateGoalStates();
     public abstract GoalStack GetAllGoals();
-
 
     public void PlanFailed(HashSet<KeyValuePair<string, bool>> failedGoal)
     {
