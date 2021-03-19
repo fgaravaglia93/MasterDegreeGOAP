@@ -7,19 +7,25 @@ public class DisplayController : MonoBehaviour
 {
     public static DisplayController instance = null;
 
-    public Camera GameCamera;
+    public Camera gameCamera;
     public GameObject SlotCamera;
-    public GameObject DisplayConsoleText;
-    RenderTexture RenderGameScene;
+    public GameObject displayConsoleText;
 
-
+    public GameObject moodBar;
+    public GameObject currentMoodDisplay;
+    
+    private RenderTexture renderGameScene;
     public float SmallCameraSize = 4f;
 
     //to redefine later
     public GameObject npc;
-
-    private float cooldownTime = 5f;
+    private Mood currentMood;
+    private int cooldownSteps = 5; //default with no personality affection
+    private float stepCooldown = 3f;
     private int countClicks;
+    private string spritePathUI = "Sprites/ui_expression_";
+    private string spritePathTile= "Sprites/tile_npc_";
+    Dictionary<MoodType, Mood> moodDict = new Dictionary<MoodType, Mood>();
 
     // Start is called before the first frame update
     void Awake()
@@ -27,10 +33,10 @@ public class DisplayController : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            RenderGameScene = new RenderTexture(350, 300, 24, RenderTextureFormat.ARGB32);
-            RenderGameScene.Create();
-            GameCamera.GetComponent<Camera>().targetTexture = RenderGameScene;
-            RenderGameScene.name = "RT_Game";
+            renderGameScene = new RenderTexture(350, 300, 24, RenderTextureFormat.ARGB32);
+            renderGameScene.Create();
+            gameCamera.GetComponent<Camera>().targetTexture = renderGameScene;
+            renderGameScene.name = "RT_Game";
         }
         else
         {
@@ -38,83 +44,103 @@ public class DisplayController : MonoBehaviour
         }
 
 
-
     }
 
     void Start()
     {
+        //npc.GetComponent<PersonalityAgent>().MoodSwitchThreshold(MoodType.Joy)
         countClicks = 0;
-        SlotCamera.GetComponent<RawImage>().texture = RenderGameScene;
-        GameCamera.orthographicSize = SmallCameraSize;
-    }
+        SlotCamera.GetComponent<RawImage>().texture = renderGameScene;
+        gameCamera.orthographicSize = SmallCameraSize;
+        var moodNames = System.Enum.GetNames(typeof(MoodType));
+        //check and instantiate Mood objects to the relative sliders in the Scene UI
+        foreach (MoodType moodName in System.Enum.GetValues(typeof(MoodType)))
+        {
+            foreach (Transform t in moodBar.transform)
+            {
+                
+                if (t.name == "Bar" + moodName)
+                {
+                    //Debug.Log("Bar" + moodName);
+                    moodDict.Add(moodName, new Mood(moodName, spritePathUI+moodName, 
+                        t.GetComponentInChildren<Slider>(), npc.GetComponent<PersonalityAgent>().MoodSwitchThreshold(moodName)));
+                    break;
+                }
+            }
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-
+        moodDict.Add(MoodType.Neutral, new Mood(spritePathUI+MoodType.Neutral));
+     
     }
 
     public void ShowOnConsole(string text)
     {
-        DisplayConsoleText.GetComponent<Text>().text = text;
+        displayConsoleText.GetComponent<Text>().text = text;
     }
 
     public void ShowOnConsole(string text, Color color)
     {
-        DisplayConsoleText.GetComponent<Text>().text = text;
-        DisplayConsoleText.GetComponent<Text>().color = color;
+        displayConsoleText.GetComponent<Text>().text = text;
+        displayConsoleText.GetComponent<Text>().color = color;
+    }
+    
+    void ChangeMood(Mood mood, int cooldownSteps, float durationChange, float successChange)
+    {
+        mood.bar.value += 1f;
+        if (mood.bar.value >= mood.threshold)
+        {
+            npc.GetComponent<PersonalityAgent>().mood = mood.name;
+            npc.GetComponent<HogwartsStudent>().durationActionInfluence = durationChange;
+            npc.GetComponent<HogwartsStudent>().successActionInfluence = successChange;
+            npc.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(spritePathTile+mood.name);
+            currentMoodDisplay.GetComponent<Image>().sprite = mood.sprite;
+            currentMoodDisplay.GetComponent<Image>().color = mood.color;
+            currentMood = mood;
+            StopCoroutine("CooldownEmotion");
+            StartCoroutine("CooldownEmotion");
+        }
     }
 
     public void ChangeMoodToJoy()
     {
-        countClicks += 1;
-        print(npc.GetComponent<PersonalityAgent>().CalculateSwitchEmotionFactor(2));
-
-        if (countClicks >= npc.GetComponent<PersonalityAgent>().CalculateSwitchEmotionFactor(2))
-        {
-            npc.GetComponent<PersonalityAgent>().mood = Mood.Joy;
-            npc.GetComponent<HogwartsStudent>().durationActionInfluence = 0.5f;
-            npc.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/tile_npc_joy");
-            cooldownTime = 5f;
-            StartCoroutine("CooldownEmotion");
-            countClicks = 0;
-        }
-
+        ChangeMood(moodDict[MoodType.Joy], 5, 0.5f, 1f);
     }
 
     public void ChangeMoodToSad()
     {
-        npc.GetComponent<PersonalityAgent>().mood = Mood.Sad;
-        npc.GetComponent<HogwartsStudent>().durationActionInfluence = 2f;
-        npc.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/tile_npc_sad");
-        cooldownTime = 5f;
-        StartCoroutine("CooldownEmotion");
-    }
-
-    public void ChangeMoodToFear()
-    {
-        npc.GetComponent<PersonalityAgent>().mood = Mood.Fear;
-        npc.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/tile_npc_fear");
-        cooldownTime = 2f;
-        StartCoroutine("CooldownEmotion");
+        ChangeMood(moodDict[MoodType.Sad], 5, 2f, 1f);
     }
 
     public void ChangeMoodToAngry()
     {
-        npc.GetComponent<PersonalityAgent>().mood = Mood.Angry;
-        npc.GetComponent<HogwartsStudent>().durationActionInfluence = 0.5f;
-        npc.GetComponent<HogwartsStudent>().successActionInfluence = 0.5f;
-        npc.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/tile_npc_angry");
-        cooldownTime = 5f;
-        StartCoroutine("CooldownEmotion");
+        ChangeMood(moodDict[MoodType.Angry], 5, 0.5f, 0.5f);
+    }
+
+    public void ChangeMoodToFear()
+    {
+        ChangeMood(moodDict[MoodType.Fear], 5, 1f, 1f);
+    }
+
+    public void ChangeMoodToDisgust()
+    {
+        ChangeMood(moodDict[MoodType.Disgust], 5, 1f, 1f);
     }
 
     IEnumerator CooldownEmotion()
     {
-        yield return new WaitForSeconds(cooldownTime);
-        npc.GetComponent<PersonalityAgent>().mood = Mood.Neutral;
-        npc.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/tile_npc");
-
+        cooldownSteps = (int)currentMood.bar.value;
+        for (int i = 0; i < cooldownSteps; i++)
+        {
+            //Debug.Log(i);
+            yield return new WaitForSeconds(stepCooldown);
+            currentMood.bar.value -= 1f;
+            if (currentMood.bar.value < currentMood.threshold)
+            {
+                npc.GetComponent<PersonalityAgent>().mood = MoodType.Neutral;
+                npc.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(spritePathTile);
+                currentMoodDisplay.GetComponent<Image>().sprite = moodDict[MoodType.Neutral].sprite;
+                currentMoodDisplay.GetComponent<Image>().color = moodDict[MoodType.Neutral].color;
+            }
+        }
     }
 }

@@ -1,0 +1,7 @@
+Resources
+Sprite/ contiene tutte le sprites usate per UI e per la parte di game
+
+Convenzioni:
+tile_npc_<Mood.moodname>
+ui_expression_<Mood.moodname>
+tile_npc_<GameObjectName>

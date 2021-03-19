@@ -33,7 +33,7 @@ public class CompletionBar : MonoBehaviour
     public IEnumerator CompleteTaskBar()
     {
         float stepBar = step / (currentDuration / step);
-        Debug.Log((int)(currentDuration / step));
+        //Debug.Log((int)(currentDuration / step));
         for(int i=0; i< ((int)(currentDuration/step)); i++)
         {
             completionTaskbarSlider.value += stepBar;

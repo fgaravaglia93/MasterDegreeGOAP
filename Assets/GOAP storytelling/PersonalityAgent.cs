@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Mood { Neutral, Joy, Sad, Angry, Fear, Disgust }
+public enum MoodType { Neutral, Joy, Sad, Angry, Fear, Disgust }
 
 public class PersonalityAgent : Agent
 {
@@ -21,7 +21,10 @@ public class PersonalityAgent : Agent
     [Range(-1, 1)]
     public int neuroticism;
 
-    public Mood mood = Mood.Neutral;
+
+    public MoodType mood = MoodType.Neutral;
+
+    
 
     public override void IdleState(FSM fsm, GameObject agent)
     {
@@ -38,9 +41,39 @@ public class PersonalityAgent : Agent
         
     }
 
-    public float CalculateSwitchEmotionFactor(int switchFactor)
+    //Calculate value of each mood threshold depending on the personality model OCEAN 
+    public float MoodSwitchThreshold(MoodType mood)
     {
-        return switchFactor -= switchFactor / 2 * neuroticism;
+        //default value with no personality
+        float threshold = 5f;
+        switch (mood)
+        {
+            case MoodType.Joy:
+                threshold -= (neuroticism + extraversion);  
+                break;
+
+            case MoodType.Sad:
+                threshold -= neuroticism;
+                break;
+
+            case MoodType.Angry:
+                threshold -= (neuroticism - aggreeableness);
+                break;
+
+            case MoodType.Fear:
+                threshold -= neuroticism;
+                break;
+
+            case MoodType.Disgust:
+                threshold -= (neuroticism - aggreeableness);
+                break;
+
+            default:
+                break;
+
+        }
+
+        return threshold;
     }
    
 }
