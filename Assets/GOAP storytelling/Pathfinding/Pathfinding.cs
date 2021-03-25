@@ -66,9 +66,9 @@ public class Pathfinding : MonoBehaviour {
         callback(new PathResult(waypoints, pathSuccess,request.callback));
     }
 
-    Vector3[] RetracePath(Node startNode,Node endNode) {
-        List<Node> path = new List<Node>();
-        Node currentNode = endNode;
+    Vector3[] RetracePath(NodeGraphPathFind startNode,NodeGraphPathFind endNode) {
+        List<NodeGraphPathFind> path = new List<NodeGraphPathFind>();
+        NodeGraphPathFind currentNode = endNode;
 
         while(currentNode!= startNode) {
             path.Add(currentNode);
@@ -84,7 +84,7 @@ public class Pathfinding : MonoBehaviour {
         return waypoints.ToArray();
     }
 
-    Vector3[] SimplifyPath(List<Node> path) {
+    Vector3[] SimplifyPath(List<NodeGraphPathFind> path) {
         List<Vector3> waypoints = new List<Vector3>();
         Vector2 directionOld = Vector2.zero;
         
@@ -106,7 +106,7 @@ public class Pathfinding : MonoBehaviour {
     }
 
     //The Heuristic
-    int getDistance (Node nodeA, Node nodeB) {
+    int getDistance (NodeGraphPathFind nodeA, NodeGraphPathFind nodeB) {
         int distX = Mathf.Abs(nodeA.gridX - nodeB.gridX);
         int distY = Mathf.Abs(nodeA.gridY - nodeB.gridY);
 

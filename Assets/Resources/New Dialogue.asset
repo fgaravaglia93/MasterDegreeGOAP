@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a74c0aa5c3437c243b28f0f72899fc53, type: 3}
+  m_Name: New Dialogue
+  m_EditorClassIdentifier: 
+  NodeLinks:
+  - BaseNodeGUID: abc1a39e-0b48-49c4-acd3-091d310a24af
+    PortName: Next
+    TargetNodeGUID: 945c195e-4b9f-4070-93c3-2d3d6c4a6830
+  - BaseNodeGUID: 945c195e-4b9f-4070-93c3-2d3d6c4a6830
+    PortName: Professor Snape is looking for you
+    TargetNodeGUID: 0e96f6ed-7a35-4e75-8197-1830652e2258
+  - BaseNodeGUID: 945c195e-4b9f-4070-93c3-2d3d6c4a6830
+    PortName: You were nominated Gryffindor goalkeeper
+    TargetNodeGUID: a6698251-f268-446b-90c3-51bc20f4df05
+  DialogueNodeData:
+  - NodeGUID: 945c195e-4b9f-4070-93c3-2d3d6c4a6830
+    DialogueText: Ehi, what's up?
+    Position: {x: 207, y: 0}
+  - NodeGUID: 0e96f6ed-7a35-4e75-8197-1830652e2258
+    DialogueText: oh god that's not a good thing
+    Position: {x: 677, y: 0}
+  - NodeGUID: a6698251-f268-446b-90c3-51bc20f4df05
+    DialogueText: That's amazing!!
+    Position: {x: 677, y: 131}

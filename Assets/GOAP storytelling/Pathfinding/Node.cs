@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Node : IHeapItem<Node> {
+public class NodeGraphPathFind : IHeapItem<NodeGraphPathFind> {
 
     public bool walkable;
     public Vector3 worldPosition;
@@ -13,7 +13,7 @@ public class Node : IHeapItem<Node> {
     //distance from End
     public int hCost;
 
-    public Node parent;
+    public NodeGraphPathFind parent;
 
     int heapIndex;
 
@@ -30,7 +30,7 @@ public class Node : IHeapItem<Node> {
         }
     }
 
-    public Node(bool walkable, Vector3 worldPosition, int gridX, int gridY,int movementPenalty) {
+    public NodeGraphPathFind(bool walkable, Vector3 worldPosition, int gridX, int gridY,int movementPenalty) {
         this.walkable = walkable;
         this.worldPosition = worldPosition;
         this.gridX = gridX;
@@ -38,7 +38,7 @@ public class Node : IHeapItem<Node> {
         this.movementPenalty = movementPenalty;
     }
 
-    public int CompareTo(Node nodeToCompare) {
+    public int CompareTo(NodeGraphPathFind nodeToCompare) {
         int compare = fCost.CompareTo(nodeToCompare.fCost);
         if(compare==0)
             compare = hCost.CompareTo(nodeToCompare.hCost);
