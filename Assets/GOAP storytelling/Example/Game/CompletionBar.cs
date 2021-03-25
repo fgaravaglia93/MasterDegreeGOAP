@@ -15,7 +15,7 @@ public class CompletionBar : MonoBehaviour
     private void Start()
     {
         completionTaskbarSlider = this.GetComponentInChildren<Slider>();
-        gameObject.GetComponent<Canvas>().enabled = false;
+        completionTaskbarSlider.gameObject.SetActive(false);
     }
 
     private void Update()

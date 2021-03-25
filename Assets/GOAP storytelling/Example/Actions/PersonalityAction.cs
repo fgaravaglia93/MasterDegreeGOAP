@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PersonalityAction : GoapAction
 {
@@ -24,15 +25,15 @@ public class PersonalityAction : GoapAction
         {
             startTime = Time.time;
             DisplayController.instance.ShowOnConsole(console);
-            GetComponentInChildren<CompletionBar>().gameObject.GetComponent<Canvas>().enabled = true;
+            GetComponentInChildren<CompletionBar>().transform.GetChild(0).gameObject.SetActive(true);
             //GetComponentInChildren<CompletionBar>().gameObject.transform.position = new Vector3(transform.position.x,transform.position.y+1f,transform.position.z);
             GetComponentInChildren<CompletionBar>().StartTaskBar(GetComponent<HogwartsStudent>().durationActionInfluence * duration);
         }
         if (Time.time - startTime > duration * GetComponent<HogwartsStudent>().durationActionInfluence)
         {
             performed = true;
-          
-            GetComponentInChildren<CompletionBar>().gameObject.GetComponent<Canvas>().enabled = false;
+
+            GetComponentInChildren<CompletionBar>().transform.GetChild(0).gameObject.SetActive(false);
         }
         return true;
     }

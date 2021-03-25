@@ -10,6 +10,7 @@ public class DisplayController : MonoBehaviour
     public Camera gameCamera;
     public GameObject SlotCamera;
     public GameObject displayConsoleText;
+    public GameObject displayGoalText;
 
     public GameObject moodBar;
     public GameObject currentMoodDisplay;
@@ -24,8 +25,9 @@ public class DisplayController : MonoBehaviour
     private float stepCooldown = 3f;
     private int countClicks;
     private string spritePathUI = "Sprites/ui_expression_";
-    private string spritePathTile= "Sprites/tile_npc_";
-    Dictionary<MoodType, Mood> moodDict = new Dictionary<MoodType, Mood>();
+    private string spritePathBaloon= "Sprites/ui_baloon_";
+    [HideInInspector]
+    public Dictionary<MoodType, Mood> moodDict = new Dictionary<MoodType, Mood>();
 
     // Start is called before the first frame update
     void Awake()
@@ -84,15 +86,17 @@ public class DisplayController : MonoBehaviour
         displayConsoleText.GetComponent<Text>().color = color;
     }
     
-    void ChangeMood(Mood mood, int cooldownSteps, float durationChange, float successChange)
+    public void ChangeMood(Mood mood, float durationChange, float successChange, float increment)
     {
-        mood.bar.value += 1f;
+        mood.bar.value += increment;
         if (mood.bar.value >= mood.threshold)
         {
             npc.GetComponent<PersonalityAgent>().mood = mood.name;
             npc.GetComponent<HogwartsStudent>().durationActionInfluence = durationChange;
             npc.GetComponent<HogwartsStudent>().successActionInfluence = successChange;
-            npc.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(spritePathTile+mood.name);
+            //npc.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(spritePathBaloon+mood.name);
+            npc.transform.GetComponentInChildren<Canvas>().transform.GetChild(1).transform.GetComponent<Image>().sprite = Resources.Load<Sprite>(spritePathBaloon + mood.name);
+            npc.transform.GetComponentInChildren<Canvas>().transform.GetChild(1).transform.GetComponent<Image>().color = new Color(255, 255, 255, 0.75f);
             currentMoodDisplay.GetComponent<Image>().sprite = mood.sprite;
             currentMoodDisplay.GetComponent<Image>().color = mood.color;
             currentMood = mood;
@@ -103,27 +107,27 @@ public class DisplayController : MonoBehaviour
 
     public void ChangeMoodToJoy()
     {
-        ChangeMood(moodDict[MoodType.Joy], 5, 0.5f, 1f);
+        ChangeMood(moodDict[MoodType.Joy], 0.5f, 1f, 1f);
     }
 
     public void ChangeMoodToSad()
     {
-        ChangeMood(moodDict[MoodType.Sad], 5, 2f, 1f);
+        ChangeMood(moodDict[MoodType.Sad], 2f, 1f, 1f);
     }
 
     public void ChangeMoodToAngry()
     {
-        ChangeMood(moodDict[MoodType.Angry], 5, 0.5f, 0.5f);
+        ChangeMood(moodDict[MoodType.Angry], 0.5f, 0.5f, 1f);
     }
 
     public void ChangeMoodToFear()
     {
-        ChangeMood(moodDict[MoodType.Fear], 5, 1f, 1f);
+        ChangeMood(moodDict[MoodType.Fear], 1f, 1f, 1f);
     }
 
     public void ChangeMoodToDisgust()
     {
-        ChangeMood(moodDict[MoodType.Disgust], 5, 1f, 1f);
+        ChangeMood(moodDict[MoodType.Disgust], 1f, 1f, 1f);
     }
 
     IEnumerator CooldownEmotion()
@@ -137,7 +141,8 @@ public class DisplayController : MonoBehaviour
             if (currentMood.bar.value < currentMood.threshold)
             {
                 npc.GetComponent<PersonalityAgent>().mood = MoodType.Neutral;
-                npc.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(spritePathTile);
+                npc.transform.GetComponentInChildren<Canvas>().transform.GetChild(1).transform.GetComponent<Image>().color = new Color(255, 255, 255, 0);
+                npc.transform.GetComponentInChildren<Canvas>().transform.GetChild(1).transform.GetComponent<Image>().sprite = null;
                 currentMoodDisplay.GetComponent<Image>().sprite = moodDict[MoodType.Neutral].sprite;
                 currentMoodDisplay.GetComponent<Image>().color = moodDict[MoodType.Neutral].color;
             }

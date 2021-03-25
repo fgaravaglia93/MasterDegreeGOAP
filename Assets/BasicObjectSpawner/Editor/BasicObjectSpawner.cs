@@ -9,7 +9,7 @@ public class BasicObjectSpawner : EditorWindow
     float objectScale;
     float spawnRadius = 5f;
     // Start is called before the first frame update
-    [MenuItem("Tools/Basic Object Spawner")]
+    [MenuItem("Moody5/Basic Object Spawner")]
     public static void ShowWindow()
     {
         GetWindow(typeof(BasicObjectSpawner));

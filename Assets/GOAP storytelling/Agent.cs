@@ -3,6 +3,7 @@ using System.Reflection;
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Agent : MonoBehaviour
 {
@@ -63,10 +64,14 @@ public class Agent : MonoBehaviour
         //FRA rimozione di un goal dopo che è stato raggiunto
         if(m_goalStack.Peek() != null)
         {
+            DisplayController.instance.displayGoalText.GetComponent<Text>().text = "Goal:"+m_goalStack.Peek().m_nameGoal;
             m_eqsEventOccurred = m_eqsAgent.Update();
             m_fsm.Update(gameObject);
             if (m_currentActions.Count <= 0)
+            {
                 m_goalStack.Remove(m_goalStack.Peek());
+                DisplayController.instance.displayGoalText.GetComponent<Text>().color = new Color(0, 255, 0);
+            }
         }
   
 	}
@@ -201,7 +206,7 @@ public class Agent : MonoBehaviour
             GetComponent<HogwartsStudent>().pathCalculated = false;
             //FRA to put aside
             Debug.Log("<color=yellow>EQS Event Occurred: Recaculate Plan</color>");
-            DisplayController.instance.ChangeMoodToFear();
+            DisplayController.instance.ChangeMood(DisplayController.instance.moodDict[MoodType.Fear], 1f ,1f, 5f);
             fsm.popState(); //move
 			fsm.popState(); //perform
 			fsm.pushState(m_idleState);

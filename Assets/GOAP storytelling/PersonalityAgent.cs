@@ -10,6 +10,7 @@ public class PersonalityAgent : Agent
     [Space(10)]
     [Header("BIG 5 personality model")]
 
+    [Tooltip("Openness to Experience.\nAgent preference on new actions")]
     [Range(-1, 1)]
     public int openness;
     [Range(-1, 1)]
@@ -17,7 +18,7 @@ public class PersonalityAgent : Agent
     [Range(-1, 1)]
     public int extraversion;
     [Range(-1, 1)]
-    public int aggreeableness;
+    public int agreeableness;
     [Range(-1, 1)]
     public int neuroticism;
 
@@ -57,7 +58,7 @@ public class PersonalityAgent : Agent
                 break;
 
             case MoodType.Angry:
-                threshold -= (neuroticism - aggreeableness);
+                threshold -= (neuroticism - agreeableness);
                 break;
 
             case MoodType.Fear:
@@ -65,7 +66,7 @@ public class PersonalityAgent : Agent
                 break;
 
             case MoodType.Disgust:
-                threshold -= (neuroticism - aggreeableness);
+                threshold -= (neuroticism - agreeableness);
                 break;
 
             default:
