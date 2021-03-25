@@ -32,7 +32,8 @@ public class PersonalityAction : GoapAction
         if (Time.time - startTime > duration * GetComponent<HogwartsStudent>().durationActionInfluence)
         {
             performed = true;
-
+            GetComponentInChildren<CompletionBar>().transform.GetChild(2).gameObject.SetActive(true);
+            StartCoroutine("DoneMessage");
             GetComponentInChildren<CompletionBar>().transform.GetChild(0).gameObject.SetActive(false);
         }
         return true;
@@ -70,10 +71,14 @@ public class PersonalityAction : GoapAction
         {
             Debug.Log("%: "+success+" <= "+percentage+"\nAction done");
             return true;
-
         }
         return false;
     }
 
+    IEnumerator DoneMessage()
+    {
+        yield return new WaitForSeconds(0.2f);
+        GetComponentInChildren<CompletionBar>().transform.GetChild(2).gameObject.SetActive(false);
+    }
 
 }
