@@ -22,7 +22,7 @@ public class DisplayController : MonoBehaviour
     public GameObject npc;
     private Mood currentMood;
     private int cooldownSteps = 5; //default with no personality affection
-    private float stepCooldown = 3f;
+    private float stepCooldown = 1.5f;
     private int countClicks;
     private string spritePathUI = "Sprites/ui_expression_";
     private string spritePathBaloon= "Sprites/ui_baloon_";
@@ -35,10 +35,10 @@ public class DisplayController : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            renderGameScene = new RenderTexture(350, 300, 24, RenderTextureFormat.ARGB32);
+           /* renderGameScene = new RenderTexture(350, 300, 24, RenderTextureFormat.ARGB32);
             renderGameScene.Create();
             gameCamera.GetComponent<Camera>().targetTexture = renderGameScene;
-            renderGameScene.name = "RT_Game";
+            renderGameScene.name = "RT_Game";*/
         }
         else
         {
@@ -52,8 +52,8 @@ public class DisplayController : MonoBehaviour
     {
         //npc.GetComponent<PersonalityAgent>().MoodSwitchThreshold(MoodType.Joy)
         countClicks = 0;
-        SlotCamera.GetComponent<RawImage>().texture = renderGameScene;
-        gameCamera.orthographicSize = SmallCameraSize;
+        /*SlotCamera.GetComponent<RawImage>().texture = renderGameScene;
+        gameCamera.orthographicSize = SmallCameraSize;*/
         var moodNames = System.Enum.GetNames(typeof(MoodType));
         //check and instantiate Mood objects to the relative sliders in the Scene UI
         foreach (MoodType moodName in System.Enum.GetValues(typeof(MoodType)))

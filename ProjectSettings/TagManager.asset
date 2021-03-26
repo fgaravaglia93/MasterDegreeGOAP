@@ -12,6 +12,7 @@ TagManager:
   - Delivery
   - Helper
   - Book
+  - NPC
   layers:
   - Default
   - TransparentFX

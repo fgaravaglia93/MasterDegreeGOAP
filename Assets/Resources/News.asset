@@ -10,25 +10,31 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a74c0aa5c3437c243b28f0f72899fc53, type: 3}
-  m_Name: New Dialogue
+  m_Name: News
   m_EditorClassIdentifier: 
   NodeLinks:
   - BaseNodeGUID: abc1a39e-0b48-49c4-acd3-091d310a24af
     PortName: Next
     TargetNodeGUID: 945c195e-4b9f-4070-93c3-2d3d6c4a6830
   - BaseNodeGUID: 945c195e-4b9f-4070-93c3-2d3d6c4a6830
-    PortName: Professor Snape is looking for you
-    TargetNodeGUID: 0e96f6ed-7a35-4e75-8197-1830652e2258
-  - BaseNodeGUID: 945c195e-4b9f-4070-93c3-2d3d6c4a6830
     PortName: You were nominated Gryffindor goalkeeper
     TargetNodeGUID: a6698251-f268-446b-90c3-51bc20f4df05
+  - BaseNodeGUID: 945c195e-4b9f-4070-93c3-2d3d6c4a6830
+    PortName: Professor Snape is looking for you [TRAIT]
+    TargetNodeGUID: 0e96f6ed-7a35-4e75-8197-1830652e2258
+  - BaseNodeGUID: 945c195e-4b9f-4070-93c3-2d3d6c4a6830
+    PortName: Professor Snape is looking for you
+    TargetNodeGUID: 681620d8-0c8d-449f-8f62-8225e583621c
   DialogueNodeData:
-  - NodeGUID: 945c195e-4b9f-4070-93c3-2d3d6c4a6830
-    DialogueText: Ehi, what's up?
-    Position: {x: 207, y: 0}
   - NodeGUID: 0e96f6ed-7a35-4e75-8197-1830652e2258
-    DialogueText: oh god that's not a good thing
+    DialogueText: oh god that's not a good thing [scared]
     Position: {x: 677, y: 0}
   - NodeGUID: a6698251-f268-446b-90c3-51bc20f4df05
     DialogueText: That's amazing!!
     Position: {x: 677, y: 131}
+  - NodeGUID: 945c195e-4b9f-4070-93c3-2d3d6c4a6830
+    DialogueText: Ehi, what's up?
+    Position: {x: 205, y: 4}
+  - NodeGUID: 681620d8-0c8d-449f-8f62-8225e583621c
+    DialogueText: Again? I'm going to visit him at Potion's lab
+    Position: {x: 673, y: -118}
