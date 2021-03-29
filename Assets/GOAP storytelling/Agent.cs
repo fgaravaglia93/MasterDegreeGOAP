@@ -17,7 +17,9 @@ public class Agent : MonoBehaviour
     [SerializeField]
 	public GoalStack m_goalStack;
 
-	private Queue<GoapAction> m_currentActions;
+    [HideInInspector]
+    public Queue<GoapAction> m_currentActions;
+
 	public HashSet<GoapAction> m_availableActions;
 
 
@@ -27,10 +29,16 @@ public class Agent : MonoBehaviour
 	public EQSAgent m_eqsAgent;
 
 	public Personality m_personality;
+
 	[HideInInspector]
 	public List<Trait> m_traits;
+    public bool m_eqsEventOccurred;
+    [HideInInspector]
+    public Queue<GoapAction> plan;
 
-	private bool m_eqsEventOccurred;
+    
+
+    
 
 	void Awake() {
 
@@ -126,7 +134,7 @@ public class Agent : MonoBehaviour
 
         HashSet<KeyValuePair<string, bool>> worldState = m_dataProvider.getWorldState();
 		Goal goal = m_goalStack.Peek();
-		Queue<GoapAction> plan = m_planner.Plan(agent, m_availableActions, worldState, goal.GoalStates);
+		plan = m_planner.Plan(agent, m_availableActions, worldState, goal.GoalStates);
         print(plan.Peek().nameAction);
         if (plan != null) {
             Debug.Log("<color=blue>Found Plan:</color>" + PrettyPrint(goal.GoalStates));
@@ -144,7 +152,7 @@ public class Agent : MonoBehaviour
 		}
 	}
 	//make it to switch goal when all action for one goal are completed?
-	private void PerformActionState(FSM fsm, GameObject agent) {
+	public virtual void PerformActionState(FSM fsm, GameObject agent) {
         if(m_eqsEventOccurred) {
 			Debug.Log("<color=yellow>EQS Event Occurred: Recaculate Plan</color>");
 			fsm.popState();
@@ -160,18 +168,6 @@ public class Agent : MonoBehaviour
 		}
 
 		GoapAction action = m_currentActions.Peek();
-        if(action.IsDone()) {
-
-            if (action.CalculateSuccess()) 
-                m_currentActions.Dequeue();
-            else
-            {
-                Debug.Log("Action failed, repeat");
-                action.OnReset();
-            }
-
-            
-        }
 
         if (HasActionPlan()) {
 
@@ -198,7 +194,7 @@ public class Agent : MonoBehaviour
 		}
 	}
 
-	private void MoveToState(FSM fsm, GameObject agent) {
+	public virtual void MoveToState(FSM fsm, GameObject agent) {
 
         if(m_eqsEventOccurred) {
             //FRA

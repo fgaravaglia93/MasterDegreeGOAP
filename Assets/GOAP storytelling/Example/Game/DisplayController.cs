@@ -65,7 +65,7 @@ public class DisplayController : MonoBehaviour
                 {
                     //Debug.Log("Bar" + moodName);
                     moodDict.Add(moodName, new Mood(moodName, spritePathUI+moodName, 
-                        t.GetComponentInChildren<Slider>(), npc.GetComponent<PersonalityAgent>().MoodSwitchThreshold(moodName)));
+                        t.GetComponentInChildren<Slider>(), npc.GetComponent<BigFivePersonality>().MoodSwitchThreshold(moodName)));
                     break;
                 }
             }
@@ -75,7 +75,7 @@ public class DisplayController : MonoBehaviour
      
     }
 
-    public void ShowOnConsole(string text)
+    public void ShowOnConsolePlan(string text)
     {
         displayConsoleText.GetComponent<Text>().text = text;
     }
@@ -91,7 +91,7 @@ public class DisplayController : MonoBehaviour
         mood.bar.value += increment;
         if (mood.bar.value >= mood.threshold)
         {
-            npc.GetComponent<PersonalityAgent>().mood = mood.name;
+            npc.GetComponent<BigFivePersonality>().mood = mood.name;
             npc.GetComponent<HogwartsStudent>().durationActionInfluence = durationChange;
             npc.GetComponent<HogwartsStudent>().successActionInfluence = successChange;
             //npc.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(spritePathBaloon+mood.name);
@@ -140,7 +140,7 @@ public class DisplayController : MonoBehaviour
             currentMood.bar.value -= 1f;
             if (currentMood.bar.value < currentMood.threshold)
             {
-                npc.GetComponent<PersonalityAgent>().mood = MoodType.Neutral;
+                npc.GetComponent<BigFivePersonality>().mood = MoodType.Neutral;
                 npc.transform.GetComponentInChildren<Canvas>().transform.GetChild(1).transform.GetComponent<Image>().color = new Color(255, 255, 255, 0);
                 npc.transform.GetComponentInChildren<Canvas>().transform.GetChild(1).transform.GetComponent<Image>().sprite = null;
                 currentMoodDisplay.GetComponent<Image>().sprite = moodDict[MoodType.Neutral].sprite;

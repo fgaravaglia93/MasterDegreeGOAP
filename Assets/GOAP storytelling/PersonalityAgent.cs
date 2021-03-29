@@ -2,34 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum MoodType { Neutral, Joy, Sad, Angry, Fear, Disgust }
-
 public class PersonalityAgent : Agent
 {
 
-    [Space(10)]
-    [Header("BIG 5 personality model")]
+    int extraversion;
 
-    [Tooltip("Openness to Experience.\nAgent preference on new actions")]
-    [Range(-1, 1)]
-    public int openness;
-    [Range(-1, 1)]
-    public int consciousness;
-    [Range(-1, 1)]
-    public int extraversion;
-    [Range(-1, 1)]
-    public int agreeableness;
-    [Range(-1, 1)]
-    public int neuroticism;
-
-
-    public MoodType mood = MoodType.Neutral;
-
-    
+    void Start()
+    {
+        extraversion = GetComponent<BigFivePersonality>().extraversion;
+    }
 
     public override void IdleState(FSM fsm, GameObject agent)
     {
-
+        
+        //manage extraversion factor on available actions
         foreach (PersonalityAction action in m_availableActions)
             if (action.interactFlag)
             {
@@ -39,42 +25,67 @@ public class PersonalityAgent : Agent
             }
 
         base.IdleState(fsm, agent);
-        
+
+        if(plan != null)
+        {
+            DisplayController.instance.ShowOnConsolePlan(PrintPlanActions());
+        }
+        else
+        {
+            DisplayController.instance.ShowOnConsolePlan("Plan not Found");
+        }
+       
+
     }
 
-    //Calculate value of each mood threshold depending on the personality model OCEAN 
-    public float MoodSwitchThreshold(MoodType mood)
+    public override void MoveToState(FSM fsm, GameObject agent)
     {
-        //default value with no personality
-        float threshold = 5f;
-        switch (mood)
+        base.MoveToState(fsm, agent);
+        if (m_eqsEventOccurred)
         {
-            case MoodType.Joy:
-                threshold -= (neuroticism + extraversion);  
-                break;
+            DisplayController.instance.ShowOnConsolePlan("Event occurred. Recalculate plan");
+        }
+    }
 
-            case MoodType.Sad:
-                threshold -= neuroticism;
-                break;
+    public override void PerformActionState(FSM fsm, GameObject agent)
+    {
 
-            case MoodType.Angry:
-                threshold -= (neuroticism - agreeableness);
-                break;
+        base.PerformActionState(fsm, agent);
 
-            case MoodType.Fear:
-                threshold -= neuroticism;
-                break;
+        GoapAction action = m_currentActions.Peek();
+        if (action.IsDone())
+        {
 
-            case MoodType.Disgust:
-                threshold -= (neuroticism - agreeableness);
-                break;
+            if (action.CalculateSuccess())
+                m_currentActions.Dequeue();
+            else
+            {
+                //DisplayController.instance.ShowOnConsoleAction("Action failed, repeat");
 
-            default:
-                break;
+                action.OnReset();
+            }
+
 
         }
 
-        return threshold;
     }
-   
+
+    string PrintPlanActions()
+    {
+        string printedPlan="Plan Found:";
+        int i = 1;
+
+        foreach (PersonalityAction action in plan)
+        {
+            printedPlan += ("\n)"+i+" "+(action.console));
+            i++;
+        }
+        print(printedPlan);
+        return printedPlan;
+    }
+
+
+
+
+
 }

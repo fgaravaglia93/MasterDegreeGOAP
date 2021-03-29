@@ -10,7 +10,7 @@ public class OverlayAgentStatus : MonoBehaviour
 
     private void Start()
     {
-        DisplayController.instance.gameObject.transform.parent.GetChild(0).gameObject.SetActive(false);
+       // DisplayController.instance.gameObject.transform.parent.GetChild(0).gameObject.SetActive(false);
     }
     void Update()
     {

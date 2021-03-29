@@ -3,28 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-public class NPCPlugin : EditorWindow
+public class Moody5CreateAgent : EditorWindow
 {
     // Start is called before the first frame update
     string objectName = ""; 
     float spawnRadius = 5f;
     bool isGoap = false;
-    //bool isWanderer = false;
     int openness;
     int consciousness;
     int extraversion;
     int agreeableness;
     int neuroticism;
 
+    //add something for the movement
+
+
     [MenuItem("Moody5/Create Personality Agent")]
     public static void ShowWindow()
     {
-        GetWindow(typeof(NPCPlugin));
+        GetWindow(typeof(Moody5CreateAgent), true, "Moody5");
     }
 
     private void OnGUI()
     {
-        GUILayout.Label("Spawn New Object", EditorStyles.boldLabel);
+        GUILayout.Label("Create new agent with personality", EditorStyles.boldLabel);
+        if (objectName == "")
+            objectName = "NPC name";
         objectName = EditorGUILayout.TextField("Name", objectName);
         GUILayout.Label("Big 5 personality model", EditorStyles.boldLabel);
         openness = (int)EditorGUILayout.Slider("Openness", openness, -1, 1);
@@ -59,29 +63,27 @@ public class NPCPlugin : EditorWindow
         npcToSpawn.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/tile_npc_"+MoodType.Neutral);
         npcToSpawn.GetComponent<SpriteRenderer>().sortingOrder = 2;
 
+        npcToSpawn.AddComponent(typeof(BigFivePersonality));
+        npcToSpawn.GetComponent<BigFivePersonality>().openness = openness;
+        npcToSpawn.GetComponent<BigFivePersonality>().consciousness = consciousness;
+        npcToSpawn.GetComponent<BigFivePersonality>().extraversion = extraversion;
+        npcToSpawn.GetComponent<BigFivePersonality>().agreeableness = agreeableness;
+        npcToSpawn.GetComponent<BigFivePersonality>().neuroticism = neuroticism;
 
         if (isGoap)
         {
             npcToSpawn.AddComponent(typeof(PersonalityAgent));
-            npcToSpawn.GetComponent<PersonalityAgent>().openness = openness;
-            npcToSpawn.GetComponent<PersonalityAgent>().consciousness = consciousness;
-            npcToSpawn.GetComponent<PersonalityAgent>().extraversion = extraversion;
-            npcToSpawn.GetComponent<PersonalityAgent>().agreeableness = agreeableness;
-            npcToSpawn.GetComponent<PersonalityAgent>().neuroticism = neuroticism;
         } else
         {
             npcToSpawn.AddComponent(typeof(PersonalityCommon));
-            npcToSpawn.GetComponent<PersonalityCommon>().openness = openness;
-            npcToSpawn.GetComponent<PersonalityCommon>().consciousness = consciousness;
-            npcToSpawn.GetComponent<PersonalityCommon>().extraversion = extraversion;
-            npcToSpawn.GetComponent<PersonalityCommon>().agreeableness = agreeableness;
-            npcToSpawn.GetComponent<PersonalityCommon>().neuroticism = neuroticism;
         }
-
+        npcToSpawn.AddComponent(typeof(OverlayAgentStatus));
+        objectName = "NPC name";
         //go.AddComponent(typeof(Animation));
         // go.SetActiveRecursively(false);
         //AssetDatabase.CreateAsset(go, "Assets/Prefabs/TestAsset.prefab");
         //GameObject.DestroyImmediate(go);
+
     }
 
     
