@@ -105,7 +105,7 @@ public class DisplayController : MonoBehaviour
         mood.bar.value += increment;
         if (mood.bar.value >= mood.threshold)
         {
-            Debug.Log("Change Angry");
+            //Debug.Log("Change Angry");
             npc.GetComponent<BigFivePersonality>().mood = mood.name;
             npc.GetComponent<HogwartsStudent>().durationActionInfluence = durationChange;
             npc.GetComponent<HogwartsStudent>().successActionInfluence = successChange;
@@ -116,7 +116,7 @@ public class DisplayController : MonoBehaviour
             currentMoodDisplay.GetComponent<Image>().color = mood.color;
             currentMood = mood;
             StopCoroutine("CooldownEmotion");
-           // StartCoroutine("CooldownEmotion");
+            StartCoroutine("CooldownEmotion");
         }
     }
 
@@ -132,7 +132,7 @@ public class DisplayController : MonoBehaviour
 
     public void ChangeMoodToAngry()
     {
-        ChangeMood(moodDict[MoodType.Angry], 0.5f, 0f, 1f);
+        ChangeMood(moodDict[MoodType.Angry], 0.5f, 0.5f, 1f);
     }
 
     public void ChangeMoodToFear()

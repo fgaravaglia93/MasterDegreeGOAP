@@ -27,7 +27,7 @@ public class PersonalityAction : GoapAction
            // DisplayController.instance.ShowOnConsole(console);
             GetComponentInChildren<CompletionBar>().transform.GetChild(0).gameObject.SetActive(true);
             //GetComponentInChildren<CompletionBar>().gameObject.transform.position = new Vector3(transform.position.x,transform.position.y+1f,transform.position.z);
-            Debug.Log("Start " + GetComponent<HogwartsStudent>().durationActionInfluence+ " " +duration);
+            //Debug.Log("Start " + GetComponent<HogwartsStudent>().durationActionInfluence+ " " +duration);
             GetComponentInChildren<CompletionBar>().StartTaskBar(GetComponent<HogwartsStudent>().durationActionInfluence * duration);
         }
         if (Time.time - startTime > duration * GetComponent<HogwartsStudent>().durationActionInfluence)

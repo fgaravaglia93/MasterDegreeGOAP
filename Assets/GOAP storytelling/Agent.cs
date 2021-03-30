@@ -176,6 +176,7 @@ public class Agent : MonoBehaviour
             else
             {
                 DisplayController.instance.ShowOnConsoleAction("Action failed, repeat", new Color(255, 0, 0));
+                action.OnReset();
             }
             
         }

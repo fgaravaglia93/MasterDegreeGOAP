@@ -6,26 +6,34 @@ public class PersonalityAgent : Agent
 {
 
     int extraversion;
-
+    int agreeableness;
+    bool firstTime = true;
     bool firsHitAction;
 
     void Start()
     {
         firsHitAction = true;
         extraversion = GetComponent<BigFivePersonality>().extraversion;
+        agreeableness = GetComponent<BigFivePersonality>().agreeableness;
     }
 
     public override void IdleState(FSM fsm, GameObject agent)
     {
-        
-        //manage extraversion factor on available actions
-        foreach (PersonalityAction action in m_availableActions)
-            if (action.interactFlag)
+        if (firstTime)
+        {
+            //manage extraversion factor on available actions
+            foreach (PersonalityAction action in m_availableActions)
             {
-                //action.cost = action.cost - (action.cost/2*extraversion);
-                action.cost -= action.cost / 2 * extraversion;
-                //print(action.cost + " - " + action.nameAction);
+                if (action.interactFlag)
+                {
+                    //action.cost = action.cost - (action.cost/2*extraversion);
+                    action.cost -= action.cost / 2 * extraversion;
+                    //print(action.cost + " - " + action.nameAction);
+                }
             }
+            firstTime = false;
+        }
+        
 
         base.IdleState(fsm, agent);
 

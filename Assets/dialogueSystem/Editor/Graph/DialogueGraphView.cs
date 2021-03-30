@@ -34,9 +34,7 @@ namespace DialogueSystem.Editor
             var grid = new GridBackground();
             Insert(0, grid);
             grid.StretchToParentSize();
-
             AddElement(GetEntryPointNodeInstance());
-
             AddSearchWindow(editorWindow);
         }
 
@@ -147,6 +145,7 @@ namespace DialogueSystem.Editor
                 tempDialogueNode.title = evt.newValue;
             });
             textField.SetValueWithoutNotify(tempDialogueNode.title);
+           // tempDialogueNode.mainContainer.
             tempDialogueNode.mainContainer.Add(textField);
 
             var button = new Button(() => { AddChoicePort(tempDialogueNode); })

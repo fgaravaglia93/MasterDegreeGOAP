@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a74c0aa5c3437c243b28f0f72899fc53, type: 3}
+  m_Name: prova
+  m_EditorClassIdentifier: 
+  NodeLinks:
+  - BaseNodeGUID: fc30cc30-0191-4126-8a26-7e3bdda888a0
+    PortName: Next
+    TargetNodeGUID: a2a39a5e-bff4-4a4e-b492-d0dc8c900668
+  DialogueNodeData:
+  - NodeGUID: a2a39a5e-bff4-4a4e-b492-d0dc8c900668
+    DialogueText: "Prova una soluzione per capire come funziona per mettere una finestra
+      pi\xF9 grande di questa perch\xE8 il dialogo \xE8 troppo lungo e si capisce
+      poco a livello visivo. Proviamo a vedere quanti caratteri servono per faer
+      4 righe. Serve per forza andare a capo "
+    Position: {x: 100, y: 300}
