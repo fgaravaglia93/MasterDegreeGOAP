@@ -12,9 +12,9 @@ public class PersonalityAction : GoapAction
 
     [HideInInspector]
     public string console = "Action: ";
-    
-    //default 100% of success
-    public float percentageSuccess = 1f;
+
+    //default 1f = 100% of success
+    public float percentageSuccess;
     //default not interact  action
     public bool interactFlag = false;
     public List<GameObject> consentNPCs;
@@ -27,13 +27,14 @@ public class PersonalityAction : GoapAction
            // DisplayController.instance.ShowOnConsole(console);
             GetComponentInChildren<CompletionBar>().transform.GetChild(0).gameObject.SetActive(true);
             //GetComponentInChildren<CompletionBar>().gameObject.transform.position = new Vector3(transform.position.x,transform.position.y+1f,transform.position.z);
+            Debug.Log("Start " + GetComponent<HogwartsStudent>().durationActionInfluence+ " " +duration);
             GetComponentInChildren<CompletionBar>().StartTaskBar(GetComponent<HogwartsStudent>().durationActionInfluence * duration);
         }
         if (Time.time - startTime > duration * GetComponent<HogwartsStudent>().durationActionInfluence)
         {
             performed = true;
-            GetComponentInChildren<CompletionBar>().transform.GetChild(2).gameObject.SetActive(true);
-            StartCoroutine("DoneMessage");
+            //GetComponentInChildren<CompletionBar>().transform.GetChild(2).gameObject.SetActive(true);
+            //StartCoroutine("DoneMessage");
             GetComponentInChildren<CompletionBar>().transform.GetChild(0).gameObject.SetActive(false);
         }
         return true;
@@ -72,6 +73,7 @@ public class PersonalityAction : GoapAction
             Debug.Log("%: "+success+" <= "+percentage+"\nAction done");
             return true;
         }
+        Debug.Log("%: " + success + " <= " + percentage + "\nAction done");
         return false;
     }
 

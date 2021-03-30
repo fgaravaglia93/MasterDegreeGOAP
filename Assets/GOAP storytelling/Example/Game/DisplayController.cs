@@ -11,6 +11,7 @@ public class DisplayController : MonoBehaviour
     public GameObject SlotCamera;
     public GameObject displayConsoleText;
     public GameObject displayGoalText;
+    public GameObject displayActionText;
 
     public GameObject moodBar;
     public GameObject currentMoodDisplay;
@@ -78,19 +79,33 @@ public class DisplayController : MonoBehaviour
     public void ShowOnConsolePlan(string text)
     {
         displayConsoleText.GetComponent<Text>().text = text;
+        displayConsoleText.GetComponent<Text>().color = new Color(255,255,255);
     }
 
-    public void ShowOnConsole(string text, Color color)
+    public void ShowOnConsolePlan(string text, Color color)
     {
         displayConsoleText.GetComponent<Text>().text = text;
         displayConsoleText.GetComponent<Text>().color = color;
     }
-    
+
+    public void ShowOnConsoleAction(string text)
+    {
+        displayActionText.GetComponent<Text>().text = text;
+        displayActionText.GetComponent<Text>().color = new Color(255, 255, 255);
+    }
+
+    public void ShowOnConsoleAction(string text, Color color)
+    {
+        displayActionText.GetComponent<Text>().text = text;
+        displayActionText.GetComponent<Text>().color = color;
+    }
+
     public void ChangeMood(Mood mood, float durationChange, float successChange, float increment)
     {
         mood.bar.value += increment;
         if (mood.bar.value >= mood.threshold)
         {
+            Debug.Log("Change Angry");
             npc.GetComponent<BigFivePersonality>().mood = mood.name;
             npc.GetComponent<HogwartsStudent>().durationActionInfluence = durationChange;
             npc.GetComponent<HogwartsStudent>().successActionInfluence = successChange;
@@ -101,7 +116,7 @@ public class DisplayController : MonoBehaviour
             currentMoodDisplay.GetComponent<Image>().color = mood.color;
             currentMood = mood;
             StopCoroutine("CooldownEmotion");
-            StartCoroutine("CooldownEmotion");
+           // StartCoroutine("CooldownEmotion");
         }
     }
 
@@ -117,7 +132,7 @@ public class DisplayController : MonoBehaviour
 
     public void ChangeMoodToAngry()
     {
-        ChangeMood(moodDict[MoodType.Angry], 0.5f, 0.5f, 1f);
+        ChangeMood(moodDict[MoodType.Angry], 0.5f, 0f, 1f);
     }
 
     public void ChangeMoodToFear()
@@ -141,6 +156,8 @@ public class DisplayController : MonoBehaviour
             if (currentMood.bar.value < currentMood.threshold)
             {
                 npc.GetComponent<BigFivePersonality>().mood = MoodType.Neutral;
+                npc.GetComponent<HogwartsStudent>().durationActionInfluence = 1f;
+                npc.GetComponent<HogwartsStudent>().successActionInfluence = 1f;
                 npc.transform.GetComponentInChildren<Canvas>().transform.GetChild(1).transform.GetComponent<Image>().color = new Color(255, 255, 255, 0);
                 npc.transform.GetComponentInChildren<Canvas>().transform.GetChild(1).transform.GetComponent<Image>().sprite = null;
                 currentMoodDisplay.GetComponent<Image>().sprite = moodDict[MoodType.Neutral].sprite;

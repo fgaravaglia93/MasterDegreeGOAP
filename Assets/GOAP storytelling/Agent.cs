@@ -36,10 +36,7 @@ public class Agent : MonoBehaviour
     [HideInInspector]
     public Queue<GoapAction> plan;
 
-    
-
-    
-
+   
 	void Awake() {
 
 		m_fsm = new FSM();
@@ -135,7 +132,7 @@ public class Agent : MonoBehaviour
         HashSet<KeyValuePair<string, bool>> worldState = m_dataProvider.getWorldState();
 		Goal goal = m_goalStack.Peek();
 		plan = m_planner.Plan(agent, m_availableActions, worldState, goal.GoalStates);
-        print(plan.Peek().nameAction);
+        //print(plan.Peek().nameAction);
         if (plan != null) {
             Debug.Log("<color=blue>Found Plan:</color>" + PrettyPrint(goal.GoalStates));
             m_currentActions = plan;
@@ -167,11 +164,25 @@ public class Agent : MonoBehaviour
 			return;
 		}
 
-		GoapAction action = m_currentActions.Peek();
+		PersonalityAction action = (PersonalityAction)m_currentActions.Peek();
+        DisplayController.instance.ShowOnConsoleAction(action.console);
+        if (action.IsDone())
+        {
+            if (action.CalculateSuccess())
+            {
+                m_currentActions.Dequeue();
+                DisplayController.instance.ShowOnConsoleAction("Done", new Color(0, 255, 0));
+            }
+            else
+            {
+                DisplayController.instance.ShowOnConsoleAction("Action failed, repeat", new Color(255, 0, 0));
+            }
+            
+        }
 
         if (HasActionPlan()) {
 
-			action = m_currentActions.Peek();
+			action = (PersonalityAction)m_currentActions.Peek();
 			bool inRange = action.RequiresInRange() ? action.InRange : true;
 
 			if(inRange) {

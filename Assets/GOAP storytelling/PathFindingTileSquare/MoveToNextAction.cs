@@ -135,7 +135,7 @@ public class MoveToNextAction : MonoBehaviour
             || collision.gameObject.tag == "Pot" || collision.gameObject.tag == "Delivery" || collision.gameObject.tag == "Book"
             || collision.gameObject.tag == "Helper")
         {
-            Debug.Log("Collisione"+ collision.gameObject.tag);
+            //Debug.Log("Collisione"+ collision.gameObject.tag);
             if (collision.gameObject.tag == "Delivery")
             {
                 collision.gameObject.transform.parent.GetChild(1).gameObject.SetActive(true);

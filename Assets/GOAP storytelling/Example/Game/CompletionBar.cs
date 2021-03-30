@@ -31,6 +31,8 @@ public class CompletionBar : MonoBehaviour
 
     public void StartTaskBar(float duration)
     {
+        StopCoroutine("CompleteTaskBar");
+        StopCoroutine("StartCronometer");
         completionTaskbarSlider.value = 0f;
         currentDuration = duration;//seconds
         StartCoroutine("CompleteTaskBar");

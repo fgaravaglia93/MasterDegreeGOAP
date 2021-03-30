@@ -7,8 +7,11 @@ public class PersonalityAgent : Agent
 
     int extraversion;
 
+    bool firsHitAction;
+
     void Start()
     {
+        firsHitAction = true;
         extraversion = GetComponent<BigFivePersonality>().extraversion;
     }
 
@@ -21,7 +24,7 @@ public class PersonalityAgent : Agent
             {
                 //action.cost = action.cost - (action.cost/2*extraversion);
                 action.cost -= action.cost / 2 * extraversion;
-                print(action.cost + " - " + action.nameAction);
+                //print(action.cost + " - " + action.nameAction);
             }
 
         base.IdleState(fsm, agent);
@@ -47,28 +50,32 @@ public class PersonalityAgent : Agent
         }
     }
 
-    public override void PerformActionState(FSM fsm, GameObject agent)
+    /*public override void PerformActionState(FSM fsm, GameObject agent)
     {
+        PersonalityAction actionSucc = null;
+
+        if (firsHitAction && plan.Peek()!=null)
+        {
+            actionSucc = (PersonalityAction)plan.Peek();
+            string actionName = actionSucc.console;
+           
+        }
 
         base.PerformActionState(fsm, agent);
 
-        GoapAction action = m_currentActions.Peek();
-        if (action.IsDone())
+        if (actionSucc.CalculateSuccess())
         {
-
-            if (action.CalculateSuccess())
-                m_currentActions.Dequeue();
-            else
-            {
-                //DisplayController.instance.ShowOnConsoleAction("Action failed, repeat");
-
-                action.OnReset();
-            }
-
-
+            firsHitAction = true;
+           // DisplayController.instance.ShowOnConsoleAction("Done", new Color(0, 255, 0));
+        }
+        else
+        {
+            firsHitAction = false;
+            DisplayController.instance.ShowOnConsoleAction("Action failed, repeat", new Color(255, 0, 0));
         }
 
-    }
+
+    }*/
 
     string PrintPlanActions()
     {
@@ -77,7 +84,7 @@ public class PersonalityAgent : Agent
 
         foreach (PersonalityAction action in plan)
         {
-            printedPlan += ("\n)"+i+" "+(action.console));
+            printedPlan += ("\n"+i+") "+(action.console));
             i++;
         }
         print(printedPlan);
