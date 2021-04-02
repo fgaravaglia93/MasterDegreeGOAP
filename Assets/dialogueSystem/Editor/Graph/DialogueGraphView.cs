@@ -5,10 +5,13 @@ using System.Linq;
 using DialogueSystem.DataContainers;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
+using UnityEditor.Experimental.UIElements;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 using Button = UnityEngine.UIElements.Button;
+using ObjectField = UnityEditor.UIElements.ObjectField;
+using EnumField = UnityEditor.UIElements.EnumField;
 
 namespace DialogueSystem.Editor
 {
@@ -20,7 +23,6 @@ namespace DialogueSystem.Editor
         public Blackboard Blackboard = new Blackboard();
         //public List<ExposedProperty> ExposedProperties { get; private set; } = new List<ExposedProperty>();
         private NodeSearchWindow _searchWindow;
-
         public DialogueGraphView(DialogueGraph editorWindow)
         {
             styleSheets.Add(Resources.Load<StyleSheet>("DialogueGraph"));
@@ -54,7 +56,7 @@ namespace DialogueSystem.Editor
             Blackboard.Clear();
         }*/
 
-        /*public Group CreateCommentBlock(Rect rect, CommentBlockData commentBlockData = null)
+        public Group CreateCommentBlock(Rect rect, CommentBlockData commentBlockData = null)
         {
             if (commentBlockData == null)
                 commentBlockData = new CommentBlockData();
@@ -66,7 +68,7 @@ namespace DialogueSystem.Editor
             AddElement(group);
             group.SetPosition(rect);
             return group;
-        }*/
+        }
 
         /*public void AddPropertyToBlackBoard(ExposedProperty property, bool loadMode = false)
         {
@@ -116,43 +118,143 @@ namespace DialogueSystem.Editor
             return compatiblePorts;
         }
 
-        public void CreateNewDialogueNode(string nodeName, Vector2 position)
+        public void CreateNewDialogueNode(string nodeTitle, string nodeDialogue, MoodType mood, Vector2 position)
         {
-            AddElement(CreateNode(nodeName, position));
+            AddElement(CreateNode(nodeTitle, nodeDialogue, null, mood, position));
         }
 
-        public DialogueNode CreateNode(string nodeName, Vector2 position)
+        public DialogueNode CreateNode(string nodeTitle, string nodeDialogue, Sprite face, MoodType mood, Vector2 position)
         {
             var tempDialogueNode = new DialogueNode()
             {
-                title = nodeName,
-                DialogueText = nodeName,
+                title = nodeTitle,
+                DialogueText = nodeDialogue,
+                face = face,
+                mood = mood,
                 GUID = Guid.NewGuid().ToString()
             };
-            tempDialogueNode.styleSheets.Add(Resources.Load<StyleSheet>("Node"));
+
+            switch (mood)
+            {
+                case MoodType.Neutral:
+                    tempDialogueNode.Q<VisualElement>("title").style.backgroundColor = new Color(50, 50, 50, 0.91f);
+                    break;
+                case MoodType.Joy:
+                    tempDialogueNode.Q<VisualElement>("title").style.backgroundColor = new Color(255, 255, 0, 0.91f);
+                    break;
+                case MoodType.Angry:
+                    tempDialogueNode.Q<VisualElement>("title").style.backgroundColor = new Color(255, 0, 0,0.91f);
+                    break;
+                case MoodType.Sad:
+                    tempDialogueNode.Q<VisualElement>("title").style.backgroundColor = new Color(0, 0, 255, 0.91f);
+                    break;
+                case MoodType.Fear:
+                    tempDialogueNode.Q<VisualElement>("title").style.backgroundColor = new Color(0, 150, 0, 0.91f);
+                    break;
+                case MoodType.Disgust:
+                    tempDialogueNode.Q<VisualElement>("title").style.backgroundColor = new Color(0, 255, 0, 0.91f);
+                    break;
+                default:
+                    break;
+            }
+                    tempDialogueNode.styleSheets.Add(Resources.Load<StyleSheet>("Node"));
+            //tempDialogueNode.titleContainer.styleSheets.
+           
             var inputPort = GetPortInstance(tempDialogueNode, Direction.Input, Port.Capacity.Multi);
             inputPort.portName = "Input";
             tempDialogueNode.inputContainer.Add(inputPort);
             tempDialogueNode.RefreshExpandedState();
             tempDialogueNode.RefreshPorts();
             tempDialogueNode.SetPosition(new Rect(position,
-                DefaultNodeSize)); //To-Do: implement screen center instantiation positioning
+                DefaultNodeSize));
 
-            var textField = new TextField("");
-            textField.RegisterValueChangedCallback(evt =>
+           
+
+            var insertImage = new ObjectField();
+            insertImage.objectType = (typeof(Sprite));
+            
+            if (face != null)
+                insertImage.value = face;
+            
+          //  insertImage = tempDialogueNode.face;
+            tempDialogueNode.mainContainer.Add(insertImage);
+            tempDialogueNode.mainContainer.Add(insertImage.contentContainer);
+           
+            //tempDialogueNode.mainContainer.Add();
+
+            //Set Image
+            //Sprite spriteFace;
+            insertImage.RegisterValueChangedCallback(evt =>
             {
-                tempDialogueNode.DialogueText = evt.newValue;
+                    Debug.Log("Valore:" + evt.newValue);
+                    tempDialogueNode.face = (Sprite)evt.newValue;
+                    tempDialogueNode.mainContainer.Add(insertImage.contentContainer);
+                    Debug.Log("Sprite"+ insertImage.contentContainer);
+                   
+            });
+
+            //Set title
+            var textFieldTitle = new TextField("");
+            textFieldTitle.RegisterValueChangedCallback(evt =>
+            {
                 tempDialogueNode.title = evt.newValue;
             });
-            textField.SetValueWithoutNotify(tempDialogueNode.title);
-           // tempDialogueNode.mainContainer.
-            tempDialogueNode.mainContainer.Add(textField);
+            textFieldTitle.SetValueWithoutNotify(tempDialogueNode.title);
+
+            //Set field for the associated emotion
+            EnumField moodField = new EnumField(mood);
+            tempDialogueNode.mainContainer.Add(moodField);
+            moodField.RegisterValueChangedCallback(evt =>
+            {
+                tempDialogueNode.mood = (MoodType)evt.newValue;
+                switch ((MoodType)evt.newValue)
+                {
+                    case MoodType.Neutral:
+                        tempDialogueNode.Q<VisualElement>("title").style.backgroundColor = new Color(50, 50, 50, 0.91f);
+                        break;
+                    case MoodType.Joy:
+                        tempDialogueNode.Q<VisualElement>("title").style.backgroundColor = new Color(255, 255, 0, 0.91f);
+                        break;
+                    case MoodType.Angry:
+                        tempDialogueNode.Q<VisualElement>("title").style.backgroundColor = new Color(255, 0, 0, 0.91f);
+                        break;
+                    case MoodType.Sad:
+                        tempDialogueNode.Q<VisualElement>("title").style.backgroundColor = new Color(0, 0, 255, 0.91f);
+                        break;
+                    case MoodType.Fear:
+                        tempDialogueNode.Q<VisualElement>("title").style.backgroundColor = new Color(150, 0, 200, 0.91f);
+                        break;
+                    case MoodType.Disgust:
+                        tempDialogueNode.Q<VisualElement>("title").style.backgroundColor = new Color(0, 150, 0, 0.91f);
+                        break;
+                    default:
+                        break;
+                }
+                
+                    
+            });
+
+
+            //Set Dialogue Text Field
+            var textFieldDialogue = new TextField("");
+            textFieldDialogue.RegisterValueChangedCallback(evt =>
+            {
+                tempDialogueNode.DialogueText = evt.newValue;
+            });
+            textFieldDialogue.SetValueWithoutNotify(tempDialogueNode.DialogueText);
+
+            tempDialogueNode.mainContainer.Add(textFieldTitle);
+            tempDialogueNode.mainContainer.Add(textFieldDialogue);
+
 
             var button = new Button(() => { AddChoicePort(tempDialogueNode); })
             {
-                text = "Add Choice"
+                text = "Add an answer"
             };
             tempDialogueNode.titleButtonContainer.Add(button);
+
+            //Set the color on the editor
+            
             return tempDialogueNode;
         }
 

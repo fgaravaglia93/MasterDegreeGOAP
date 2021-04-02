@@ -13,7 +13,7 @@ using UnityEngine.UIElements;
 
 namespace DialogueSystem.Editor
 {
-    public class GraphSaveUtility
+    public class GraphSave
     {
         private List<Edge> Edges => _graphView.edges.ToList();
         private List<DialogueNode> Nodes => _graphView.nodes.ToList().Cast<DialogueNode>().ToList();
@@ -24,9 +24,9 @@ namespace DialogueSystem.Editor
         private DialogueContainer _dialogueContainer;
         private DialogueGraphView _graphView;
 
-        public static GraphSaveUtility GetInstance(DialogueGraphView graphView)
+        public static GraphSave GetInstance(DialogueGraphView graphView)
         {
-            return new GraphSaveUtility
+            return new GraphSave
             {
                 _graphView = graphView
             };
@@ -37,16 +37,16 @@ namespace DialogueSystem.Editor
             var dialogueContainerObject = ScriptableObject.CreateInstance<DialogueContainer>();
             if (!SaveNodes(fileName, dialogueContainerObject)) return;
            // SaveExposedProperties(dialogueContainerObject);
-           // SaveCommentBlocks(dialogueContainerObject);
+            SaveCommentBlocks(dialogueContainerObject);
 
-            if (!AssetDatabase.IsValidFolder("Assets/Resources"))
-                AssetDatabase.CreateFolder("Assets", "Resources");
+            if (!AssetDatabase.IsValidFolder("Assets/dialogueSystem/Resources"))
+                AssetDatabase.CreateFolder("Assets/dialogueSystem", "Resources");
 
-            UnityEngine.Object loadedAsset = AssetDatabase.LoadAssetAtPath($"Assets/Resources/{fileName}.asset", typeof(DialogueContainer));
+            UnityEngine.Object loadedAsset = AssetDatabase.LoadAssetAtPath($"Assets/dialogueSystem/Resources/{fileName}.asset", typeof(DialogueContainer));
 
             if (loadedAsset == null || !AssetDatabase.Contains(loadedAsset))
             {
-                AssetDatabase.CreateAsset(dialogueContainerObject, $"Assets/Resources/{fileName}.asset");
+                AssetDatabase.CreateAsset(dialogueContainerObject, $"Assets/dialogueSystem/Resources/{fileName}.asset");
             }
             else
             {
@@ -82,7 +82,9 @@ namespace DialogueSystem.Editor
                 dialogueContainerObject.DialogueNodeData.Add(new DialogueNodeData
                 {
                     NodeGUID = node.GUID,
+                    title = node.title,
                     DialogueText = node.DialogueText,
+                    face = node.face,
                     Position = node.GetPosition().position
                 });
             }
@@ -96,7 +98,7 @@ namespace DialogueSystem.Editor
             dialogueContainer.ExposedProperties.AddRange(_graphView.ExposedProperties);
         }*/
 
-        /*private void SaveCommentBlocks(DialogueContainer dialogueContainer)
+        private void SaveCommentBlocks(DialogueContainer dialogueContainer)
         {
             foreach (var block in CommentBlocks)
             {
@@ -110,7 +112,7 @@ namespace DialogueSystem.Editor
                     Position = block.GetPosition().position
                 });
             }
-        }*/
+        }
         
         public void LoadNarrative(string fileName)
         {
@@ -125,7 +127,7 @@ namespace DialogueSystem.Editor
             GenerateDialogueNodes();
             ConnectDialogueNodes();
             //AddExposedProperties();
-            //GenerateCommentBlocks();
+            GenerateCommentBlocks();
         }
 
         /// <summary>
@@ -150,7 +152,7 @@ namespace DialogueSystem.Editor
         {
             foreach (var perNode in _dialogueContainer.DialogueNodeData)
             {
-                var tempNode = _graphView.CreateNode(perNode.DialogueText, Vector2.zero);
+                var tempNode = _graphView.CreateNode(perNode.title, perNode.DialogueText, perNode.face, perNode.mood, Vector2.zero);
                 tempNode.GUID = perNode.NodeGUID;
                 _graphView.AddElement(tempNode);
 
@@ -199,7 +201,7 @@ namespace DialogueSystem.Editor
             }
         }*/
 
-        /*private void GenerateCommentBlocks()
+        private void GenerateCommentBlocks()
         {
             foreach (var commentBlock in CommentBlocks)
             {
@@ -212,6 +214,6 @@ namespace DialogueSystem.Editor
                      commentBlockData);
                 block.AddElements(Nodes.Where(x => commentBlockData.ChildNodes.Contains(x.GUID)));
             }
-        }*/
+        }
     }
 }

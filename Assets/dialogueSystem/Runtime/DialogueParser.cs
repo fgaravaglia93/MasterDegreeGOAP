@@ -9,6 +9,7 @@ using DialogueSystem.DataContainers;
 
 namespace DialogueSystem.Runtime
 {
+    //Here we the change of mood tresholds during dialogues
     public class DialogueParser : MonoBehaviour
     {
         [SerializeField]
@@ -38,7 +39,7 @@ namespace DialogueSystem.Runtime
             {
                 Destroy(buttons[i].gameObject);
             }
-
+            int nChoices = choices.Count();
             //serve un sistema più avanzato per indicare la tranform
             int j = 0;
             foreach (NodeLinkData choice in choices)
@@ -47,7 +48,11 @@ namespace DialogueSystem.Runtime
                 //buttonContainer.Translate(new Vector3(300 * j, 0f, 0f), Space.World);
                 Button button = Instantiate(choicePrefab, buttonContainer);
                 var rectTransform = button.GetComponent<RectTransform>();
-                button.GetComponent<RectTransform>().anchoredPosition =
+                if (nChoices == 1)
+                    button.GetComponent<RectTransform>().anchoredPosition =
+                    new Vector3(button.GetComponent<RectTransform>().anchoredPosition.x + 600, 0f, 0f);
+                else
+                    button.GetComponent<RectTransform>().anchoredPosition =
                     new Vector3(button.GetComponent<RectTransform>().anchoredPosition.x + 300 * j, 0f, 0f);
                 button.GetComponentInChildren<TextMeshProUGUI>().text = choice.PortName;
                 button.onClick.AddListener(() => StartDialogue(choice.TargetNodeGUID));

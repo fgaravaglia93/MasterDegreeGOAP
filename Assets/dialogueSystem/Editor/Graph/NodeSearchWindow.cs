@@ -36,11 +36,11 @@ namespace DialogueSystem.Editor
                 {
                     level = 2, userData = new DialogueNode()
                 },
-               /* new SearchTreeEntry(new GUIContent("Comment Block",_indentationIcon))
+               new SearchTreeEntry(new GUIContent("Comment Block",_indentationIcon))
                 {
                     level = 1,
                     userData = new Group()
-                }*/
+                }
             };
 
             return tree;
@@ -55,11 +55,11 @@ namespace DialogueSystem.Editor
             switch (SearchTreeEntry.userData)
             {
                 case DialogueNode dialogueNode:
-                    _graphView.CreateNewDialogueNode("Dialogue Node", graphMousePosition);
+                    _graphView.CreateNewDialogueNode("Dialogue Node", "Dialogue Content", MoodType.Neutral, graphMousePosition);
                     return true;
                 case Group group:
                     var rect = new Rect(graphMousePosition, _graphView.DefaultCommentBlockSize);
-                   // _graphView.CreateCommentBlock(rect);
+                     _graphView.CreateCommentBlock(rect);
                     return true;
             }
             return false;

@@ -1,8 +1,11 @@
 DialogueNode #title {
-    background-color: rgba(29, 115, 57, 0.91);
+    background-color: rgba(100, 100, 100, 0.91);
+	color: rgba(50, 50, 50, 0.91);
+	width: 300;
+
 }
 
-DialogueNode #DialogueText {
+#textFieldTitle {
     height: 100;
     width: 150;
     -unity-text-align: upper-left;  

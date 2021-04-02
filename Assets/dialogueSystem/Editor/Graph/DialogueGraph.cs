@@ -55,7 +55,7 @@ namespace DialogueSystem.Editor
         {
             if (!string.IsNullOrEmpty(_fileName))
             {
-                var saveUtility = GraphSaveUtility.GetInstance(_graphView);
+                var saveUtility = GraphSave.GetInstance(_graphView);
                 if (save)
                     saveUtility.SaveGraph(_fileName);
                 else
