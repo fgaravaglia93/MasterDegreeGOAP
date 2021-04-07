@@ -59,7 +59,7 @@ namespace DialogueSystem.Editor
                 if (save)
                     saveUtility.SaveGraph(_fileName);
                 else
-                    saveUtility.LoadNarrative(_fileName);
+                    saveUtility.LoadDialogues(_fileName);
             }
             else
             {

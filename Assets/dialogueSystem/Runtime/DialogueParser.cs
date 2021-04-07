@@ -56,6 +56,12 @@ namespace DialogueSystem.Runtime
                     new Vector3(button.GetComponent<RectTransform>().anchoredPosition.x + 300 * j, 0f, 0f);
                 button.GetComponentInChildren<TextMeshProUGUI>().text = choice.PortName;
                 button.onClick.AddListener(() => StartDialogue(choice.TargetNodeGUID));
+                //this will manage the change of mood during interaction by talking
+                if (choice.changeMoodTo == "Joy")
+                    //Debug.Log("Il PG ORA è FELICE");
+                    button.onClick.AddListener(() => DisplayController.instance.DisplayChange());
+                    //button.onClick.AddListener(() => DisplayController.instance.ChangeMoodToJoy());
+
                 j++;
             }
         }

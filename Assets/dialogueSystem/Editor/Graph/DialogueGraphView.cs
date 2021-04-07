@@ -41,6 +41,7 @@ namespace DialogueSystem.Editor
         }
 
 
+
         private void AddSearchWindow(DialogueGraph editorWindow)
         {
             _searchWindow = ScriptableObject.CreateInstance<NodeSearchWindow>();
@@ -125,6 +126,7 @@ namespace DialogueSystem.Editor
 
         public DialogueNode CreateNode(string nodeTitle, string nodeDialogue, Sprite face, MoodType mood, Vector2 position)
         {
+            
             var tempDialogueNode = new DialogueNode()
             {
                 title = nodeTitle,
@@ -134,41 +136,42 @@ namespace DialogueSystem.Editor
                 GUID = Guid.NewGuid().ToString()
             };
 
+
             switch (mood)
             {
                 case MoodType.Neutral:
-                    tempDialogueNode.Q<VisualElement>("title").style.backgroundColor = new Color(50, 50, 50, 0.91f);
+                    tempDialogueNode.Q<VisualElement>("title").style.backgroundColor = new Color(0.2f, 0.2f, 0.2f, 0.91f);
                     break;
                 case MoodType.Joy:
-                    tempDialogueNode.Q<VisualElement>("title").style.backgroundColor = new Color(255, 255, 0, 0.91f);
+                    tempDialogueNode.Q<VisualElement>("title").style.backgroundColor = new Color(1f, 1f, 0f, 0.91f);
+                    tempDialogueNode.mood = MoodType.Joy;
                     break;
                 case MoodType.Angry:
-                    tempDialogueNode.Q<VisualElement>("title").style.backgroundColor = new Color(255, 0, 0,0.91f);
+                    tempDialogueNode.Q<VisualElement>("title").style.backgroundColor = new Color(1f, 0f, 0f, 0.91f);
                     break;
                 case MoodType.Sad:
-                    tempDialogueNode.Q<VisualElement>("title").style.backgroundColor = new Color(0, 0, 255, 0.91f);
+                    tempDialogueNode.Q<VisualElement>("title").style.backgroundColor = new Color(0f, 0f, 1f, 0.91f);
                     break;
                 case MoodType.Fear:
-                    tempDialogueNode.Q<VisualElement>("title").style.backgroundColor = new Color(0, 150, 0, 0.91f);
+                    tempDialogueNode.Q<VisualElement>("title").style.backgroundColor = new Color(0.5f, 0f, 0.5f, 0.91f);
                     break;
                 case MoodType.Disgust:
-                    tempDialogueNode.Q<VisualElement>("title").style.backgroundColor = new Color(0, 255, 0, 0.91f);
+                    tempDialogueNode.Q<VisualElement>("title").style.backgroundColor = new Color(0, 0.5f, 0, 0.91f);
                     break;
                 default:
                     break;
             }
-                    tempDialogueNode.styleSheets.Add(Resources.Load<StyleSheet>("Node"));
-            //tempDialogueNode.titleContainer.styleSheets.
-           
+
+            tempDialogueNode.styleSheets.Add(Resources.Load<StyleSheet>("Node"));
+                       
             var inputPort = GetPortInstance(tempDialogueNode, Direction.Input, Port.Capacity.Multi);
             inputPort.portName = "Input";
             tempDialogueNode.inputContainer.Add(inputPort);
+
             tempDialogueNode.RefreshExpandedState();
             tempDialogueNode.RefreshPorts();
             tempDialogueNode.SetPosition(new Rect(position,
                 DefaultNodeSize));
-
-           
 
             var insertImage = new ObjectField();
             insertImage.objectType = (typeof(Sprite));
@@ -203,38 +206,36 @@ namespace DialogueSystem.Editor
 
             //Set field for the associated emotion
             EnumField moodField = new EnumField(mood);
-            tempDialogueNode.mainContainer.Add(moodField);
+            moodField.value = tempDialogueNode.mood;
+
             moodField.RegisterValueChangedCallback(evt =>
             {
                 tempDialogueNode.mood = (MoodType)evt.newValue;
                 switch ((MoodType)evt.newValue)
                 {
                     case MoodType.Neutral:
-                        tempDialogueNode.Q<VisualElement>("title").style.backgroundColor = new Color(50, 50, 50, 0.91f);
+                        tempDialogueNode.Q<VisualElement>("title").style.backgroundColor = new Color(0.2f, 0.2f, 0.2f, 0.91f);
                         break;
                     case MoodType.Joy:
-                        tempDialogueNode.Q<VisualElement>("title").style.backgroundColor = new Color(255, 255, 0, 0.91f);
+                        tempDialogueNode.Q<VisualElement>("title").style.backgroundColor = new Color(1f, 1f, 0f, 0.91f);
                         break;
                     case MoodType.Angry:
-                        tempDialogueNode.Q<VisualElement>("title").style.backgroundColor = new Color(255, 0, 0, 0.91f);
+                        tempDialogueNode.Q<VisualElement>("title").style.backgroundColor = new Color(1f, 0, 0, 0.91f);
                         break;
                     case MoodType.Sad:
-                        tempDialogueNode.Q<VisualElement>("title").style.backgroundColor = new Color(0, 0, 255, 0.91f);
+                        tempDialogueNode.Q<VisualElement>("title").style.backgroundColor = new Color(0f, 0f, 1f, 0.91f);
                         break;
                     case MoodType.Fear:
-                        tempDialogueNode.Q<VisualElement>("title").style.backgroundColor = new Color(150, 0, 200, 0.91f);
+                        tempDialogueNode.Q<VisualElement>("title").style.backgroundColor = new Color(0.5f, 0, 0.5f, 0.91f);
                         break;
                     case MoodType.Disgust:
-                        tempDialogueNode.Q<VisualElement>("title").style.backgroundColor = new Color(0, 150, 0, 0.91f);
+                        tempDialogueNode.Q<VisualElement>("title").style.backgroundColor = new Color(0, 0.5f, 0, 0.91f);
                         break;
                     default:
                         break;
                 }
-                
-                    
             });
-
-
+            tempDialogueNode.mainContainer.Add(moodField);
             //Set Dialogue Text Field
             var textFieldDialogue = new TextField("");
             textFieldDialogue.RegisterValueChangedCallback(evt =>
@@ -270,7 +271,6 @@ namespace DialogueSystem.Editor
                 ? $"Option {outputPortCount + 1}"
                 : overriddenPortName;
 
-
             var textField = new TextField()
             {
                 name = string.Empty,
@@ -278,13 +278,28 @@ namespace DialogueSystem.Editor
             };
             textField.RegisterValueChangedCallback(evt => generatedPort.portName = evt.newValue);
             generatedPort.contentContainer.Add(new Label("  "));
+
+            EnumField prova = new EnumField(MoodType.Neutral);
+            prova.style.width = 80;
+            prova.value = MoodType.Joy;
+            generatedPort.contentContainer.Add(prova);
+
+           /* prova.RegisterValueChangedCallback(evt =>
+            {
+                generatedPort.portName = evt.newValue.text;
+            }*/
+                // generatedPort.changeMoodTo = MoodType.Neutral;
+                generatedPort.contentContainer.Add(prova);
             generatedPort.contentContainer.Add(textField);
+            
             var deleteButton = new Button(() => RemovePort(nodeCache, generatedPort))
             {
                 text = "X"
             };
             generatedPort.contentContainer.Add(deleteButton);
-            generatedPort.portName = outputPortName;
+            //"_" used to split the port name into choice button text and associated mood
+            generatedPort.portName = outputPortName+"_"+prova.text;
+            Debug.Log(generatedPort.portName);
             nodeCache.outputContainer.Add(generatedPort);
             nodeCache.RefreshPorts();
             nodeCache.RefreshExpandedState();
@@ -310,6 +325,7 @@ namespace DialogueSystem.Editor
             Port.Capacity capacity = Port.Capacity.Single)
         {
             return node.InstantiatePort(Orientation.Horizontal, nodeDirection, capacity, typeof(float));
+          
         }
 
         private DialogueNode GetEntryPointNodeInstance()

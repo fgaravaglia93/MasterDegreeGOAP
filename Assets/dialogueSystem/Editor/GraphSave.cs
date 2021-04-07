@@ -69,12 +69,31 @@ namespace DialogueSystem.Editor
             {
                 var outputNode = (connectedSockets[i].output.node as DialogueNode);
                 var inputNode = (connectedSockets[i].input.node as DialogueNode);
-                dialogueContainerObject.NodeLinks.Add(new NodeLinkData
+
+                //generate 
+                var message = connectedSockets[i].output.portName.Split(new char[] { '_' });
+                if (message[0] == "Next")
                 {
-                    BaseNodeGUID = outputNode.GUID,
-                    PortName = connectedSockets[i].output.portName,
-                    TargetNodeGUID = inputNode.GUID
-                });
+                    Debug.Log(message[0]);
+                    dialogueContainerObject.NodeLinks.Add(new NodeLinkData
+                    {
+                        BaseNodeGUID = outputNode.GUID,
+                        PortName = message[0],
+                        TargetNodeGUID = inputNode.GUID,
+                        
+                    });
+                } else
+                {
+                    Debug.Log(message[1]);
+                    dialogueContainerObject.NodeLinks.Add(new NodeLinkData
+                    {
+                        BaseNodeGUID = outputNode.GUID,
+                        PortName = message[0],
+                        TargetNodeGUID = inputNode.GUID,
+                        changeMoodTo = message[1]
+                    });
+                }
+               
             }
 
             foreach (var node in Nodes.Where(node => !node.EntyPoint))
@@ -85,6 +104,7 @@ namespace DialogueSystem.Editor
                     title = node.title,
                     DialogueText = node.DialogueText,
                     face = node.face,
+                    mood = node.mood,
                     Position = node.GetPosition().position
                 });
             }
@@ -114,7 +134,7 @@ namespace DialogueSystem.Editor
             }
         }
         
-        public void LoadNarrative(string fileName)
+        public void LoadDialogues(string fileName)
         {
             _dialogueContainer = Resources.Load<DialogueContainer>(fileName);
             if (_dialogueContainer == null)

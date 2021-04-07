@@ -165,4 +165,9 @@ public class DisplayController : MonoBehaviour
             }
         }
     }
+
+    public void DisplayChange()
+    {
+        print("Il PG è felice");
+    }
 }

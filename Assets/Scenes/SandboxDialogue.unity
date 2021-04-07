@@ -298,7 +298,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a96604715dde964c9e85e2d47b822c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogue: {fileID: 11400000, guid: 7237f7bb417fef54e8eeee722691c2a7, type: 2}
+  dialogue: {fileID: 11400000, guid: f6470b6125599dd4d9c45bc359b26e16, type: 2}
   dialogueText: {fileID: 52376252}
   choicePrefab: {fileID: 3268785185847185821, guid: 934ad40c5727d594ab2efe41c49d9a95,
     type: 3}
@@ -845,7 +845,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &915448204
 Transform:
   m_ObjectHideFlags: 0
@@ -873,7 +873,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a96604715dde964c9e85e2d47b822c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogue: {fileID: 11400000, guid: 413fafdd23042c24e9d09763e7082a02, type: 2}
+  dialogue: {fileID: 11400000, guid: 0d711f24cee5d1d43823f98d60535f89, type: 2}
   dialogueText: {fileID: 432324601}
   choicePrefab: {fileID: 3268785185847185821, guid: 934ad40c5727d594ab2efe41c49d9a95,
     type: 3}
