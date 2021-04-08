@@ -23,6 +23,8 @@ namespace DialogueSystem.Editor
 
         private DialogueContainer _dialogueContainer;
         private DialogueGraphView _graphView;
+        public string path = "Assets/GOAP storytelling/Example/Traits/";
+
 
         public static GraphSave GetInstance(DialogueGraphView graphView)
         {
@@ -36,7 +38,7 @@ namespace DialogueSystem.Editor
         {
             var dialogueContainerObject = ScriptableObject.CreateInstance<DialogueContainer>();
             if (!SaveNodes(fileName, dialogueContainerObject)) return;
-           // SaveExposedProperties(dialogueContainerObject);
+            // SaveExposedProperties(dialogueContainerObject);
             SaveCommentBlocks(dialogueContainerObject);
 
             if (!AssetDatabase.IsValidFolder("Assets/dialogueSystem/Resources"))
@@ -57,8 +59,6 @@ namespace DialogueSystem.Editor
                 //container.CommentBlockData = dialogueContainerObject.CommentBlockData;
                 EditorUtility.SetDirty(container);
             }
-
-            AssetDatabase.SaveAssets();
         }
 
         private bool SaveNodes(string fileName, DialogueContainer dialogueContainerObject)
@@ -71,29 +71,33 @@ namespace DialogueSystem.Editor
                 var inputNode = (connectedSockets[i].input.node as DialogueNode);
 
                 //generate 
-                var message = connectedSockets[i].output.portName.Split(new char[] { '_' });
+                var message = connectedSockets[i].output.portName.Split(new char[] { '_', '_' });
+                Debug.Log(connectedSockets[i].output.portName);
                 if (message[0] == "Next")
                 {
-                    Debug.Log(message[0]);
                     dialogueContainerObject.NodeLinks.Add(new NodeLinkData
                     {
                         BaseNodeGUID = outputNode.GUID,
                         PortName = message[0],
                         TargetNodeGUID = inputNode.GUID,
-                        
-                    });
-                } else
-                {
-                    Debug.Log(message[1]);
-                    dialogueContainerObject.NodeLinks.Add(new NodeLinkData
-                    {
-                        BaseNodeGUID = outputNode.GUID,
-                        PortName = message[0],
-                        TargetNodeGUID = inputNode.GUID,
-                        changeMoodTo = message[1]
+
                     });
                 }
-               
+                else
+                {
+                    //Debug.Log(message[1] + " " + message[2]);
+                    MoodType changeTo = ConvertMoodFromString(message[1]);
+                    Trait traitTo = ConvertTraitFromString(message[2]);
+                    dialogueContainerObject.NodeLinks.Add(new NodeLinkData
+                    {
+                        BaseNodeGUID = outputNode.GUID,
+                        PortName = message[0],
+                        TargetNodeGUID = inputNode.GUID,
+                        changeMoodTo = changeTo,
+                        trait = traitTo
+                    });
+
+                }
             }
 
             foreach (var node in Nodes.Where(node => !node.EntyPoint))
@@ -133,7 +137,7 @@ namespace DialogueSystem.Editor
                 });
             }
         }
-        
+
         public void LoadDialogues(string fileName)
         {
             _dialogueContainer = Resources.Load<DialogueContainer>(fileName);
@@ -177,7 +181,7 @@ namespace DialogueSystem.Editor
                 _graphView.AddElement(tempNode);
 
                 var nodePorts = _dialogueContainer.NodeLinks.Where(x => x.BaseNodeGUID == perNode.NodeGUID).ToList();
-                nodePorts.ForEach(x => _graphView.AddChoicePort(tempNode, x.PortName));
+                nodePorts.ForEach(x => _graphView.AddChoicePort(tempNode, x.PortName, x.changeMoodTo, x.trait));
             }
         }
 
@@ -234,6 +238,37 @@ namespace DialogueSystem.Editor
                      commentBlockData);
                 block.AddElements(Nodes.Where(x => commentBlockData.ChildNodes.Contains(x.GUID)));
             }
+        }
+
+        private MoodType ConvertMoodFromString(string moodString)
+        {
+
+            switch (moodString)
+            {
+                case "Joy":
+                    return MoodType.Joy;
+                case "Sad":
+                    return MoodType.Sad;
+                case "Angry":
+                    return MoodType.Angry;
+                case "Fear":
+                    return MoodType.Fear;
+                case "Disgust":
+                    return MoodType.Disgust;
+                default:
+                    return MoodType.Neutral;
+            }
+        }
+
+        public Trait ConvertTraitFromString(string traitFile)
+        {
+            //remove space char at start and at the end
+            traitFile = traitFile.TrimStart();
+            traitFile = traitFile.TrimEnd();
+            string pathTrait = "Assets/GOAP storytelling/Example/Traits/" + traitFile + ".asset";
+            UnityEngine.Object data = AssetDatabase.LoadAssetAtPath(pathTrait, typeof(Trait));
+            Trait trait = data as Trait;
+            return trait;
         }
     }
 }

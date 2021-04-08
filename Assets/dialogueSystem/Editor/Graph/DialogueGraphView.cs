@@ -189,10 +189,8 @@ namespace DialogueSystem.Editor
             //Sprite spriteFace;
             insertImage.RegisterValueChangedCallback(evt =>
             {
-                    Debug.Log("Valore:" + evt.newValue);
                     tempDialogueNode.face = (Sprite)evt.newValue;
                     tempDialogueNode.mainContainer.Add(insertImage.contentContainer);
-                    Debug.Log("Sprite"+ insertImage.contentContainer);
                    
             });
 
@@ -248,19 +246,17 @@ namespace DialogueSystem.Editor
             tempDialogueNode.mainContainer.Add(textFieldDialogue);
 
 
-            var button = new Button(() => { AddChoicePort(tempDialogueNode); })
+            var button = new Button(() => { AddChoicePort(tempDialogueNode,"",MoodType.Neutral); })
             {
                 text = "Add an answer"
             };
             tempDialogueNode.titleButtonContainer.Add(button);
 
-            //Set the color on the editor
-            
             return tempDialogueNode;
         }
 
 
-        public void AddChoicePort(DialogueNode nodeCache, string overriddenPortName = "")
+        public void AddChoicePort(DialogueNode nodeCache, string overriddenPortName = "", MoodType savedMoodPort = MoodType.Neutral, Trait trait = null)
         {
             var generatedPort = GetPortInstance(nodeCache, Direction.Output);
             var portLabel = generatedPort.contentContainer.Q<Label>("type");
@@ -279,27 +275,64 @@ namespace DialogueSystem.Editor
             textField.RegisterValueChangedCallback(evt => generatedPort.portName = evt.newValue);
             generatedPort.contentContainer.Add(new Label("  "));
 
-            EnumField prova = new EnumField(MoodType.Neutral);
-            prova.style.width = 80;
-            prova.value = MoodType.Joy;
-            generatedPort.contentContainer.Add(prova);
+            EnumField moodAnswer = new EnumField(savedMoodPort);
+            moodAnswer.style.width = 80;
+            moodAnswer.value = savedMoodPort;
+            generatedPort.contentContainer.Add(moodAnswer);
 
-           /* prova.RegisterValueChangedCallback(evt =>
+            //activate only if a trait is associated to that NPC
+            var insertTrait = new ObjectField();
+            insertTrait.objectType = (typeof(Trait));
+            insertTrait.style.width = 40;
+            if (trait != null)
             {
-                generatedPort.portName = evt.newValue.text;
-            }*/
-                // generatedPort.changeMoodTo = MoodType.Neutral;
-                generatedPort.contentContainer.Add(prova);
-            generatedPort.contentContainer.Add(textField);
+                insertTrait.value = trait;
+            }
             
+            generatedPort.contentContainer.Add(insertTrait);
+            MoodType moodName = MoodType.Neutral;
+            string traitName = "";
+
+            textField.RegisterValueChangedCallback(evt => 
+            {
+                outputPortName = evt.newValue;
+                //"_" used to split the port name into choice button text and associated mood
+                if(traitName == null)
+                     generatedPort.portName = outputPortName + "_" + moodName;
+                if (traitName != "")
+                    generatedPort.portName = outputPortName + "_" + moodAnswer + "_" + traitName;
+                //Debug.Log("Stringa passata: " + generatedPort.portName);
+            });
+
+            moodAnswer.RegisterValueChangedCallback(evt =>
+            {
+                moodName = (MoodType)evt.newValue;
+                //"_" used to split the port name into choice button text and associated mood
+                if (traitName == null)
+                    generatedPort.portName = outputPortName + "_" + moodName;
+                if (traitName != "")
+                    generatedPort.portName = outputPortName + "_" + moodAnswer + "_" + traitName;
+                // Debug.Log("Stringa passata: "+ generatedPort.portName);
+            });
+
+            insertTrait.RegisterValueChangedCallback(evt =>
+            {
+                traitName = ((Trait)evt.newValue).name;
+                //"_" used to split the port name into choice button text and associated mood
+                generatedPort.portName = outputPortName + "_" + moodName + "_" + traitName;
+                //Debug.Log("Stringa passata: " + generatedPort.portName);
+            });
+
+
+            generatedPort.contentContainer.Add(moodAnswer);
+            generatedPort.contentContainer.Add(textField);
+
             var deleteButton = new Button(() => RemovePort(nodeCache, generatedPort))
             {
                 text = "X"
             };
             generatedPort.contentContainer.Add(deleteButton);
-            //"_" used to split the port name into choice button text and associated mood
-            generatedPort.portName = outputPortName+"_"+prova.text;
-            Debug.Log(generatedPort.portName);
+            
             nodeCache.outputContainer.Add(generatedPort);
             nodeCache.RefreshPorts();
             nodeCache.RefreshExpandedState();

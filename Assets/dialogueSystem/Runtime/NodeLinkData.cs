@@ -9,13 +9,9 @@ namespace DialogueSystem.DataContainers
         public string BaseNodeGUID;
         public string PortName;
         public string TargetNodeGUID;
-        public string changeMoodTo;
+        public MoodType changeMoodTo;
         public Trait trait;
 
-        /*public void SetChangeToMood(string message)
-        {
-            if (message == "Joy")
-                changeMoodTo = MoodType.Joy;
-        }*/
+        
     }
 }
