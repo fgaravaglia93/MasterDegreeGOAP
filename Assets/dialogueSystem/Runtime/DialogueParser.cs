@@ -15,6 +15,8 @@ namespace DialogueSystem.Runtime
         public bool flagNPC;
         public GameObject dialogueFace;
         [SerializeField]
+        public bool interactable;
+        [SerializeField]
         private DialogueContainer dialogue;
         [SerializeField]
         private TextMeshProUGUI dialogueText;
@@ -22,12 +24,39 @@ namespace DialogueSystem.Runtime
         private Button choicePrefab;
         [SerializeField]
         private Transform buttonContainer;
+        private NodeLinkData dialogueData;
+        private bool dialogueOnGoing = false;
+        private bool lastBlock = false;
 
         void Start()
         {
             //Start dialogue from the root node (NodeLinks.First())
-            var dialogueData = dialogue.NodeLinks.First();
-            StartDialogue(dialogueData.TargetNodeGUID);
+            dialogueData = dialogue.NodeLinks.First();
+        }
+
+        void Update()
+        {
+            if(interactable && !dialogueOnGoing)
+            {
+
+                if (Input.GetButtonDown("Enter"))
+                {
+                    Debug.Log("interact");
+
+                    if (!lastBlock)
+                    {
+                        dialogueOnGoing = true;
+                        dialogueFace.transform.parent.gameObject.SetActive(true);
+                        StartDialogue(dialogueData.TargetNodeGUID);
+                    }
+                    else
+                    {
+                        dialogueFace.transform.parent.gameObject.SetActive(false);
+                        lastBlock = false;
+                        dialogueData = dialogue.NodeLinks.First();
+                    }
+                }
+            }
         }
 
         public void StartDialogue(string dialogueDataGUID)
@@ -46,6 +75,13 @@ namespace DialogueSystem.Runtime
             }
             int nChoices = choices.Count();
 
+            //If leaf node
+            if (nChoices == 0)
+            {
+                dialogueOnGoing = false;
+                lastBlock = true;
+            }
+                
             //This handle the trait option
 
             //serve un sistema più avanzato per indicare la tranform
