@@ -283,6 +283,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 613923487}
+  - {fileID: 276892645}
   m_Father: {fileID: 1336243490}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -298,8 +299,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a96604715dde964c9e85e2d47b822c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flagNPC: 0
-  dialogue: {fileID: 11400000, guid: 2e310446a13caa944951c643daf801d7, type: 2}
+  flagNPC: 1
+  dialogueFace: {fileID: 276892644}
+  dialogue: {fileID: 11400000, guid: 8e5216c25380e3a4589c4a02d65786d0, type: 2}
   dialogueText: {fileID: 52376252}
   choicePrefab: {fileID: 3268785185847185821, guid: 934ad40c5727d594ab2efe41c49d9a95,
     type: 3}
@@ -397,7 +399,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &276892645
 RectTransform:
   m_ObjectHideFlags: 0
@@ -409,8 +411,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1336243490}
-  m_RootOrder: 2
+  m_Father: {fileID: 173990613}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -436,8 +438,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -4877067339641310479, guid: 65f8a2b27e962884496ba55e671b2369,
-    type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -875,6 +876,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flagNPC: 0
+  dialogueFace: {fileID: 0}
   dialogue: {fileID: 11400000, guid: 0d711f24cee5d1d43823f98d60535f89, type: 2}
   dialogueText: {fileID: 432324601}
   choicePrefab: {fileID: 3268785185847185821, guid: 934ad40c5727d594ab2efe41c49d9a95,
@@ -1094,7 +1096,6 @@ RectTransform:
   m_Children:
   - {fileID: 173990613}
   - {fileID: 915448204}
-  - {fileID: 276892645}
   m_Father: {fileID: 2107276010}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

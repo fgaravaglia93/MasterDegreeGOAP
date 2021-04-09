@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a74c0aa5c3437c243b28f0f72899fc53, type: 3}
+  m_Name: spider 2
+  m_EditorClassIdentifier: 
+  NodeLinks:
+  - BaseNodeGUID: 2442ee76-1b94-4723-ab47-d35a798bb829
+    PortName: Next
+    TargetNodeGUID: a421e5f0-68f6-474b-9349-260026ca1b1f
+    changeMoodTo: 0
+    trait: {fileID: 0}
+  - BaseNodeGUID: a421e5f0-68f6-474b-9349-260026ca1b1f
+    PortName: Spider
+    TargetNodeGUID: 559115cd-e849-4cab-b8d7-60ed6c6a9d97
+    changeMoodTo: 2
+    trait: {fileID: 11400000, guid: 1db226b0b48987949ab4f6aa46cda155, type: 2}
+  - BaseNodeGUID: a421e5f0-68f6-474b-9349-260026ca1b1f
+    PortName: Spider
+    TargetNodeGUID: 878637b2-3e77-4655-bdb0-241d1a4ffd2f
+    changeMoodTo: 2
+    trait: {fileID: 0}
+  - BaseNodeGUID: a421e5f0-68f6-474b-9349-260026ca1b1f
+    PortName: Forgot
+    TargetNodeGUID: 07cd237a-59c2-4e59-8c40-8df4d2073c81
+    changeMoodTo: 0
+    trait: {fileID: 0}
+  DialogueNodeData:
+  - NodeGUID: 878637b2-3e77-4655-bdb0-241d1a4ffd2f
+    title: Dialogue Node
+    DialogueText: Spider
+    face: {fileID: -4877067339641310479, guid: 65f8a2b27e962884496ba55e671b2369, type: 3}
+    mood: 0
+    Position: {x: 767, y: 115}
+  - NodeGUID: 559115cd-e849-4cab-b8d7-60ed6c6a9d97
+    title: Dialogue Node
+    DialogueText: Spider trait
+    face: {fileID: -2125013130175267435, guid: 65f8a2b27e962884496ba55e671b2369, type: 3}
+    mood: 4
+    Position: {x: 758, y: -88}
+  - NodeGUID: 07cd237a-59c2-4e59-8c40-8df4d2073c81
+    title: Dialogue Node
+    DialogueText: Forgot
+    face: {fileID: -4877067339641310479, guid: 65f8a2b27e962884496ba55e671b2369, type: 3}
+    mood: 0
+    Position: {x: 591, y: 321}
+  - NodeGUID: a421e5f0-68f6-474b-9349-260026ca1b1f
+    title: Dialogue Node
+    DialogueText: prova
+    face: {fileID: -4877067339641310479, guid: 65f8a2b27e962884496ba55e671b2369, type: 3}
+    mood: 0
+    Position: {x: 293, y: 12}
+  CommentBlockData: []

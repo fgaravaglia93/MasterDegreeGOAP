@@ -191,6 +191,7 @@ namespace DialogueSystem.Editor
             {
                     tempDialogueNode.face = (Sprite)evt.newValue;
                     tempDialogueNode.mainContainer.Add(insertImage.contentContainer);
+
                    
             });
 
@@ -239,6 +240,7 @@ namespace DialogueSystem.Editor
             textFieldDialogue.RegisterValueChangedCallback(evt =>
             {
                 tempDialogueNode.DialogueText = evt.newValue;
+
             });
             textFieldDialogue.SetValueWithoutNotify(tempDialogueNode.DialogueText);
 
@@ -256,23 +258,29 @@ namespace DialogueSystem.Editor
         }
 
 
-        public void AddChoicePort(DialogueNode nodeCache, string overriddenPortName = "", MoodType savedMoodPort = MoodType.Neutral, Trait trait = null)
+        public void AddChoicePort(DialogueNode nodeCache, string overriddenPortName = "", MoodType savedMoodPort = MoodType.Neutral, Trait traitSaved
+            = null)
         {
             var generatedPort = GetPortInstance(nodeCache, Direction.Output);
             var portLabel = generatedPort.contentContainer.Q<Label>("type");
             generatedPort.contentContainer.Remove(portLabel);
 
+            
+
             var outputPortCount = nodeCache.outputContainer.Query("connector").ToList().Count();
             var outputPortName = string.IsNullOrEmpty(overriddenPortName)
                 ? $"Option {outputPortCount + 1}"
                 : overriddenPortName;
+            //Default string to pass at node creation
+            if (overriddenPortName == "")
+                generatedPort.name = $"Option {outputPortCount + 1}_" + savedMoodPort;
 
             var textField = new TextField()
             {
                 name = string.Empty,
                 value = outputPortName
             };
-            textField.RegisterValueChangedCallback(evt => generatedPort.portName = evt.newValue);
+            //textField.RegisterValueChangedCallback(evt => generatedPort.portName = evt.newValue);
             generatedPort.contentContainer.Add(new Label("  "));
 
             EnumField moodAnswer = new EnumField(savedMoodPort);
@@ -284,46 +292,55 @@ namespace DialogueSystem.Editor
             var insertTrait = new ObjectField();
             insertTrait.objectType = (typeof(Trait));
             insertTrait.style.width = 40;
-            if (trait != null)
+            string traitName = "";
+            if (traitSaved != null)
             {
-                insertTrait.value = trait;
+                insertTrait.value = traitSaved;
+                traitName = traitSaved.name;
             }
             
-            generatedPort.contentContainer.Add(insertTrait);
-            MoodType moodName = MoodType.Neutral;
-            string traitName = "";
+            
+            MoodType moodName = savedMoodPort;
+           
 
             textField.RegisterValueChangedCallback(evt => 
             {
                 outputPortName = evt.newValue;
                 //"_" used to split the port name into choice button text and associated mood
-                if(traitName == null)
-                     generatedPort.portName = outputPortName + "_" + moodName;
-                if (traitName != "")
-                    generatedPort.portName = outputPortName + "_" + moodAnswer + "_" + traitName;
-                //Debug.Log("Stringa passata: " + generatedPort.portName);
+                if(insertTrait.value == null)
+                     generatedPort.portName = evt.newValue + "_" + moodName;
+                else
+                    generatedPort.portName = evt.newValue + "_" + moodName + "_" + traitName;
+                Debug.Log("Stringa passata text: " + generatedPort.portName);
             });
 
             moodAnswer.RegisterValueChangedCallback(evt =>
             {
                 moodName = (MoodType)evt.newValue;
                 //"_" used to split the port name into choice button text and associated mood
-                if (traitName == null)
+                
+                if (insertTrait.value == null)
                     generatedPort.portName = outputPortName + "_" + moodName;
-                if (traitName != "")
-                    generatedPort.portName = outputPortName + "_" + moodAnswer + "_" + traitName;
-                // Debug.Log("Stringa passata: "+ generatedPort.portName);
+                else
+                    generatedPort.portName = outputPortName + "_" + moodName + "_" + traitName;
+                Debug.Log("Stringa passata mood: "+ generatedPort.portName);
             });
 
             insertTrait.RegisterValueChangedCallback(evt =>
             {
-                traitName = ((Trait)evt.newValue).name;
-                //"_" used to split the port name into choice button text and associated mood
-                generatedPort.portName = outputPortName + "_" + moodName + "_" + traitName;
-                //Debug.Log("Stringa passata: " + generatedPort.portName);
+                if (evt.newValue != null)
+                {
+                    traitName = ((Trait)evt.newValue).name;
+                    //"_" used to split the port name into choice button text and associated mood
+                    generatedPort.portName = outputPortName + "_" + moodName + "_" + traitName;
+                }
+                else
+                    generatedPort.portName = outputPortName + "_" + moodName;
+                Debug.Log("Stringa passata Trait: " + generatedPort.portName);
+
             });
 
-
+            generatedPort.contentContainer.Add(insertTrait);
             generatedPort.contentContainer.Add(moodAnswer);
             generatedPort.contentContainer.Add(textField);
 

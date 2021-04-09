@@ -85,9 +85,13 @@ namespace DialogueSystem.Editor
                 }
                 else
                 {
-                    //Debug.Log(message[1] + " " + message[2]);
-                    MoodType changeTo = ConvertMoodFromString(message[1]);
-                    Trait traitTo = ConvertTraitFromString(message[2]);
+                    MoodType changeTo = MoodType.Neutral;
+                    Trait traitTo = null;
+                    if(message.Length>=2)
+                        changeTo = ConvertMoodFromString(message[1]);
+                    if(message.Length >= 3)
+                        traitTo = ConvertTraitFromString(message[2]);
+
                     dialogueContainerObject.NodeLinks.Add(new NodeLinkData
                     {
                         BaseNodeGUID = outputNode.GUID,

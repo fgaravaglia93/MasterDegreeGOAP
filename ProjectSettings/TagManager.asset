@@ -13,6 +13,7 @@ TagManager:
   - Helper
   - Book
   - NPC
+  - Interact
   layers:
   - Default
   - TransparentFX

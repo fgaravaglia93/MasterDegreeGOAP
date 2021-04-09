@@ -13,6 +13,7 @@ namespace DialogueSystem.Runtime
     public class DialogueParser : MonoBehaviour
     {
         public bool flagNPC;
+        public GameObject dialogueFace;
         [SerializeField]
         private DialogueContainer dialogue;
         [SerializeField]
@@ -33,8 +34,11 @@ namespace DialogueSystem.Runtime
         {
             var text = dialogue.DialogueNodeData.Find(x => x.NodeGUID == dialogueDataGUID).DialogueText;
             var choices = dialogue.NodeLinks.Where(x => x.BaseNodeGUID == dialogueDataGUID);
+            var face = dialogue.DialogueNodeData.Find(x => x.NodeGUID == dialogueDataGUID).face;
+
             // dialogueText.text = ProcessProperties(text);
             dialogueText.text = text;
+            dialogueFace.GetComponent<Image>().sprite = face;
             var buttons = buttonContainer.GetComponentsInChildren<Button>();
             for (int i = 0; i < buttons.Length; i++)
             {
@@ -55,10 +59,11 @@ namespace DialogueSystem.Runtime
                 //se ho trait instanza bottone e dimmi di non istanziare il successivo
                 if (!skip)
                 {
-                    j++;
+                    
 
                     if (choice.trait == null)
                     {
+                        j++;
                         Button button = InstanciateButtonChoice(choice, nChoices, j);
                     }
                     else
@@ -69,13 +74,16 @@ namespace DialogueSystem.Runtime
                         if (flagNPC)
                         {
                             skip = true;
-                            button = InstanciateButtonChoice(choice, nChoices, j+1);
+                            j++;
+                            button = InstanciateButtonChoice(choice, nChoices, j);
                         }
 
                     }
 
 
                 }
+                else
+                    skip = false;
                 
                 //this will manage the change of mood during interaction by talking
                 // if (choice.changeMoodTo == MoodType.Joy)
