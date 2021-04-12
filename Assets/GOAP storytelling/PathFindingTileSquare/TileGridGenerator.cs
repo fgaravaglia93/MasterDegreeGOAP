@@ -12,6 +12,9 @@ public class TileGridGenerator : MonoBehaviour {
     private int gridSizeX, gridSizeY;
     private float nodeDiameter;
     private List<TileNode> gizmospath;
+    [HideInInspector]
+    public TileNode check;
+
     // Use this for initialization
     void Start () {
         nodeDiameter = nodeRadius * 2;
@@ -109,13 +112,24 @@ public class TileGridGenerator : MonoBehaviour {
                         Gizmos.DrawCube(n.worldPosition, Vector2.one * (nodeDiameter - .1f));
                     }
             }
-           foreach (TileNode n in grid)
-            
-                if (!n.walkable) { 
+            foreach (TileNode n in grid)
+            {
+
+                if (!n.walkable)
+                {
                     //Gizmos.color = Color.red;
                     Gizmos.color = new Color(1, 0, 0, 0.5f);
                     Gizmos.DrawCube(n.worldPosition, Vector2.one * (nodeDiameter - .1f));
                 }
+
+                if(check != null)
+                    if((n.gridX == check.gridX) && (n.gridY == check.gridY))
+                    {
+                        Gizmos.color = new Color(0, 1, 0, 0.5f);
+                        Gizmos.DrawCube(n.worldPosition, Vector2.one * (nodeDiameter - .1f));
+                    }
+            }     
+                
 
         }
         

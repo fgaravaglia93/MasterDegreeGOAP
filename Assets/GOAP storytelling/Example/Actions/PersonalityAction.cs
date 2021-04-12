@@ -70,10 +70,10 @@ public class PersonalityAction : GoapAction
 
         if (success <= percentage)
         {
-            Debug.Log("%: "+success+" <= "+percentage+"\nAction done");
+           // Debug.Log("%: "+success+" <= "+percentage+"\nAction done");
             return true;
         }
-        Debug.Log("%: " + success + " <= " + percentage + "\nAction done");
+        //Debug.Log("%: " + success + " <= " + percentage + "\nAction done");
         return false;
     }
 
