@@ -53,12 +53,12 @@ public class Movement2D : MonoBehaviour
             animator.SetFloat("Y", y);
             if (Mathf.Abs(x) >= Mathf.Abs(y))
             {
-                rb.velocity = new Vector2(x * speed * Time.deltaTime, 0);
+                rb.velocity = new Vector2(x * speed * 100 * Time.deltaTime, 0);
 
             }
             else
             {
-                rb.velocity= new Vector2(0, y* speed *Time.deltaTime);
+                rb.velocity= new Vector2(0, y* speed * 100 * Time.deltaTime);
             }
     }
 

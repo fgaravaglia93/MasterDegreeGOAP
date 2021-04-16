@@ -12,26 +12,26 @@ namespace DialogueSystem.Runtime
     //Here we the change of mood tresholds during dialogues
     public class DialogueParser : MonoBehaviour
     {
-        public bool flagNPC;
+        [SerializeField]
+        private DialogueContainer narrativeSequence;
+        public TextMeshProUGUI dialogueText;
+
         public GameObject dialogueFace;
-        [SerializeField]
-        public bool interactable;
-        [SerializeField]
-        private DialogueContainer dialogue;
-        [SerializeField]
-        private TextMeshProUGUI dialogueText;
-        [SerializeField]
-        private Button choicePrefab;
-        [SerializeField]
-        private Transform buttonContainer;
+        public Button choicePrefab;
+        public Transform buttonContainer;
+        
+        //[SerializeField]
         private NodeLinkData dialogueData;
-        private bool dialogueOnGoing = false;
+        public bool dialogueOnGoing = false;
         private bool lastBlock = false;
+
+        public bool flagNPC;
+        public bool interactable;
 
         void Start()
         {
             //Start dialogue from the root node (NodeLinks.First())
-            dialogueData = dialogue.NodeLinks.First();
+            dialogueData = narrativeSequence.NodeLinks.First();
         }
 
         void Update()
@@ -53,7 +53,7 @@ namespace DialogueSystem.Runtime
                     {
                         dialogueFace.transform.parent.gameObject.SetActive(false);
                         lastBlock = false;
-                        dialogueData = dialogue.NodeLinks.First();
+                        dialogueData = narrativeSequence.NodeLinks.First();
                     }
                 }
             }
@@ -61,9 +61,9 @@ namespace DialogueSystem.Runtime
 
         public void StartDialogue(string dialogueDataGUID)
         {
-            var text = dialogue.DialogueNodeData.Find(x => x.NodeGUID == dialogueDataGUID).DialogueText;
-            var choices = dialogue.NodeLinks.Where(x => x.BaseNodeGUID == dialogueDataGUID);
-            var face = dialogue.DialogueNodeData.Find(x => x.NodeGUID == dialogueDataGUID).face;
+            var text = narrativeSequence.DialogueNodeData.Find(x => x.NodeGUID == dialogueDataGUID).DialogueText;
+            var choices = narrativeSequence.NodeLinks.Where(x => x.BaseNodeGUID == dialogueDataGUID);
+            var face = narrativeSequence.DialogueNodeData.Find(x => x.NodeGUID == dialogueDataGUID).face;
 
             // dialogueText.text = ProcessProperties(text);
             dialogueText.text = text;
@@ -87,9 +87,10 @@ namespace DialogueSystem.Runtime
             //serve un sistema più avanzato per indicare la tranform
             int j = 0;
             bool skip = false;
+           
             foreach (NodeLinkData choice in choices)
             {
-                Debug.Log(choice.PortName);
+                //Debug.Log(choice.PortName);
                 //buttonContainer.Translate(new Vector3(300 * j, 0f, 0f), Space.World);
 
                 //se ho trait instanza bottone e dimmi di non istanziare il successivo
@@ -106,7 +107,7 @@ namespace DialogueSystem.Runtime
                     {
                         //check trait, se ce'ho istanzialo
                         Button button;
-                        Debug.Log("not trait");
+                        //Debug.Log("not trait");
                         if (flagNPC)
                         {
                             skip = true;
@@ -120,7 +121,7 @@ namespace DialogueSystem.Runtime
                 }
                 else
                     skip = false;
-                
+
                 //this will manage the change of mood during interaction by talking
                 // if (choice.changeMoodTo == MoodType.Joy)
                 //button.onClick.AddListener(() => DisplayController.instance.DisplayChange());
@@ -134,10 +135,10 @@ namespace DialogueSystem.Runtime
             var rectTransform = button.GetComponent<RectTransform>();
             if (nChoices == 1)
                 button.GetComponent<RectTransform>().anchoredPosition =
-                new Vector3(button.GetComponent<RectTransform>().anchoredPosition.x + 600, 0f, 0f);
+                new Vector3(buttonContainer.GetComponent<RectTransform>().anchoredPosition.x + 600, buttonContainer.GetComponent<RectTransform>().anchoredPosition.y - 50f, 0f);
             else
                 button.GetComponent<RectTransform>().anchoredPosition =
-                new Vector3(button.GetComponent<RectTransform>().anchoredPosition.x + 300 * j, 0f, 0f);
+                new Vector3(buttonContainer.GetComponent<RectTransform>().anchoredPosition.x + 100 * j, buttonContainer.GetComponent<RectTransform>().anchoredPosition.x -50f, 0f);
 
             button.GetComponentInChildren<TextMeshProUGUI>().text = choice.PortName;
             button.onClick.AddListener(() => StartDialogue(choice.TargetNodeGUID));

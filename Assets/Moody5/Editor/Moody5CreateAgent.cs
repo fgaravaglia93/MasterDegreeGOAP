@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using DialogueSystem.Runtime;
+using DialogueSystem.DataContainers;
+using UnityEngine.UI;
+using TMPro;
 
 public class Moody5CreateAgent : EditorWindow
 {
@@ -9,6 +13,7 @@ public class Moody5CreateAgent : EditorWindow
     string objectName = ""; 
     float spawnRadius = 5f;
     bool isGoap = false;
+    bool isDialogue = false;
     int openness;
     int consciousness;
     int extraversion;
@@ -39,7 +44,13 @@ public class Moody5CreateAgent : EditorWindow
         spawnRadius = EditorGUILayout.FloatField("Spawn Radius", spawnRadius);
         //isWanderer = EditorGUILayout.Toggle("Wanderer", isWanderer);
         isGoap = EditorGUILayout.Toggle("GOAP", isGoap);
-        
+
+        if(isGoap)
+            GUILayout.Label("Define parameter needed for GOAP", EditorStyles.boldLabel);
+
+        isDialogue = EditorGUILayout.Toggle("Add Dialogue System", isDialogue);
+
+
         if (GUILayout.Button("Create NPC"))
         {
             CreateNPC();
@@ -76,6 +87,22 @@ public class Moody5CreateAgent : EditorWindow
         } else
         {
             npcToSpawn.AddComponent(typeof(PersonalityCommon));
+        }
+
+        if (isDialogue)
+        {
+            //Add Dialogue System Script to the NPC and set default value on the inspector
+            npcToSpawn.AddComponent(typeof(DialogueParser));
+            var dialoguePrefab = GameObject.FindGameObjectWithTag("DialogueContainer");
+            if(dialoguePrefab == null)
+                dialoguePrefab = (GameObject)Instantiate(Resources.Load("Prefab/DialogueContainer"));
+            npcToSpawn.GetComponent<DialogueParser>().dialogueText = dialoguePrefab.gameObject.transform.GetChild(0).transform.GetComponent<TextMeshProUGUI>();
+            npcToSpawn.GetComponent<DialogueParser>().buttonContainer = dialoguePrefab.gameObject.transform.GetChild(1);
+            npcToSpawn.GetComponent<DialogueParser>().dialogueFace = dialoguePrefab.gameObject.transform.GetChild(2).gameObject;
+            npcToSpawn.GetComponent<DialogueParser>().choicePrefab = dialoguePrefab.GetComponentInChildren<Button>();
+
+            //add here variables on inspector for the dialogue Parser - Dialogue Container / Face e button prefab
+
         }
         npcToSpawn.AddComponent(typeof(OverlayAgentStatus));
         objectName = "NPC name";
