@@ -32,7 +32,7 @@ public class Agent : MonoBehaviour
 
 	[HideInInspector]
 	public List<Trait> m_traits;
-    public bool m_eqsEventOccurred;
+    public TraitData m_eqsEventOccurred;
     [HideInInspector]
     public Queue<GoapAction> plan;
 
@@ -104,8 +104,12 @@ public class Agent : MonoBehaviour
 		//m_goalStack = new GoalStack(m_initialGoal);
 
 		foreach(TraitData traitData in m_personality.m_traitDatas) {
-			traitData.name = traitData.trait.name;
-			m_traits.Add(traitData.trait);
+            if(traitData.trait != null)
+            {
+                traitData.name = traitData.trait.name;
+                m_traits.Add(traitData.trait);
+            }
+			
 			/*Type type = Type.GetType(traitData.m_influenceType.goalType);
 			if(type != null) {
 				traitData.m_influenceType.goal = (Goal)Activator.CreateInstance(type);
@@ -115,7 +119,8 @@ public class Agent : MonoBehaviour
 
 	public void RecalculateTestsRuntimeVariables() {
 		foreach(TraitData traitData in m_personality.m_traitDatas) {
-			traitData.Init(m_eqsAgent);
+            if(traitData.trait != null)
+			    traitData.Init(m_eqsAgent);
 			/*Type type = Type.GetType(traitData.m_influenceType.goalType);
 			if(type != null) {
 				traitData.m_influenceType.goal = (Goal)Activator.CreateInstance(type);
@@ -150,7 +155,7 @@ public class Agent : MonoBehaviour
 	}
 	//make it to switch goal when all action for one goal are completed?
 	public virtual void PerformActionState(FSM fsm, GameObject agent) {
-        if(m_eqsEventOccurred) {
+        if(m_eqsEventOccurred!=null) {
 			Debug.Log("<color=yellow>EQS Event Occurred: Recaculate Plan</color>");
 			fsm.popState();
 			fsm.pushState(m_idleState);
@@ -208,13 +213,14 @@ public class Agent : MonoBehaviour
 
 	public virtual void MoveToState(FSM fsm, GameObject agent) {
 
-        if(m_eqsEventOccurred) {
+        if(m_eqsEventOccurred!=null) {
             //FRA
             GetComponent<MoveToNextAction>().followPath = false;
             GetComponent<HogwartsStudent>().pathCalculated = false;
             //FRA to put aside
             Debug.Log("<color=yellow>EQS Event Occurred: Recaculate Plan</color>");
-            DisplayController.instance.ChangeMood(DisplayController.instance.moodDict[MoodType.Fear], 1f ,1f, 5f);
+            //5f to secure mood activation
+            DisplayController.instance.ChangeMood(DisplayController.instance.moodDict[m_eqsEventOccurred.changeToMood], 5f);
             fsm.popState(); //move
 			fsm.popState(); //perform
 			fsm.pushState(m_idleState);

@@ -87,6 +87,8 @@ public class Moody5CreateAgent : EditorWindow
         } else
         {
             npcToSpawn.AddComponent(typeof(PersonalityCommon));
+            npcToSpawn.GetComponent<PersonalityCommon>().m_personality = new Personality();
+            npcToSpawn.GetComponent<PersonalityCommon>().m_personality.isGOAP = false;
         }
 
         if (isDialogue)

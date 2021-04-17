@@ -100,15 +100,15 @@ public class DisplayController : MonoBehaviour
         displayActionText.GetComponent<Text>().color = color;
     }
 
-    public void ChangeMood(Mood mood, float durationChange, float successChange, float increment)
+    public void ChangeMood(Mood mood, float increment)
     {
         mood.bar.value += increment;
         if (mood.bar.value >= mood.threshold)
         {
             //Debug.Log("Change Angry");
             npc.GetComponent<BigFivePersonality>().mood = mood.name;
-            npc.GetComponent<HogwartsStudent>().durationActionInfluence = durationChange;
-            npc.GetComponent<HogwartsStudent>().successActionInfluence = successChange;
+            npc.GetComponent<HogwartsStudent>().durationActionInfluence = mood.durationChange;
+            npc.GetComponent<HogwartsStudent>().successActionInfluence = mood.successChange;
             //npc.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(spritePathBaloon+mood.name);
             npc.transform.GetComponentInChildren<Canvas>().transform.GetChild(1).transform.GetComponent<Image>().sprite = Resources.Load<Sprite>(spritePathBaloon + mood.name);
             npc.transform.GetComponentInChildren<Canvas>().transform.GetChild(1).transform.GetComponent<Image>().color = new Color(255, 255, 255, 0.75f);
@@ -122,27 +122,27 @@ public class DisplayController : MonoBehaviour
 
     public void ChangeMoodToJoy()
     {
-        ChangeMood(moodDict[MoodType.Joy], 0.5f, 1f, 1f);
+        ChangeMood(moodDict[MoodType.Joy], 1f);
     }
 
     public void ChangeMoodToSad()
     {
-        ChangeMood(moodDict[MoodType.Sad], 2f, 1f, 1f);
+        ChangeMood(moodDict[MoodType.Sad], 1f);
     }
 
     public void ChangeMoodToAngry()
     {
-        ChangeMood(moodDict[MoodType.Angry], 0.5f, 0.5f, 1f);
+        ChangeMood(moodDict[MoodType.Angry], 1f);
     }
 
     public void ChangeMoodToFear()
     {
-        ChangeMood(moodDict[MoodType.Fear], 1f, 1f, 1f);
+        ChangeMood(moodDict[MoodType.Fear], 1f);
     }
 
     public void ChangeMoodToDisgust()
     {
-        ChangeMood(moodDict[MoodType.Disgust], 1f, 1f, 1f);
+        ChangeMood(moodDict[MoodType.Disgust], 1f);
     }
 
     IEnumerator CooldownEmotion()

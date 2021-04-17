@@ -10,6 +10,9 @@ public class Personality
 	public Agent m_agent;
 	public List<TraitData> m_traitDatas = new List<TraitData>();
 
+    [HideInInspector]
+    public bool isGOAP = true;
+
 	//public Dictionary<string, float> oldResults;
 	public Dictionary<string, float> results;
 
@@ -25,26 +28,45 @@ public class Personality
 		}
 	}
 
-	public void RunTests() {
+    public void Init()
+    {
+        //oldResults = new Dictionary<string, float>();
+        results = new Dictionary<string, float>();
+        
+
+        foreach (TraitData traitData in m_traitDatas)
+        {
+            //oldResults.Add(traitData.name, 0);
+            results.Add(traitData.name, 0);
+            traitData.m_testResults = new float[traitData.trait.EQSTests.Count];
+        }
+    }
+
+    public List<TraitData> RunTests() {
 
 		//Save the result of the last test in memory
 		/*foreach(string key in results.Keys) {
 			oldResults[key] = results[key];
 		}*/
 		ResetValues();
-		//Run Each set of tests in the traits
-		foreach(TraitData traitData in m_traitDatas) {
+        List<TraitData> traitDataActivated = new List<TraitData>();
+        //Run Each set of tests in the traits
+        foreach (TraitData traitData in m_traitDatas) {
 			traitData.RunTraitTest(this);
 			results[traitData.name] = traitData.SumValuesOfTests();
 
+
 			if(!CheckIfEventOccurred(traitData)) {
-				AddEventDelegate(traitData);
-			}
+                if(isGOAP)
+				    AddEventDelegate(traitData);
+                traitDataActivated.Add(traitData);
+            }
 			else {
 				results[traitData.name] = 0f;
 			}
 			PrintResultsInfo(traitData);
 		}
+        return traitDataActivated;
 	}
 
 	public bool CheckIfEventOccurred(TraitData traitData) {
@@ -113,6 +135,6 @@ public class Personality
 		}
 
 		//Debug.Log(text.Substring(0,text.IndexOf("S")) + text.Substring(text.IndexOf("S")+"S".Length));
-		//Debug.Log(text);
+		Debug.Log(text);
 	}
 }

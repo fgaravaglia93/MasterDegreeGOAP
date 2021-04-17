@@ -11,6 +11,8 @@ public class Mood
     public Color color;
     public Slider bar;
     public RectTransform placeHolder;
+    public float durationChange;
+    public float successChange;
 
     //for neutral mood
     public Mood(string spritePath)
@@ -36,19 +38,29 @@ public class Mood
         switch (moodType)
         {
             case MoodType.Joy:
-                color = new Color(255, 255, 0);
+                color = new Color(1f, 1f, 0);
+                durationChange = 0.5f;
+                successChange = 1f;
                 break;
             case MoodType.Sad:
-                color = new Color(0, 0, 255);
+                color = new Color(0, 0, 1f);
+                durationChange = 2f;
+                successChange = 1f;
                 break;
             case MoodType.Angry:
-                color = new Color(255, 0, 0);
+                color = new Color(1f, 0, 0);
+                durationChange = 0.5f;
+                successChange = 0.5f;
                 break;
             case MoodType.Fear:
-                color = new Color(255, 0, 255);
+                color = new Color(1f, 0, 1f);
+                durationChange = 1f;
+                successChange = 0.5f;
                 break;
             case MoodType.Disgust:
-                color = new Color(0, 255, 0);
+                color = new Color(0, 1f, 0);
+                durationChange = 0f;
+                successChange = 0f;
                 break;
             default:
                 break;

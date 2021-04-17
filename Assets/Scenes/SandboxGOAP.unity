@@ -1086,7 +1086,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1453,7 +1453,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &447690924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1776,6 +1776,7 @@ MonoBehaviour:
     - name: 'Arachnophobia '
       weight: 1
       radius: 1
+      changeToMood: 4
       m_influenceType:
         response: 0
         responseType: 0
@@ -1800,9 +1801,27 @@ MonoBehaviour:
       - 0
       m_outcomeResults: 00
       m_occurred: 0
+    isGOAP: 1
   m_traits:
   - {fileID: 11400000, guid: 1db226b0b48987949ab4f6aa46cda155, type: 2}
-  m_eqsEventOccurred: 0
+  m_eqsEventOccurred:
+    name: 
+    weight: 1
+    radius: 0
+    changeToMood: 0
+    m_influenceType:
+      response: 0
+      responseType: 0
+      costIncrement: 0
+      costModified: 0
+      actionType: 
+      goal: 
+    m_eventTriggerType: 0
+    trait: {fileID: 0}
+    m_testsRuntimeVariables: []
+    m_testResults: []
+    m_outcomeResults: 
+    m_occurred: 0
 --- !u!114 &447690938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1919,7 +1938,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a03c995083bf0b042809e28ee72b81eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wanderer: 0
+  m_personality:
+    m_agent: {fileID: 0}
+    m_traitDatas: []
+    isGOAP: 1
 --- !u!114 &462875752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2118,7 +2140,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2434,7 +2456,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &650784526
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2779,7 +2801,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &752530501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2805,7 +2827,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a03c995083bf0b042809e28ee72b81eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wanderer: 0
+  m_personality:
+    m_agent: {fileID: 0}
+    m_traitDatas: []
+    isGOAP: 1
 --- !u!114 &752530503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3254,7 +3279,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4307,7 +4332,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 978370427}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.69, y: -3.17, z: 0}
+  m_LocalPosition: {x: -1.69, y: 4.45, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 517773745}
@@ -5622,7 +5647,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -9778,6 +9803,7 @@ MonoBehaviour:
     - name: 'Arachnophobia '
       weight: 1
       radius: 1
+      changeToMood: 0
       m_influenceType:
         response: 0
         responseType: 0
@@ -9802,9 +9828,27 @@ MonoBehaviour:
       - 0
       m_outcomeResults: 00
       m_occurred: 0
+    isGOAP: 1
   m_traits:
   - {fileID: 11400000, guid: 1db226b0b48987949ab4f6aa46cda155, type: 2}
-  m_eqsEventOccurred: 0
+  m_eqsEventOccurred:
+    name: 
+    weight: 1
+    radius: 0
+    changeToMood: 0
+    m_influenceType:
+      response: 0
+      responseType: 0
+      costIncrement: 0
+      costModified: 0
+      actionType: 
+      goal: 
+    m_eventTriggerType: 0
+    trait: {fileID: 0}
+    m_testsRuntimeVariables: []
+    m_testResults: []
+    m_outcomeResults: 
+    m_occurred: 0
 --- !u!114 &1857982879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10148,7 +10192,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -10547,7 +10591,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1981180925
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10775,7 +10819,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -11298,6 +11342,7 @@ MonoBehaviour:
     - name: 'Arachnophobia '
       weight: 1
       radius: 1
+      changeToMood: 0
       m_influenceType:
         response: 0
         responseType: 0
@@ -11322,9 +11367,27 @@ MonoBehaviour:
       - 0
       m_outcomeResults: 00
       m_occurred: 0
+    isGOAP: 1
   m_traits:
   - {fileID: 11400000, guid: 1db226b0b48987949ab4f6aa46cda155, type: 2}
-  m_eqsEventOccurred: 0
+  m_eqsEventOccurred:
+    name: 
+    weight: 1
+    radius: 0
+    changeToMood: 0
+    m_influenceType:
+      response: 0
+      responseType: 0
+      costIncrement: 0
+      costModified: 0
+      actionType: 
+      goal: 
+    m_eventTriggerType: 0
+    trait: {fileID: 0}
+    m_testsRuntimeVariables: []
+    m_testResults: []
+    m_outcomeResults: 
+    m_occurred: 0
 --- !u!114 &2034605233
 MonoBehaviour:
   m_ObjectHideFlags: 0

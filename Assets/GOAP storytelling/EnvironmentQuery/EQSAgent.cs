@@ -22,17 +22,30 @@ public class EQSAgent
 		m_personality = personality;
 	}
 
-	public bool Update() {
+	public TraitData Update() {
 		OnRiseEqsEvents = null;
-		m_personality.RunTests();
+		var traitDatasActivated = m_personality.RunTests();
 
 		if(OnRiseEqsEvents!=null) {
-            Debug.Log("avvenuto");
             OnRiseEqsEvents(this);
-			return true;
+            return MostRelevantTrait(traitDatasActivated);
 		}
 		else {
-			return false;
+			return null;
 		}
 	}
+    public TraitData MostRelevantTrait(List<TraitData> traitDatasActivated)
+    {
+        float maxWeight = Mathf.NegativeInfinity;
+        TraitData activated = null;
+        foreach (TraitData traitData in traitDatasActivated)
+        {
+            if(traitData.weight > maxWeight)
+            {
+                maxWeight = traitData.weight;
+                activated = traitData;
+            }
+        }
+        return activated;
+    }
 }

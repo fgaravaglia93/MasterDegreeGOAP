@@ -52,7 +52,7 @@ public class PersonalityAgent : Agent
     public override void MoveToState(FSM fsm, GameObject agent)
     {
         base.MoveToState(fsm, agent);
-        if (m_eqsEventOccurred)
+        if (m_eqsEventOccurred!=null)
         {
             DisplayController.instance.ShowOnConsolePlan("Event occurred. Recalculate plan");
         }

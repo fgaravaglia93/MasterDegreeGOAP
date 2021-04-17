@@ -4,5 +4,13 @@ using UnityEngine;
 
 public class PersonalityCommon : MonoBehaviour
 {
-    public bool wanderer;
+    public Personality m_personality;
+
+    [HideInInspector]
+    void awake()
+    {
+        m_personality.Init();
+
+    }
 }
+

@@ -10,10 +10,12 @@ public enum EventTriggerType { All, AtLeastOne, None }
 public class TraitData
 {
 	public string name;
-	public float weight = 1f;
+    [ShowWhen("m_personality.isGOAP")]
+    public float weight = 1f;
 	public float radius;
-
-	[Space(10)]
+    public MoodType changeToMood;
+    [ShowWhen("m_personality.isGOAP")]
+    [Space(10)]
 	public InfluenceType m_influenceType;
 
 	[Space(10)]
