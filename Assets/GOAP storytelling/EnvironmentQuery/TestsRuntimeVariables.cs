@@ -30,7 +30,7 @@ public class TestsRuntimeVariables
 	[Tooltip("The Tag Of The Game Objects To Check")]
 	public string m_tagToCheck;
 
-	public TestsRuntimeVariables(string testName, Type testType, List<object> values) {
+	public TestsRuntimeVariables(Trait trait,string testName, Type testType, List<object> values) {
 
 		if(values != default(List<object>))
 			SetOldValues(values);
@@ -65,6 +65,7 @@ public class TestsRuntimeVariables
 			m_testRaycast = false;
 			m_testTag = true;
 			m_numberOfDynamicVariables = 2;
+            m_tagToCheck = trait.name;
 		}
 	}
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DialogueSystem.Runtime;
+using UnityEditor;
 
 public class Movement2D : MonoBehaviour
 {
@@ -65,10 +66,21 @@ public class Movement2D : MonoBehaviour
     {
         if(collision.gameObject.tag == "Interact")
         {
-            
             collision.gameObject.transform.parent.GetComponent<DialogueParser>().interactable = true;
             //collision.gameObject.GetComponent<DialogueParser>().enabled = true;
-        }        
+        }
+
+        if (collision.gameObject.tag == "New Trait")
+        {
+            
+            TraitData traitData = new TraitData();
+            traitData.name = "Snape";
+            //collision.gameObject.GetComponent<RefToNPC>().NPC.GetComponent<PersonalityAgent>().m_personality.AddTrait(traitData);
+
+            collision.gameObject.GetComponent<RefToNPC>().NPC.GetComponent<PersonalityAgent>().m_personality.RemoveTrait(traitData.name);
+
+
+        }
     }
 
     void OnTriggerExit2D(Collider2D collision)

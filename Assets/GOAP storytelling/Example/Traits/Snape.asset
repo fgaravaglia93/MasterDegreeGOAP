@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-2046905729866558549
+--- !u!114 &-2818689710257668241
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b8817ab89f37e4f4f81ef4d413d181b8, type: 3}
-  m_Name: 'Arachnophobia: Distance Test 1'
+  m_Name: 'Snape: Tag Test 0'
   m_EditorClassIdentifier: 
   isActive: 1
   weight: 1
-  maxValue: 0
+  maxValue: 1
   scoringEquation: 0
-  resultType: 1
-  tagToCheck: 
+  resultType: 0
+  tagToCheck: Snape
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28,26 +28,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7e14358fa30383247ae03e041ee532d1, type: 3}
-  m_Name: Arachnophobia
+  m_Name: Snape
   m_EditorClassIdentifier: 
-  name: 'Arachnophobia '
+  name: Snape
   EQSTests:
-  - {fileID: 7580895247189902855}
---- !u!114 &7580895247189902855
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8817ab89f37e4f4f81ef4d413d181b8, type: 3}
-  m_Name: 'Arachnophobia: Tag Test 1'
-  m_EditorClassIdentifier: 
-  isActive: 1
-  weight: 1
-  maxValue: 1
-  scoringEquation: 0
-  resultType: 0
-  tagToCheck: 'Arachnophobia '
+  - {fileID: -2818689710257668241}

@@ -36,6 +36,7 @@ public class Agent : MonoBehaviour
     [HideInInspector]
     public Queue<GoapAction> plan;
 
+    
    
 	void Awake() {
 
@@ -60,13 +61,14 @@ public class Agent : MonoBehaviour
         
 	}
 
-	void Update() {
+    void Update() {
 
         //vecchio
         //m_eqsEventOccurred = m_eqsAgent.Update();
         //m_fsm.Update(gameObject);
         //Debug.Log("goal cost " + m_goalStack.Peek().maxCostForGoal);
         //FRA rimozione di un goal dopo che è stato raggiunto
+        //FRA aggiunta di controllo rimozione/aggiunta trait
         if(m_goalStack.Peek() != null)
         {
             DisplayController.instance.displayGoalText.GetComponent<Text>().text = "Goal:"+m_goalStack.Peek().m_nameGoal;
@@ -77,8 +79,7 @@ public class Agent : MonoBehaviour
                 m_goalStack.Remove(m_goalStack.Peek());
                 DisplayController.instance.displayGoalText.GetComponent<Text>().color = new Color(0, 255, 0);
             }
-        }
-  
+        }  
 	}
 
 	public void AddAction(GoapAction action) {

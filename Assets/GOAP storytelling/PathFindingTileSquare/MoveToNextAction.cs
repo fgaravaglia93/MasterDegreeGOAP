@@ -60,7 +60,7 @@ public class MoveToNextAction : MonoBehaviour
             {
                 if (currentNode < path.Count)
                 {
-                    Debug.Log("check");
+                    //Debug.Log("check");
                     CheckNode();
                     currentNode++;
                 }
@@ -80,8 +80,8 @@ public class MoveToNextAction : MonoBehaviour
         //Instantiate(placeholder, new Vector3(currentPositionHolder.x, currentPositionHolder.y, 0f), Quaternion.identity);
         var dirX = (currentPositionHolder.x - transform.position.x + .1f) / Mathf.Abs(currentPositionHolder.x - transform.position.x + .1f);
         var dirY = (currentPositionHolder.y - transform.position.y + .1f) / Mathf.Abs(currentPositionHolder.y - transform.position.y + .1f);
-        Debug.Log(currentPositionHolder);
-        Debug.Log(Mathf.Abs(currentPositionHolder.x - transform.position.x) + " , " + Mathf.Abs(currentPositionHolder.y - transform.position.y));
+        //Debug.Log(currentPositionHolder);
+        //Debug.Log(Mathf.Abs(currentPositionHolder.x - transform.position.x) + " , " + Mathf.Abs(currentPositionHolder.y - transform.position.y));
         if (Mathf.Abs(currentPositionHolder.x - transform.position.x) >= Mathf.Abs(currentPositionHolder.y - transform.position.y))
         {
             animator.SetFloat("X", dirX);

@@ -8,13 +8,15 @@ TagManager:
   - Workstation
   - Fridge
   - Pot
-  - Spider
   - Delivery
   - Helper
   - Book
   - NPC
   - Interact
   - DialogueContainer
+  - New Trait
+  - Snape
+  - Arachnophobia
   layers:
   - Default
   - TransparentFX

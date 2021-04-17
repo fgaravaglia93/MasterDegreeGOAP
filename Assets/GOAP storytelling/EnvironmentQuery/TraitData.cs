@@ -62,13 +62,13 @@ public class TraitData
 				foreach(var thisVar in m_oldTestsRuntimeVariables[i].GetType().GetFields()) {
 					values.Add(thisVar.GetValue(m_oldTestsRuntimeVariables[i]));
 				}
-				m_testsRuntimeVariables.Add(new TestsRuntimeVariables(trait.EQSTests[i].name, trait.EQSTests[i].GetType(), values));
+				m_testsRuntimeVariables.Add(new TestsRuntimeVariables(trait, trait.EQSTests[i].name, trait.EQSTests[i].GetType(), values));
 				m_outcomeResults.Add(false);
 			}
 		}
 		else {
 			for(int i = 0; i < trait.EQSTests.Count; i++) {
-				m_testsRuntimeVariables.Add(new TestsRuntimeVariables(trait.EQSTests[i].name, trait.EQSTests[i].GetType(), null));
+				m_testsRuntimeVariables.Add(new TestsRuntimeVariables(trait, trait.EQSTests[i].name, trait.EQSTests[i].GetType(), null));
 				m_outcomeResults.Add(false);
 			}
 		}

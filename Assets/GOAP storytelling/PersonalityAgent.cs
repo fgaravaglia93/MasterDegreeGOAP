@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PersonalityAgent : Agent
 {
 
@@ -10,6 +11,8 @@ public class PersonalityAgent : Agent
     bool firstTime = true;
     bool firsHitAction;
 
+    bool traitChange;
+
     void Start()
     {
         firsHitAction = true;
@@ -17,6 +20,7 @@ public class PersonalityAgent : Agent
         agreeableness = GetComponent<BigFivePersonality>().agreeableness;
     }
 
+    
     public override void IdleState(FSM fsm, GameObject agent)
     {
         if (firstTime)
@@ -98,6 +102,8 @@ public class PersonalityAgent : Agent
         print(printedPlan);
         return printedPlan;
     }
+
+    
 
 
 

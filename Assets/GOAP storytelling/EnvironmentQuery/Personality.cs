@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEditor;
+
 
 [Serializable]
 public class Personality
@@ -135,6 +137,60 @@ public class Personality
 		}
 
 		//Debug.Log(text.Substring(0,text.IndexOf("S")) + text.Substring(text.IndexOf("S")+"S".Length));
-		Debug.Log(text);
+		//Debug.Log(text);
 	}
+
+    public void AddTrait(TraitData newTraitData)
+    {
+        Debug.Log("Collisione Trait");
+        string pathTrait = "Assets/GOAP storytelling/Example/Traits/" + newTraitData.name + ".asset";
+        UnityEngine.Object data = AssetDatabase.LoadAssetAtPath(pathTrait, typeof(Trait));
+        newTraitData.trait = (Trait)data;
+
+        newTraitData.m_testsRuntimeVariables = new List<TestsRuntimeVariables>();
+        newTraitData.m_outcomeResults = new List<bool>();
+        newTraitData.m_testResults = new float[newTraitData.trait.EQSTests.Count];
+        
+
+        for (int i = 0; i < newTraitData.trait.EQSTests.Count; i++)
+        {
+            //Debug.Log(newTraitData.trait.EQSTests[i].GetType());
+            newTraitData.m_testsRuntimeVariables.Add(new TestsRuntimeVariables(newTraitData.trait, newTraitData.trait.EQSTests[i].name, newTraitData.trait.EQSTests[i].GetType(), null));
+            newTraitData.m_outcomeResults.Add(false);
+        }
+        bool alreadyAdded = true;
+        foreach (TraitData traitData in m_traitDatas)
+        {
+            if(newTraitData.name == traitData.name)
+            {
+                alreadyAdded = true;
+                break;
+            }
+        }
+        if (alreadyAdded)
+        {
+            m_traitDatas.Add(newTraitData);
+        }
+    }
+
+    public void RemoveTrait(string name)
+    {
+        Debug.Log("Collisione Trait");
+        bool found = false;
+        int i = 0;
+        foreach (TraitData traitData in m_traitDatas)
+        {
+            if (name == traitData.name)
+            {
+                found = true;
+                
+                break;
+            }
+            i++;
+        }
+        if(found == true)
+            m_traitDatas.RemoveAt(i);
+
+    }
+
 }
