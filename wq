@@ -1,0 +1,21 @@
+* [33m73827682336a45bb441b3c63747cbcde62f3e5d0[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31mpersonal/master[m[33m)[m add trait at run-time
+* [33me4eb96dabc3f81b19261ff348503999045101c49[m definition of trait with mood change
+* [33m14bbbaa439dcac84ef55518205f265ac8b24036b[m fix bug on dialogue generation
+* [33m8d24e8056618a4f660a34f6e2351e31e5266129a[m change movement NPC GOAP into 4d RPG like
+* [33m2150466e186f31ecb1439f9b2fdafc475568de9a[m Add hero movement and interact functionality
+* [33mc6d6ea1608d286090695136bdbb4d2e6a1786d00[m[33m ([m[1;31mpersonal/changedisplay[m[33m, [m[1;31morigin/master[m[33m, [m[1;32mchangedisplay[m[33m)[m Dialogue graph mood complete
+* [33m76f7330c36806d04216a2d18d15ac8dcb94d4989[m mood dialogue graph, mood trait activation on answer
+* [33m287f929c6bf05a0908e1daa08c4849dfb646ea3f[m mood dialogue graph, mood change on answer
+* [33mbdd7f8a4f8b116593480f3e46c7f87a8edce2d8e[m mood dialogue graph
+* [33m35d6042fe9384120d1753abf45ffb6687f2d56bc[m add dialogue graph
+* [33me9958cd812792bccdfcd13ab86100a95df9ff7c1[m minor fix in success action
+* [33m9e790e37cdab02bd0fa5be0310603aff0f03fb5e[m update overlay system
+* [33me218b5409f505bb919a4f9c657a883b6bfadcaad[m change display view
+* [33m5ec7f25d776712b19d801eea8c0416a9d11d4b3c[m draft plugin
+* [33m75ccec0d576c7d1ba3df7e9d3d78281a14e3ecda[m add dialogue system with GraphView
+* [33mc289424cf54b578c11ab5579a4574fe582dbfca5[m minor fix on mood system
+* [33mc1fa3510cebb7ba9b1dcee9bdbf87b1cc16eccd1[m define mood model
+* [33m400f0598f82d954ae1201b5b474bcf95260add93[m integration of personality traits
+* [33m2a5760559cf7d05d2c13052fad86dbf8eb3b013e[m redefinition of action, agent, add probability of success
+* [33mf709fc6360049716df3eade3e46cef7b514be493[m setup for the project
+* [33m51d7e4ee0b53d1b2c54f27cbc9aa6206debdcdbf[m init

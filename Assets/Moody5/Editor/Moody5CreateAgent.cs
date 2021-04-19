@@ -12,7 +12,7 @@ public class Moody5CreateAgent : EditorWindow
     // Start is called before the first frame update
     string objectName = ""; 
     float spawnRadius = 5f;
-    bool isGoap = false;
+    bool isGOAP = false;
     bool isDialogue = false;
     int openness;
     int consciousness;
@@ -43,9 +43,9 @@ public class Moody5CreateAgent : EditorWindow
         neuroticism = (int)EditorGUILayout.Slider("Neuroticism", neuroticism, -1, 1);
         spawnRadius = EditorGUILayout.FloatField("Spawn Radius", spawnRadius);
         //isWanderer = EditorGUILayout.Toggle("Wanderer", isWanderer);
-        isGoap = EditorGUILayout.Toggle("GOAP", isGoap);
+        isGOAP = EditorGUILayout.Toggle("GOAP", isGOAP);
 
-        if(isGoap)
+        if(isGOAP)
             GUILayout.Label("Define parameter needed for GOAP", EditorStyles.boldLabel);
 
         isDialogue = EditorGUILayout.Toggle("Add Dialogue System", isDialogue);
@@ -73,15 +73,26 @@ public class Moody5CreateAgent : EditorWindow
         npcToSpawn.AddComponent(typeof(SpriteRenderer));
         npcToSpawn.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/tile_npc_"+MoodType.Neutral);
         npcToSpawn.GetComponent<SpriteRenderer>().sortingOrder = 2;
-
+        npcToSpawn.tag = "NPC";
         npcToSpawn.AddComponent(typeof(BigFivePersonality));
         npcToSpawn.GetComponent<BigFivePersonality>().openness = openness;
         npcToSpawn.GetComponent<BigFivePersonality>().consciousness = consciousness;
         npcToSpawn.GetComponent<BigFivePersonality>().extraversion = extraversion;
         npcToSpawn.GetComponent<BigFivePersonality>().agreeableness = agreeableness;
         npcToSpawn.GetComponent<BigFivePersonality>().neuroticism = neuroticism;
+        npcToSpawn.AddComponent(typeof(Rigidbody2D));
+        npcToSpawn.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+        npcToSpawn.GetComponent<Rigidbody2D>().freezeRotation = true;
+        npcToSpawn.AddComponent(typeof(BoxCollider2D));
+        npcToSpawn.GetComponent<BoxCollider2D>().size = new Vector2(0.5f,0.5f);
+        
 
-        if (isGoap)
+
+        var camera = (GameObject)Instantiate(Resources.Load("Prefab/NPCCamera"));
+        camera.transform.parent = npcToSpawn.transform;
+        camera.name = "Camera";
+        camera.transform.localPosition = new Vector3(0f,0f,-10f);
+        if (isGOAP)
         {
             npcToSpawn.AddComponent(typeof(PersonalityAgent));
         } else
@@ -106,8 +117,8 @@ public class Moody5CreateAgent : EditorWindow
             //add here variables on inspector for the dialogue Parser - Dialogue Container / Face e button prefab
 
         }
-        npcToSpawn.AddComponent(typeof(OverlayAgentStatus));
         objectName = "NPC name";
+        
         //go.AddComponent(typeof(Animation));
         // go.SetActiveRecursively(false);
         //AssetDatabase.CreateAsset(go, "Assets/Prefabs/TestAsset.prefab");

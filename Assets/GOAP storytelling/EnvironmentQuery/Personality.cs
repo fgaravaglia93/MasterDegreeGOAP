@@ -34,8 +34,7 @@ public class Personality
     {
         //oldResults = new Dictionary<string, float>();
         results = new Dictionary<string, float>();
-        
-
+            
         foreach (TraitData traitData in m_traitDatas)
         {
             //oldResults.Add(traitData.name, 0);

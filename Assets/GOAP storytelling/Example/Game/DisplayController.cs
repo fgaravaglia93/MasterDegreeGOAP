@@ -6,21 +6,29 @@ using UnityEngine.UI;
 public class DisplayController : MonoBehaviour
 {
     public static DisplayController instance = null;
-
+    
+    //defaultCamera = HeroCamera
     public Camera gameCamera;
-    public GameObject SlotCamera;
+    public GameObject displayBox;
+    public GameObject dialogueBox;
+    public GameObject displayGOAP;
+
+    [HideInInspector]
+    public Camera npcOverlayCamera;
     public GameObject displayConsoleText;
     public GameObject displayGoalText;
     public GameObject displayActionText;
 
     public GameObject moodBar;
     public GameObject currentMoodDisplay;
+
     
-    private RenderTexture renderGameScene;
-    public float SmallCameraSize = 4f;
+   /* private RenderTexture renderGameScene;
+    public float SmallCameraSize = 4f;*/
 
     //to redefine later
     public GameObject npc;
+
     private Mood currentMood;
     private int cooldownSteps = 5; //default with no personality affection
     private float stepCooldown = 1.5f;
@@ -29,6 +37,13 @@ public class DisplayController : MonoBehaviour
     private string spritePathBaloon= "Sprites/ui_baloon_";
     [HideInInspector]
     public Dictionary<MoodType, Mood> moodDict = new Dictionary<MoodType, Mood>();
+
+    //Verlay
+    [HideInInspector]
+    public bool overlayInUse = false;
+
+    Vector2 pos;
+    RaycastHit2D hit;
 
     // Start is called before the first frame update
     void Awake()
@@ -46,7 +61,8 @@ public class DisplayController : MonoBehaviour
             Destroy(gameObject);
         }
 
-
+        displayBox.SetActive(false);
+        dialogueBox.SetActive(false);
     }
 
     void Start()
@@ -73,8 +89,49 @@ public class DisplayController : MonoBehaviour
         }
 
         moodDict.Add(MoodType.Neutral, new Mood(spritePathUI+MoodType.Neutral));
-     
+
+        Camera [] cameras = (Camera [])FindObjectsOfType(typeof(Camera));
+        
+        foreach(Camera cam in cameras)
+        {
+            cam.enabled = false;
+        }
+
+        gameCamera.enabled = true;
     }
+
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0) && !overlayInUse)
+        {
+            pos = Input.mousePosition;
+            pos = gameCamera.ScreenToWorldPoint(pos);
+            hit = Physics2D.Raycast(pos, Vector2.zero);
+            if (hit && (hit.collider.gameObject.CompareTag("NPC") || hit.collider.transform.parent.gameObject.CompareTag("NPC")))
+            {
+                displayBox.gameObject.SetActive(true);
+                npcOverlayCamera = hit.transform.gameObject.GetComponentInChildren<Camera>();
+                npcOverlayCamera.enabled = true;
+                gameCamera.enabled = false;
+                displayGOAP.gameObject.SetActive(false);
+                if (hit.collider.GetComponent<PersonalityAgent>()!=null)
+                {
+                    displayGOAP.gameObject.SetActive(true);
+                }
+                overlayInUse = true;
+            }
+        }
+
+        else if (Input.GetButtonDown("Escape") && overlayInUse)
+        {
+            overlayInUse = false;
+            displayBox.gameObject.SetActive(false);
+            gameCamera.enabled = true;
+            npcOverlayCamera.enabled = false;
+        }
+        else { }
+    }
+
 
     public void ShowOnConsolePlan(string text)
     {
