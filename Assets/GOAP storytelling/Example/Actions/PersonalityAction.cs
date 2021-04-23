@@ -12,7 +12,7 @@ public class PersonalityAction : GoapAction
 
     [HideInInspector]
     public string console = "Action: ";
-
+    
     //default 1f = 100% of success
     public float percentageSuccess;
     //default not interact  action
@@ -24,18 +24,18 @@ public class PersonalityAction : GoapAction
         if (startTime == 0)
         {
             startTime = Time.time;
-           // DisplayController.instance.ShowOnConsole(console);
-            GetComponentInChildren<CompletionBar>().transform.GetChild(0).gameObject.SetActive(true);
-            //GetComponentInChildren<CompletionBar>().gameObject.transform.position = new Vector3(transform.position.x,transform.position.y+1f,transform.position.z);
-            //Debug.Log("Start " + GetComponent<HogwartsStudent>().durationActionInfluence+ " " +duration);
+            //DisplayController.instance.ShowOnConsole(console);
+            GetComponentInChildren<CompletionBar>().transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
+            //GetComponent<BigFivePersonality>().containerUI.GetComponentInChildren<Slider>().gameObject.SetActive(true);
             GetComponentInChildren<CompletionBar>().StartTaskBar(GetComponent<HogwartsStudent>().durationActionInfluence * duration);
+            DisplayController.instance.lockMood = true;
         }
         if (Time.time - startTime > duration * GetComponent<HogwartsStudent>().durationActionInfluence)
         {
             performed = true;
             //GetComponentInChildren<CompletionBar>().transform.GetChild(2).gameObject.SetActive(true);
-            //StartCoroutine("DoneMessage");
-            GetComponentInChildren<CompletionBar>().transform.GetChild(0).gameObject.SetActive(false);
+            GetComponentInChildren<CompletionBar>().transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+            //GetComponent<BigFivePersonality>().containerUI.GetComponentInChildren<Slider>().gameObject.SetActive(false);
         }
         return true;
     }
@@ -70,7 +70,10 @@ public class PersonalityAction : GoapAction
 
         if (success <= percentage)
         {
-           // Debug.Log("%: "+success+" <= "+percentage+"\nAction done");
+            // Debug.Log("%: "+success+" <= "+percentage+"\nAction done");
+
+            //release lock on emotion
+            DisplayController.instance.lockMood = false;
             return true;
         }
         //Debug.Log("%: " + success + " <= " + percentage + "\nAction done");

@@ -9,9 +9,11 @@ public class DisplayController : MonoBehaviour
     
     //defaultCamera = HeroCamera
     public Camera gameCamera;
+    
     public GameObject displayBox;
     public GameObject dialogueBox;
     public GameObject displayGOAP;
+    public GameObject currentNPC;
 
     [HideInInspector]
     public Camera npcOverlayCamera;
@@ -21,7 +23,7 @@ public class DisplayController : MonoBehaviour
 
     public GameObject moodBar;
     public GameObject currentMoodDisplay;
-
+    [HideInInspector]
     
    /* private RenderTexture renderGameScene;
     public float SmallCameraSize = 4f;*/
@@ -31,17 +33,19 @@ public class DisplayController : MonoBehaviour
 
     private Mood currentMood;
     private int cooldownSteps = 5; //default with no personality affection
-    private float stepCooldown = 1.5f;
-    private int countClicks;
+    
     private string spritePathUI = "Sprites/ui_expression_";
-    private string spritePathBaloon= "Sprites/ui_baloon_";
+    
     [HideInInspector]
     public Dictionary<MoodType, Mood> moodDict = new Dictionary<MoodType, Mood>();
 
-    //Verlay
+    //Overlay
     [HideInInspector]
     public bool overlayInUse = false;
 
+    //Used to lock emotions
+    [HideInInspector]
+    public bool lockMood = false;
     Vector2 pos;
     RaycastHit2D hit;
 
@@ -51,10 +55,6 @@ public class DisplayController : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-           /* renderGameScene = new RenderTexture(350, 300, 24, RenderTextureFormat.ARGB32);
-            renderGameScene.Create();
-            gameCamera.GetComponent<Camera>().targetTexture = renderGameScene;
-            renderGameScene.name = "RT_Game";*/
         }
         else
         {
@@ -67,10 +67,6 @@ public class DisplayController : MonoBehaviour
 
     void Start()
     {
-        //npc.GetComponent<PersonalityAgent>().MoodSwitchThreshold(MoodType.Joy)
-        countClicks = 0;
-        /*SlotCamera.GetComponent<RawImage>().texture = renderGameScene;
-        gameCamera.orthographicSize = SmallCameraSize;*/
         var moodNames = System.Enum.GetNames(typeof(MoodType));
         //check and instantiate Mood objects to the relative sliders in the Scene UI
         foreach (MoodType moodName in System.Enum.GetValues(typeof(MoodType)))
@@ -110,10 +106,23 @@ public class DisplayController : MonoBehaviour
             if (hit && (hit.collider.gameObject.CompareTag("NPC") || hit.collider.transform.parent.gameObject.CompareTag("NPC")))
             {
                 displayBox.gameObject.SetActive(true);
-                npcOverlayCamera = hit.transform.gameObject.GetComponentInChildren<Camera>();
+                npc = hit.transform.gameObject;
+                npcOverlayCamera = npc.GetComponentInChildren<Camera>();
                 npcOverlayCamera.enabled = true;
                 gameCamera.enabled = false;
                 displayGOAP.gameObject.SetActive(false);
+
+                foreach (MoodType moodName in System.Enum.GetValues(typeof(MoodType)))
+                {
+                    if(moodName != MoodType.Neutral)
+                    {
+                        moodDict[moodName].threshold = npc.GetComponent<BigFivePersonality>().thresholdMoodValues[moodName];
+                        moodDict[moodName].bar.value = npc.GetComponent<BigFivePersonality>().currentMoodValues[moodName];
+                        moodDict[moodName].SetPlaceholder(moodDict[moodName].threshold);
+                    }
+                    
+                }
+
                 if (hit.collider.GetComponent<PersonalityAgent>()!=null)
                 {
                     displayGOAP.gameObject.SetActive(true);
@@ -158,23 +167,10 @@ public class DisplayController : MonoBehaviour
     }
 
     public void ChangeMood(Mood mood, float increment)
-    {
-        mood.bar.value += increment;
-        if (mood.bar.value >= mood.threshold)
-        {
-            //Debug.Log("Change Angry");
-            npc.GetComponent<BigFivePersonality>().mood = mood.name;
-            npc.GetComponent<HogwartsStudent>().durationActionInfluence = mood.durationChange;
-            npc.GetComponent<HogwartsStudent>().successActionInfluence = mood.successChange;
-            //npc.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(spritePathBaloon+mood.name);
-            npc.transform.GetComponentInChildren<Canvas>().transform.GetChild(1).transform.GetComponent<Image>().sprite = Resources.Load<Sprite>(spritePathBaloon + mood.name);
-            npc.transform.GetComponentInChildren<Canvas>().transform.GetChild(1).transform.GetComponent<Image>().color = new Color(255, 255, 255, 0.75f);
-            currentMoodDisplay.GetComponent<Image>().sprite = mood.sprite;
-            currentMoodDisplay.GetComponent<Image>().color = mood.color;
-            currentMood = mood;
-            StopCoroutine("CooldownEmotion");
-            StartCoroutine("CooldownEmotion");
-        }
+    {   
+        npc.GetComponent<BigFivePersonality>().listenerChange = true;
+        npc.GetComponent<BigFivePersonality>().moodActivation = mood.name;
+        npc.GetComponent<BigFivePersonality>().incrementMood = increment;
     }
 
     public void ChangeMoodToJoy()
@@ -202,26 +198,7 @@ public class DisplayController : MonoBehaviour
         ChangeMood(moodDict[MoodType.Disgust], 1f);
     }
 
-    IEnumerator CooldownEmotion()
-    {
-        cooldownSteps = (int)currentMood.bar.value;
-        for (int i = 0; i < cooldownSteps; i++)
-        {
-            //Debug.Log(i);
-            yield return new WaitForSeconds(stepCooldown);
-            currentMood.bar.value -= 1f;
-            if (currentMood.bar.value < currentMood.threshold)
-            {
-                npc.GetComponent<BigFivePersonality>().mood = MoodType.Neutral;
-                npc.GetComponent<HogwartsStudent>().durationActionInfluence = 1f;
-                npc.GetComponent<HogwartsStudent>().successActionInfluence = 1f;
-                npc.transform.GetComponentInChildren<Canvas>().transform.GetChild(1).transform.GetComponent<Image>().color = new Color(255, 255, 255, 0);
-                npc.transform.GetComponentInChildren<Canvas>().transform.GetChild(1).transform.GetComponent<Image>().sprite = null;
-                currentMoodDisplay.GetComponent<Image>().sprite = moodDict[MoodType.Neutral].sprite;
-                currentMoodDisplay.GetComponent<Image>().color = moodDict[MoodType.Neutral].color;
-            }
-        }
-    }
+ 
 
     public void DisplayChange()
     {

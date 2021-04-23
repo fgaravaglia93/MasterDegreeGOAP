@@ -11,6 +11,7 @@ public class Mood
     public Color color;
     public Slider bar;
     public RectTransform placeHolder;
+    public Vector3 startPosition;
     public float durationChange;
     public float successChange;
 
@@ -29,9 +30,10 @@ public class Mood
         sprite = Resources.Load<Sprite>(spritePath);
         this.bar = bar;
         placeHolder = bar.transform.GetChild(2).GetComponent<RectTransform>();
-        placeHolder.localPosition = placeHolder.localPosition + (new Vector3(threshold * 9f, 0f, 0f));
-
-
+        startPosition = placeHolder.localPosition;
+        SetPlaceholder(threshold);
+        
+        
         bar.minValue = 0f;
         bar.maxValue = 7f;
 
@@ -59,13 +61,18 @@ public class Mood
                 break;
             case MoodType.Disgust:
                 color = new Color(0, 1f, 0);
-                durationChange = 0f;
-                successChange = 0f;
+                durationChange = 1f;
+                successChange = 1f;
                 break;
             default:
                 break;
 
         }
+    }
+
+    public void SetPlaceholder(float threshold)
+    {
+        placeHolder.localPosition = startPosition + (new Vector3(threshold * 9f, 0f, 0f));
     }
 
 }

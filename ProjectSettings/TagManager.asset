@@ -17,6 +17,8 @@ TagManager:
   - New Trait
   - Snape
   - Arachnophobia
+  - ContainerUI
+  - Baloon
   layers:
   - Default
   - TransparentFX

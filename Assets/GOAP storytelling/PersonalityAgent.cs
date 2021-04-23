@@ -6,12 +6,21 @@ using UnityEngine;
 public class PersonalityAgent : Agent
 {
 
+    public bool planning;
     int extraversion;
     int agreeableness;
     bool firstTime = true;
     bool firsHitAction;
 
     bool traitChange;
+
+    //used to be shown on overlay UI
+    [HideInInspector]
+    public string planListText;
+    [HideInInspector]
+    public string actionText;
+    [HideInInspector]
+    public string goalText;
 
     void Start()
     {
@@ -20,7 +29,11 @@ public class PersonalityAgent : Agent
         agreeableness = GetComponent<BigFivePersonality>().agreeableness;
     }
 
-    
+    public override void Update()
+    {
+        if(planning)
+            base.Update();
+    }
     public override void IdleState(FSM fsm, GameObject agent)
     {
         if (firstTime)
@@ -44,6 +57,7 @@ public class PersonalityAgent : Agent
         if(plan != null)
         {
             DisplayController.instance.ShowOnConsolePlan(PrintPlanActions());
+            
         }
         else
         {

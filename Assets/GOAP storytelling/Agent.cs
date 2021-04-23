@@ -61,7 +61,7 @@ public class Agent : MonoBehaviour
         
 	}
 
-    void Update() {
+    public virtual void Update() {
 
         //vecchio
         //m_eqsEventOccurred = m_eqsAgent.Update();
@@ -191,21 +191,24 @@ public class Agent : MonoBehaviour
 
 			action = (PersonalityAction)m_currentActions.Peek();
 			bool inRange = action.RequiresInRange() ? action.InRange : true;
-
-			if(inRange) {
+			if(inRange)
+            {
 				bool success = action.Perform(agent);
 
-				if(!success) {
+				if(!success)
+                {
 					fsm.popState();
 					fsm.pushState(m_idleState);
 					m_dataProvider.PlanAborted(action);
 				}
 			}
-			else {
+			else
+            {
 				fsm.pushState(m_moveToState);
 			}
 		}
-		else {
+		else
+        {
 			fsm.popState();
 			fsm.pushState(m_idleState);
 			m_dataProvider.ActionsFinished();
