@@ -13,7 +13,7 @@ public class DisplayController : MonoBehaviour
     public GameObject displayBox;
     public GameObject dialogueBox;
     public GameObject displayGOAP;
-    public GameObject currentNPC;
+    public GameObject displayOCEAN;
 
     [HideInInspector]
     public Camera npcOverlayCamera;
@@ -105,12 +105,14 @@ public class DisplayController : MonoBehaviour
             hit = Physics2D.Raycast(pos, Vector2.zero);
             if (hit && (hit.collider.gameObject.CompareTag("NPC") || hit.collider.transform.parent.gameObject.CompareTag("NPC")))
             {
+                Debug.Log("Click");
                 displayBox.gameObject.SetActive(true);
                 npc = hit.transform.gameObject;
                 npcOverlayCamera = npc.GetComponentInChildren<Camera>();
                 npcOverlayCamera.enabled = true;
                 gameCamera.enabled = false;
                 displayGOAP.gameObject.SetActive(false);
+                ShowOnConsolePersonality();
 
                 foreach (MoodType moodName in System.Enum.GetValues(typeof(MoodType)))
                 {
@@ -123,10 +125,16 @@ public class DisplayController : MonoBehaviour
                     
                 }
 
-                if (hit.collider.GetComponent<PersonalityAgent>()!=null)
+                if (npc.GetComponent<PersonalityAgent>()!=null)
                 {
                     displayGOAP.gameObject.SetActive(true);
+                    npc.GetComponent<PersonalityAgent>().displayed = true;
+                    //update console values
+                    ShowOnConsolePlan(npc.GetComponent<PersonalityAgent>().planListText);
+                    ShowOnConsoleAction(npc.GetComponent<PersonalityAgent>().actionText, npc.GetComponent<PersonalityAgent>().actionColor);
+                    ShowOnConsoleGoal(npc.GetComponent<PersonalityAgent>().goalText, npc.GetComponent<PersonalityAgent>().goalColor);
                 }
+
                 overlayInUse = true;
             }
         }
@@ -137,6 +145,9 @@ public class DisplayController : MonoBehaviour
             displayBox.gameObject.SetActive(false);
             gameCamera.enabled = true;
             npcOverlayCamera.enabled = false;
+            if(npc.GetComponent<PersonalityAgent>()!=null)
+             npc.GetComponent<PersonalityAgent>().displayed = false;
+
         }
         else { }
     }
@@ -145,7 +156,7 @@ public class DisplayController : MonoBehaviour
     public void ShowOnConsolePlan(string text)
     {
         displayConsoleText.GetComponent<Text>().text = text;
-        displayConsoleText.GetComponent<Text>().color = new Color(255,255,255);
+        displayConsoleText.GetComponent<Text>().color = new Color(1f,1f,1f);
     }
 
     public void ShowOnConsolePlan(string text, Color color)
@@ -165,6 +176,27 @@ public class DisplayController : MonoBehaviour
         displayActionText.GetComponent<Text>().text = text;
         displayActionText.GetComponent<Text>().color = color;
     }
+
+    public void ShowOnConsoleGoal(string text)
+    {
+        displayGoalText.GetComponent<Text>().text = text;
+        displayGoalText.GetComponent<Text>().color = new Color(255, 255, 255);
+    }
+
+    public void ShowOnConsoleGoal(string text, Color color)
+    {
+        displayGoalText.GetComponent<Text>().text = text;
+        displayGoalText.GetComponent<Text>().color = color;
+    }
+
+    public void ShowOnConsolePersonality()
+    {
+        displayOCEAN.transform.GetChild(0).GetComponent<Text>().text = "" +npc.GetComponent<BigFivePersonality>().openness;
+        displayOCEAN.transform.GetChild(1).GetComponent<Text>().text = "" + npc.GetComponent<BigFivePersonality>().consciousness;
+        displayOCEAN.transform.GetChild(2).GetComponent<Text>().text = "" + npc.GetComponent<BigFivePersonality>().extraversion;
+        displayOCEAN.transform.GetChild(3).GetComponent<Text>().text = "" + npc.GetComponent<BigFivePersonality>().agreeableness;
+        displayOCEAN.transform.GetChild(4).GetComponent<Text>().text = "" + npc.GetComponent<BigFivePersonality>().neuroticism;
+    } 
 
     public void ChangeMood(Mood mood, float increment)
     {   
@@ -197,6 +229,7 @@ public class DisplayController : MonoBehaviour
     {
         ChangeMood(moodDict[MoodType.Disgust], 1f);
     }
+
 
  
 

@@ -36,9 +36,18 @@ public class Agent : MonoBehaviour
     [HideInInspector]
     public Queue<GoapAction> plan;
 
-    
-   
-	void Awake() {
+    [HideInInspector]
+    public string planListText;
+    [HideInInspector]
+    public string actionText;
+    [HideInInspector]
+    public string goalText;
+    [HideInInspector]
+    public Color goalColor;
+    [HideInInspector]
+    public Color actionColor;
+
+    void Awake() {
 
 		m_fsm = new FSM();
 		m_availableActions = new HashSet<GoapAction>();
@@ -71,13 +80,16 @@ public class Agent : MonoBehaviour
         //FRA aggiunta di controllo rimozione/aggiunta trait
         if(m_goalStack.Peek() != null)
         {
-            DisplayController.instance.displayGoalText.GetComponent<Text>().text = "Goal:"+m_goalStack.Peek().m_nameGoal;
+            goalText = "Goal:" + m_goalStack.Peek().m_nameGoal;
+            goalColor = new Color(1, 1, 1);
+            DisplayController.instance.ShowOnConsoleGoal(goalText);
             m_eqsEventOccurred = m_eqsAgent.Update();
             m_fsm.Update(gameObject);
             if (m_currentActions.Count <= 0)
             {
                 m_goalStack.Remove(m_goalStack.Peek());
-                DisplayController.instance.displayGoalText.GetComponent<Text>().color = new Color(0, 255, 0);
+                goalColor = new Color(0, 1, 0);
+                DisplayController.instance.ShowOnConsoleGoal(goalText, goalColor);
             }
         }  
 	}
@@ -171,17 +183,22 @@ public class Agent : MonoBehaviour
 		}
 
 		PersonalityAction action = (PersonalityAction)m_currentActions.Peek();
-        DisplayController.instance.ShowOnConsoleAction(action.console);
+        actionText = action.console;
+        actionColor =  new Color(1, 1, 1);
+        DisplayController.instance.ShowOnConsoleAction(actionText);
         if (action.IsDone())
         {
             if (action.CalculateSuccess())
             {
                 m_currentActions.Dequeue();
-                DisplayController.instance.ShowOnConsoleAction("Done", new Color(0, 255, 0));
+                actionColor = new Color(0, 1, 0);
+                actionText = "Done";
+                DisplayController.instance.ShowOnConsoleAction(actionText, actionColor);
             }
             else
             {
-                DisplayController.instance.ShowOnConsoleAction("Action failed, repeat", new Color(255, 0, 0));
+                actionText = "Action failed, repeat";
+                DisplayController.instance.ShowOnConsoleAction("actionText", new Color(255, 0, 0));
                 action.OnReset();
             }
             

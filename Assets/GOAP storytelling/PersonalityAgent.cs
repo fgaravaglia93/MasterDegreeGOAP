@@ -15,12 +15,13 @@ public class PersonalityAgent : Agent
     bool traitChange;
 
     //used to be shown on overlay UI
-    [HideInInspector]
+    /*[HideInInspector]
     public string planListText;
     [HideInInspector]
     public string actionText;
     [HideInInspector]
-    public string goalText;
+    public string goalText;*/
+    public bool displayed = false;
 
     void Start()
     {
@@ -56,12 +57,14 @@ public class PersonalityAgent : Agent
 
         if(plan != null)
         {
-            DisplayController.instance.ShowOnConsolePlan(PrintPlanActions());
+            planListText = PrintPlanActions();
+            DisplayController.instance.ShowOnConsolePlan(planListText);
             
         }
         else
         {
-            DisplayController.instance.ShowOnConsolePlan("Plan not Found");
+            planListText = "Plan not Found";
+            DisplayController.instance.ShowOnConsolePlan(planListText);
         }
        
 
@@ -72,7 +75,8 @@ public class PersonalityAgent : Agent
         base.MoveToState(fsm, agent);
         if (m_eqsEventOccurred!=null)
         {
-            DisplayController.instance.ShowOnConsolePlan("Event occurred. Recalculate plan");
+            planListText = "Event occurred. Recalculate plan";
+            DisplayController.instance.ShowOnConsolePlan(planListText);
         }
     }
 

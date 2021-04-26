@@ -119,7 +119,6 @@ public class BigFivePersonality : MonoBehaviour
         int i = 0;
         while (i < cooldownSteps)
         {
-            //Debug.Log(i);
             yield return new WaitForSeconds(stepCooldown);
             if (!lockMood)
             {
