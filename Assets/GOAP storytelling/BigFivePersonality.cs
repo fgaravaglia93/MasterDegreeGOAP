@@ -124,7 +124,7 @@ public class BigFivePersonality : MonoBehaviour
             {
                 i++;
                 currentMoodValues[moodToCooldown] -= incrementMood;
-                Debug.Log(this.gameObject.name + " - cooldown - " + currentMoodValues[moodToCooldown]);
+                //Debug.Log(this.gameObject.name + " - cooldown - " + currentMoodValues[moodToCooldown]);
                 var moodRef = DisplayController.instance.moodDict[moodToCooldown];
                 if (DisplayController.instance.npc == transform.gameObject) { }
                     moodRef.bar.value -= incrementMood;

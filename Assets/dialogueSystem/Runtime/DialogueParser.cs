@@ -45,15 +45,54 @@ namespace DialogueSystem.Runtime
 
                     if (!lastBlock)
                     {
+                        //stop planning if isGOAP
+                        if (GetComponent<PersonalityAgent>() != null)
+                        {
+                            GetComponent<PersonalityAgent>().interaction = true;
+                        }
+
+                        //look at the hero
+                        if(GetComponent<MovementNPC>() != null)
+                        {
+                            GetComponent<MovementNPC>().firstInteract = true;
+                            GetComponent<MovementNPC>().hero.GetComponent<Movement2D>().interact = true;
+                        }
+
+                        //disable elements on display
+                        DisplayController.instance.displayBox.SetActive(false);
+                        //disable info mode on NPC
+                        DisplayController.instance.interact = true;
+
+
+
+
                         dialogueOnGoing = true;
                         dialogueFace.transform.parent.gameObject.SetActive(true);
                         StartDialogue(dialogueData.TargetNodeGUID);
+
                     }
                     else
                     {
                         dialogueFace.transform.parent.gameObject.SetActive(false);
                         lastBlock = false;
                         dialogueData = narrativeSequence.NodeLinks.First();
+                        //return to planning if isGOAP
+                        if (GetComponent<PersonalityAgent>() != null)
+                            GetComponent<PersonalityAgent>().interaction = false;
+
+                        //look up previous direction
+                        if (GetComponent<MovementNPC>() != null)
+                        {
+                            GetComponent<MovementNPC>().hero.GetComponent<Movement2D>().interact = false;
+                            GetComponent<MovementNPC>().backtoMove = true;
+                        }
+
+                        //enable elements on display
+                        DisplayController.instance.displayBox.SetActive(true);
+                        //enable info mode on NPC
+                        DisplayController.instance.interact = false;
+
+
                     }
                 }
             }

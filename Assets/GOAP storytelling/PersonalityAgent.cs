@@ -7,13 +7,16 @@ public class PersonalityAgent : Agent
 {
 
     public bool planning;
+    public bool interaction = false;
+    public bool displayed = false;
+    
     int extraversion;
     int agreeableness;
     bool firstTime = true;
     bool firsHitAction;
 
     bool traitChange;
-
+    
     //used to be shown on overlay UI
     /*[HideInInspector]
     public string planListText;
@@ -21,7 +24,7 @@ public class PersonalityAgent : Agent
     public string actionText;
     [HideInInspector]
     public string goalText;*/
-    public bool displayed = false;
+    
 
     void Start()
     {
@@ -32,7 +35,7 @@ public class PersonalityAgent : Agent
 
     public override void Update()
     {
-        if(planning)
+        if(planning && !interaction)
             base.Update();
     }
     public override void IdleState(FSM fsm, GameObject agent)

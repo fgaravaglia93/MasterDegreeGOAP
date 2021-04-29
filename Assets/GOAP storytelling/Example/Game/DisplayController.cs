@@ -42,6 +42,8 @@ public class DisplayController : MonoBehaviour
     //Overlay
     [HideInInspector]
     public bool overlayInUse = false;
+    [HideInInspector]
+    public bool interact;
 
     //Used to lock emotions
     [HideInInspector]
@@ -63,6 +65,7 @@ public class DisplayController : MonoBehaviour
 
         displayBox.SetActive(false);
         dialogueBox.SetActive(false);
+        interact = false;
     }
 
     void Start()
@@ -103,40 +106,44 @@ public class DisplayController : MonoBehaviour
             pos = Input.mousePosition;
             pos = gameCamera.ScreenToWorldPoint(pos);
             hit = Physics2D.Raycast(pos, Vector2.zero);
-            if (hit && (hit.collider.gameObject.CompareTag("NPC") || hit.collider.transform.parent.gameObject.CompareTag("NPC")))
+
+            if (!interact)
             {
-                Debug.Log("Click");
-                displayBox.gameObject.SetActive(true);
-                npc = hit.transform.gameObject;
-                npcOverlayCamera = npc.GetComponentInChildren<Camera>();
-                npcOverlayCamera.enabled = true;
-                gameCamera.enabled = false;
-                displayGOAP.gameObject.SetActive(false);
-                ShowOnConsolePersonality();
-
-                foreach (MoodType moodName in System.Enum.GetValues(typeof(MoodType)))
+                if (hit && (hit.collider.gameObject.CompareTag("NPC") || hit.collider.transform.parent.gameObject.CompareTag("NPC")))
                 {
-                    if(moodName != MoodType.Neutral)
+                    Debug.Log("Click");
+                    displayBox.gameObject.SetActive(true);
+                    npc = hit.transform.gameObject;
+                    npcOverlayCamera = npc.GetComponentInChildren<Camera>();
+                    npcOverlayCamera.enabled = true;
+                    gameCamera.enabled = false;
+                    displayGOAP.gameObject.SetActive(false);
+                    ShowOnConsolePersonality();
+
+                    foreach (MoodType moodName in System.Enum.GetValues(typeof(MoodType)))
                     {
-                        moodDict[moodName].threshold = npc.GetComponent<BigFivePersonality>().thresholdMoodValues[moodName];
-                        moodDict[moodName].bar.value = npc.GetComponent<BigFivePersonality>().currentMoodValues[moodName];
-                        moodDict[moodName].SetPlaceholder(moodDict[moodName].threshold);
+                        if (moodName != MoodType.Neutral)
+                        {
+                            moodDict[moodName].threshold = npc.GetComponent<BigFivePersonality>().thresholdMoodValues[moodName];
+                            moodDict[moodName].bar.value = npc.GetComponent<BigFivePersonality>().currentMoodValues[moodName];
+                            moodDict[moodName].SetPlaceholder(moodDict[moodName].threshold);
+                        }
                     }
-                    
-                }
 
-                if (npc.GetComponent<PersonalityAgent>()!=null)
-                {
-                    displayGOAP.gameObject.SetActive(true);
-                    npc.GetComponent<PersonalityAgent>().displayed = true;
-                    //update console values
-                    ShowOnConsolePlan(npc.GetComponent<PersonalityAgent>().planListText);
-                    ShowOnConsoleAction(npc.GetComponent<PersonalityAgent>().actionText, npc.GetComponent<PersonalityAgent>().actionColor);
-                    ShowOnConsoleGoal(npc.GetComponent<PersonalityAgent>().goalText, npc.GetComponent<PersonalityAgent>().goalColor);
-                }
+                    if (npc.GetComponent<PersonalityAgent>() != null)
+                    {
+                        displayGOAP.gameObject.SetActive(true);
+                        npc.GetComponent<PersonalityAgent>().displayed = true;
+                        //update console values
+                        ShowOnConsolePlan(npc.GetComponent<PersonalityAgent>().planListText);
+                        ShowOnConsoleAction(npc.GetComponent<PersonalityAgent>().actionText, npc.GetComponent<PersonalityAgent>().actionColor);
+                        ShowOnConsoleGoal(npc.GetComponent<PersonalityAgent>().goalText, npc.GetComponent<PersonalityAgent>().goalColor);
+                    }
 
-                overlayInUse = true;
+                    overlayInUse = true;
+                }
             }
+          
         }
 
         else if (Input.GetButtonDown("Escape") && overlayInUse)
@@ -230,11 +237,14 @@ public class DisplayController : MonoBehaviour
         ChangeMood(moodDict[MoodType.Disgust], 1f);
     }
 
-
- 
-
     public void DisplayChange()
     {
         print("Il PG è felice");
     }
+    
+    
+
+
+
+
 }

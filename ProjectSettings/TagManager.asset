@@ -19,6 +19,7 @@ TagManager:
   - Arachnophobia
   - ContainerUI
   - Baloon
+  - Hero
   layers:
   - Default
   - TransparentFX

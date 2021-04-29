@@ -12,40 +12,51 @@ public class Movement2D : MonoBehaviour
     private bool isWalking = false;
     private Animator animator;
     private Rigidbody2D rb;
+    [HideInInspector]
+    public bool interact;
    
 
     void Start()
     {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>() ;
+        interact = false;
     }
 
     void Update()
     {
-        x = Input.GetAxis("Horizontal");
-        y = Input.GetAxis("Vertical");
-        direction = Vector2.zero;
-
-        if (x != 0f || y != 0f)
+        if (!interact)
         {
-            if (Mathf.Abs(x) >= Mathf.Abs(y))
-                y = 0f;
-            else
-                x = 0f;
+            x = Input.GetAxis("Horizontal");
+            y = Input.GetAxis("Vertical");
+            direction = Vector2.zero;
 
-            isWalking = true;
-            animator.SetBool("isWalking", isWalking);
-            Move();
-        }
-        else
-        {
-            if (isWalking)
+            if (x != 0f || y != 0f)
             {
-                isWalking = false;
+                if (Mathf.Abs(x) >= Mathf.Abs(y))
+                    y = 0f;
+                else
+                    x = 0f;
+
+                isWalking = true;
                 animator.SetBool("isWalking", isWalking);
+                Move();
+            }
+            else
+            {
+                if (isWalking)
+                {
+                    isWalking = false;
+                    animator.SetBool("isWalking", isWalking);
+                }
             }
         }
+    }
 
+    private void FixedUpdate()
+    {
+        if (!isWalking)
+            rb.velocity = Vector2.zero;
     }
 
     void Move()
@@ -66,8 +77,9 @@ public class Movement2D : MonoBehaviour
     {
         if(collision.gameObject.tag == "Interact")
         {
+            //Start Dialogue if there is a Dialogue attached to NPC
+            //if(collision.gameObject.transform.parent.GetComponent<DialogueParser>() != null)
             collision.gameObject.transform.parent.GetComponent<DialogueParser>().interactable = true;
-            //collision.gameObject.GetComponent<DialogueParser>().enabled = true;
         }
 
         if (collision.gameObject.tag == "New Trait")
