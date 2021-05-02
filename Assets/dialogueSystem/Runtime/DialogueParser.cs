@@ -126,6 +126,7 @@ namespace DialogueSystem.Runtime
             //serve un sistema più avanzato per indicare la tranform
             int j = 0;
             bool skip = false;
+            Button button = null;
            
             foreach (NodeLinkData choice in choices)
             {
@@ -140,13 +141,13 @@ namespace DialogueSystem.Runtime
                     if (choice.trait == null)
                     {
                         j++;
-                        Button button = InstanciateButtonChoice(choice, nChoices, j);
+                        button = InstanciateButtonChoice(choice, nChoices, j);
                     }
                     else
                     {
                         //check trait, se ce'ho istanzialo
-                        Button button;
                         //Debug.Log("not trait");
+
                         if (flagNPC)
                         {
                             skip = true;
@@ -162,8 +163,8 @@ namespace DialogueSystem.Runtime
                     skip = false;
 
                 //this will manage the change of mood during interaction by talking
-                // if (choice.changeMoodTo == MoodType.Joy)
-                //button.onClick.AddListener(() => DisplayController.instance.DisplayChange());
+                if (button != null && choice.changeMoodTo != MoodType.Neutral)
+                    button.onClick.AddListener(() => DisplayController.instance.ChangeMood(choice.changeMoodTo,5f));
                 //button.onClick.AddListener(() => DisplayController.instance.ChangeMoodToJoy());
             }
         }

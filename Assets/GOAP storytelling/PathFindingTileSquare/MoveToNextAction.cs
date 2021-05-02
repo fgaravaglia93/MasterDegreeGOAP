@@ -33,7 +33,7 @@ public class MoveToNextAction : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        grid = transform.parent.GetComponent<TileGridGenerator>().GetGrid();
+        grid = transform.parent.GetComponentInChildren<TileGridGenerator>().GetGrid();
        
     }
 
@@ -108,8 +108,8 @@ public class MoveToNextAction : MonoBehaviour
             
         currentNode = 0;
 
-        TileNode start = transform.parent.GetComponent<TileGridGenerator>().NodeFromWorldPoint(transform.position);
-        transform.parent.GetComponent<TileGridGenerator>().check = start;
+        TileNode start = transform.parent.GetComponentInChildren<TileGridGenerator>().NodeFromWorldPoint(transform.position);
+        transform.parent.GetComponentInChildren<TileGridGenerator>().check = start;
 
         CheckNode();
 
@@ -120,11 +120,11 @@ public class MoveToNextAction : MonoBehaviour
     public List<TileNode> GetPath(Transform start, Transform end)
     {
         List<TileNode> aStarPath;
-        TileNode nodeStart = transform.parent.GetComponent<TileGridGenerator>().NodeFromWorldPoint(start.position - (new Vector3(0,1,0)));
-        TileNode nodeTarget = transform.parent.GetComponent<TileGridGenerator>().NodeFromWorldPoint(end.position);
-        gridSizeX = transform.parent.GetComponent<TileGridGenerator>().GetSizeX();
-        gridSizeY = transform.parent.GetComponent<TileGridGenerator>().GetSizeY();
-        aStarPath = AStarSolverGrid.Solve(transform.parent.GetComponent<TileGridGenerator>().GetGrid(), gridSizeX, gridSizeY, nodeStart, nodeTarget, EuclideanEstimator);
+        TileNode nodeStart = transform.parent.GetComponentInChildren<TileGridGenerator>().NodeFromWorldPoint(start.position - (new Vector3(0,1,0)));
+        TileNode nodeTarget = transform.parent.GetComponentInChildren<TileGridGenerator>().NodeFromWorldPoint(end.position);
+        gridSizeX = transform.parent.GetComponentInChildren<TileGridGenerator>().GetSizeX();
+        gridSizeY = transform.parent.GetComponentInChildren<TileGridGenerator>().GetSizeY();
+        aStarPath = AStarSolverGrid.Solve(transform.parent.GetComponentInChildren<TileGridGenerator>().GetGrid(), gridSizeX, gridSizeY, nodeStart, nodeTarget, EuclideanEstimator);
         return aStarPath;
     }
 

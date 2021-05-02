@@ -212,6 +212,15 @@ public class DisplayController : MonoBehaviour
         npc.GetComponent<BigFivePersonality>().incrementMood = increment;
     }
 
+    public void ChangeMood(MoodType moodType, float increment)
+    {
+        if (moodType == MoodType.Neutral)
+            ChangeMood(MoodType.Neutral, increment);
+        else
+            ChangeMood(moodDict[moodType], increment);
+    }
+
+
     public void ChangeMoodToJoy()
     {
         ChangeMood(moodDict[MoodType.Joy], 1f);

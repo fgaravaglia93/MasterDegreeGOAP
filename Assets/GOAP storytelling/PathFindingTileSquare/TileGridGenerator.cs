@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class TileGridGenerator : MonoBehaviour {
 
@@ -14,6 +15,7 @@ public class TileGridGenerator : MonoBehaviour {
     private List<TileNode> gizmospath;
     [HideInInspector]
     public TileNode check;
+    public Tilemap tilemapUnwalkable;
 
     // Use this for initialization
     void Start () {
@@ -42,8 +44,13 @@ public class TileGridGenerator : MonoBehaviour {
                 Vector2 worldPoint = worldBottomLeft + Vector2.right * (x * nodeDiameter + nodeRadius) +
                                      Vector2.up * (y * nodeDiameter + nodeRadius);
                 bool walkable = !(Physics2D.OverlapBox(worldPoint, new Vector2(nodeRadius,nodeRadius), 0 ,unwalkableMask));
-              
-               
+
+                //Debug.Log(tilemapUnwalkable.GetTile(new Vector3Int((int)worldPoint.x, (int)worldPoint.y, 0)));
+                if (tilemapUnwalkable.GetTile(new Vector3Int((int)worldPoint.x, (int)worldPoint.y-1, 0)) != null)
+                //if (tilemapUnwalkable.GetTile(new Vector3Int(x, y , 0)) != null)
+                    walkable = false;
+
+
                 grid[x, y] = new TileNode(walkable, worldPoint, x, y);
             }
         }

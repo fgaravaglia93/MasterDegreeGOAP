@@ -54,9 +54,18 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Default
-    uniqueID: 0
-    locked: 0
   - name: Background
     uniqueID: 3848429753
+    locked: 0
+  - name: Base
+    uniqueID: 2695116363
+    locked: 0
+  - name: Unwalkable
+    uniqueID: 3629220893
+    locked: 0
+  - name: Objects
+    uniqueID: 2770690909
+    locked: 0
+  - name: Default
+    uniqueID: 0
     locked: 0
