@@ -38,6 +38,7 @@ public class PersonalityAgent : Agent
         if(planning && !interaction)
             base.Update();
     }
+
     public override void IdleState(FSM fsm, GameObject agent)
     {
         if (firstTime)
@@ -47,30 +48,31 @@ public class PersonalityAgent : Agent
             {
                 if (action.interactFlag)
                 {
-                    //action.cost = action.cost - (action.cost/2*extraversion);
-                    action.cost -= action.cost / 2 * extraversion;
+                    action.cost = GetComponent<BigFivePersonality>().ExtraversionCostManipulation(action.cost, action.initialCost);
                     //print(action.cost + " - " + action.nameAction);
+                }
+
+                if(action.consentNPCs.Count > 0)
+                {
+                    action.cost = GetComponent<BigFivePersonality>().AgreeablenessCostManipulation(action.cost, action.initialCost);
+
                 }
             }
             firstTime = false;
         }
         
-
         base.IdleState(fsm, agent);
 
         if(plan != null)
         {
             planListText = PrintPlanActions();
             DisplayController.instance.ShowOnConsolePlan(planListText);
-            
         }
         else
         {
             planListText = "Plan not Found";
             DisplayController.instance.ShowOnConsolePlan(planListText);
         }
-       
-
     }
 
     public override void MoveToState(FSM fsm, GameObject agent)

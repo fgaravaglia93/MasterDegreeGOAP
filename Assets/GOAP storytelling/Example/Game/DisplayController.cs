@@ -23,8 +23,7 @@ public class DisplayController : MonoBehaviour
 
     public GameObject moodBar;
     public GameObject currentMoodDisplay;
-    [HideInInspector]
-    
+    public GameObject cursor;
    /* private RenderTexture renderGameScene;
     public float SmallCameraSize = 4f;*/
 
@@ -65,6 +64,8 @@ public class DisplayController : MonoBehaviour
 
         displayBox.SetActive(false);
         dialogueBox.SetActive(false);
+        Cursor.visible = false;
+        
         interact = false;
     }
 
@@ -101,6 +102,10 @@ public class DisplayController : MonoBehaviour
 
     private void Update()
     {
+
+        Vector2 cursorPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        cursor.transform.position = cursorPos;
+        //mouse over NPC
         if (Input.GetMouseButtonDown(0) && !overlayInUse)
         {
             pos = Input.mousePosition;
@@ -220,6 +225,10 @@ public class DisplayController : MonoBehaviour
             ChangeMood(moodDict[moodType], increment);
     }
 
+ 
+    //Cursor
+
+    //TO REMOVE (Used to test by buttons)
 
     public void ChangeMoodToJoy()
     {

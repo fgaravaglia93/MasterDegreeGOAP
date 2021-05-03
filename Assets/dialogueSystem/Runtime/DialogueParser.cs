@@ -27,6 +27,8 @@ namespace DialogueSystem.Runtime
 
         public bool flagNPC;
         public bool interactable;
+        [HideInInspector]
+        public bool storyEvent;
 
         void Start()
         {
@@ -39,8 +41,9 @@ namespace DialogueSystem.Runtime
             if(interactable && !dialogueOnGoing)
             {
 
-                if (Input.GetButtonDown("Enter"))
+                if (Input.GetButtonDown("Enter") || storyEvent)
                 {
+                    storyEvent = false;
                     Debug.Log("interact");
 
                     if (!lastBlock)

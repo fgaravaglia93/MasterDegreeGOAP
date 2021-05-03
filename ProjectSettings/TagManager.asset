@@ -31,7 +31,7 @@ TagManager:
   - 
   - Unwalkable
   - Tests
-  - 
+  - NPC
   - 
   - 
   - 
@@ -68,4 +68,7 @@ TagManager:
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Cursor
+    uniqueID: 3417721155
     locked: 0

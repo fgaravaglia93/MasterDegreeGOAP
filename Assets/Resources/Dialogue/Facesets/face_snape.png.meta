@@ -1,0 +1,392 @@
+fileFormatVersion: 2
+guid: 22756512c9e159d439c908df4acafabd
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2615978228083128885
+    second: face_snape_0
+  - first:
+      213: 241892176849248164
+    second: face_snape_1
+  - first:
+      213: -4571858113080528284
+    second: face_snape_2
+  - first:
+      213: 8498455541167672584
+    second: face_snape_3
+  - first:
+      213: -3210792919838731851
+    second: face_snape_4
+  - first:
+      213: -4414256115895797957
+    second: face_snape_5
+  - first:
+      213: 9085666252122949055
+    second: face_snape_6
+  - first:
+      213: 6203222730982017747
+    second: face_snape_7
+  - first:
+      213: -8926432958114316449
+    second: face_snape_8
+  - first:
+      213: -1978652869755348403
+    second: face_snape_9
+  - first:
+      213: -2536256853265368968
+    second: face_snape_10
+  - first:
+      213: -8752158251691464789
+    second: face_snape_11
+  - first:
+      213: -8706341605212302750
+    second: face_snape_12
+  - first:
+      213: 8505344273225856110
+    second: face_snape_13
+  - first:
+      213: 5840705697719062535
+    second: face_snape_14
+  - first:
+      213: 4925278991524999650
+    second: face_snape_15
+  - first:
+      213: 6301327213711991353
+    second: face_snape_16
+  - first:
+      213: -927339141123199072
+    second: face_snape_17
+  - first:
+      213: -2282616056016252025
+    second: face_snape_18
+  - first:
+      213: 7671329641792947911
+    second: face_snape_19
+  - first:
+      213: -5784339768418066561
+    second: face_snape_20
+  - first:
+      213: -6835357460908429418
+    second: face_snape_21
+  - first:
+      213: 4580281962478624749
+    second: face_snape_22
+  - first:
+      213: 5770032552997024801
+    second: face_snape_23
+  - first:
+      213: -7163422938832618344
+    second: face_snape_24
+  - first:
+      213: -1300741215218392419
+    second: face_snape_25
+  - first:
+      213: -6356055776273740974
+    second: face_snape_26
+  - first:
+      213: 8494925546499673122
+    second: face_snape_27
+  - first:
+      213: 2744056281587133330
+    second: face_snape_28
+  - first:
+      213: 2709467735643235886
+    second: face_snape_29
+  - first:
+      213: 6960845382398656779
+    second: face_snape_30
+  - first:
+      213: -6897423518707327988
+    second: face_snape_31
+  - first:
+      213: -8305378358522080746
+    second: face_snape_32
+  - first:
+      213: -6904907720327662324
+    second: face_snape_33
+  - first:
+      213: -7067781213441601662
+    second: face_snape_34
+  - first:
+      213: -2236848506458622655
+    second: face_snape_35
+  - first:
+      213: 8117811080978494332
+    second: face_snape_36
+  - first:
+      213: 8709885299460609045
+    second: face_snape_37
+  - first:
+      213: -5364735251523089371
+    second: face_snape_38
+  - first:
+      213: -8281480801524526743
+    second: face_snape_39
+  - first:
+      213: 6037407683306705532
+    second: face_snape_40
+  - first:
+      213: -1517857054427603637
+    second: face_snape_41
+  - first:
+      213: -5815178684065518847
+    second: face_snape_42
+  - first:
+      213: -2134412584633983120
+    second: face_snape_43
+  - first:
+      213: 4980990093048291924
+    second: face_snape_44
+  - first:
+      213: 3625521577597101078
+    second: face_snape_45
+  - first:
+      213: -4964282083357193521
+    second: face_snape_46
+  - first:
+      213: -3681047623276034304
+    second: face_snape_47
+  - first:
+      213: -6443173298546702581
+    second: face_snape_48
+  - first:
+      213: -2645574030101838486
+    second: face_snape_49
+  - first:
+      213: -4712328532031117171
+    second: face_snape_50
+  - first:
+      213: 1123540956233061602
+    second: face_snape_51
+  - first:
+      213: 8133836492770848325
+    second: face_snape_52
+  - first:
+      213: -3606151818068220811
+    second: face_snape_53
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: -1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: face_snape_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 144
+        width: 144
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc503fe59ad22bbd0800000000000000
+      internalID: -2615978228083128885
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: face_snape_1
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 144
+        width: 144
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4af9b0b37af5b5300800000000000000
+      internalID: 241892176849248164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: face_snape_2
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 144
+        width: 144
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 462f856d44f7d80c0800000000000000
+      internalID: -4571858113080528284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: face_snape_3
+      rect:
+        serializedVersion: 2
+        x: 432
+        y: 144
+        width: 144
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 80dcfb6b94490f570800000000000000
+      internalID: 8498455541167672584
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: face_snape_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 144
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b15ca5d9d8f073d0800000000000000
+      internalID: -3210792919838731851
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: face_snape_5
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 0
+        width: 144
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b377f6843796db2c0800000000000000
+      internalID: -4414256115895797957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: de7f833e1812c0644afe4c8437bd3c3d
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

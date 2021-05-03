@@ -172,4 +172,56 @@ public class BigFivePersonality : MonoBehaviour
         }
         return threshold;
     }
+
+    public float OpennessCostManipulation(float cost, float increment)
+    {
+       //change this depending on what you need
+       cost += increment / 2 * openness;
+       return cost;
+    }
+
+    public float ExtraversionCostManipulation(float cost, float increment)
+    {
+        //change this depending on what you need
+        cost -= increment / 2 * extraversion;
+        return cost;
+    }
+
+    public float AgreeablenessCostManipulation(float cost, float increment)
+    {
+        //change this depending on what you need
+        cost += increment / 2 * agreeableness;
+        return cost;
+    }
+
+    //Used to trigger FEAR mood on High Agreeableness NPC
+    public bool CheckConsentPeopleAround(List<GameObject> consentNPCs)
+    {
+        Collider2D hit = Physics2D.OverlapBox(transform.position, new Vector2(2, 2), 0f, LayerMask.GetMask("NPC"));
+        if (agreeableness > 0)
+        {
+            foreach (GameObject consent in consentNPCs)
+                if (hit.name == consent.name)
+                {
+                    DisplayController.instance.ChangeMood(MoodType.Fear, 5);
+                    return true;
+                }
+            
+        }
+        return false;
+    }
+
+    private void OnMouseOver()
+    {
+        DisplayController.instance.cursor.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/ui_cursor_investigate");    
+    }
+    private void OnMouseExit()
+    {
+        DisplayController.instance.cursor.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/ui_cursor");
+    }
+
+
+
+
+
 }

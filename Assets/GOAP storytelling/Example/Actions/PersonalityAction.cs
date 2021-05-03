@@ -8,7 +8,8 @@ public class PersonalityAction : GoapAction
     private bool performed = false;
     private float startTime = 0;
     public float duration;
-
+    public float initialCost;
+    
 
     [HideInInspector]
     public string console = "Action: ";
@@ -19,6 +20,10 @@ public class PersonalityAction : GoapAction
     public bool interactFlag = false;
     public List<GameObject> consentNPCs;
 
+    private void Start()
+    {
+        initialCost = cost;
+    }
     public override bool Perform(GameObject agent)
     {
         if (startTime == 0)
@@ -74,7 +79,13 @@ public class PersonalityAction : GoapAction
 
             //release lock on emotion
             DisplayController.instance.lockMood = false;
-            return true;
+
+            //manipulate action cost based on Openness factor
+            cost = GetComponent<BigFivePersonality>().OpennessCostManipulation(cost,initialCost);
+
+            //agreeaableness factor > 0 : if the CONSENT is around enter in fear mood 
+            GetComponent<BigFivePersonality>().CheckConsentPeopleAround(consentNPCs);
+          
         }
         //Debug.Log("%: " + success + " <= " + percentage + "\nAction done");
         return false;
