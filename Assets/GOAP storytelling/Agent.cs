@@ -47,6 +47,8 @@ public class Agent : MonoBehaviour
     [HideInInspector]
     public Color actionColor;
 
+    bool waiting;
+
     void Awake() {
 
 		m_fsm = new FSM();
@@ -170,70 +172,79 @@ public class Agent : MonoBehaviour
 	}
 	//make it to switch goal when all action for one goal are completed?
 	public virtual void PerformActionState(FSM fsm, GameObject agent) {
-        if(m_eqsEventOccurred!=null) {
-			Debug.Log("<color=yellow>EQS Event Occurred: Recaculate Plan</color>");
-			fsm.popState();
-			fsm.pushState(m_idleState);
-			return;
-		}
-        if(!HasActionPlan()) {
-			Debug.Log("<color=red>Done actions</color>");
-			fsm.popState();
-			fsm.pushState(m_idleState);
-			m_dataProvider.ActionsFinished();
-			return;
-		}
 
-		PersonalityAction action = (PersonalityAction)m_currentActions.Peek();
-        actionText = action.console;
-        actionColor =  new Color(1, 1, 1);
-        DisplayController.instance.ShowOnConsoleAction(actionText);
-        if (action.IsDone())
+        if(!waiting)
         {
-            if (action.CalculateSuccess())
+            if (m_eqsEventOccurred != null)
             {
-                m_currentActions.Dequeue();
-                actionColor = new Color(0, 1, 0);
-                actionText = "Done";
-                DisplayController.instance.ShowOnConsoleAction(actionText, actionColor);
+                Debug.Log("<color=yellow>EQS Event Occurred: Recaculate Plan</color>");
+                fsm.popState();
+                fsm.pushState(m_idleState);
+                return;
+            }
+            if (!HasActionPlan())
+            {
+                Debug.Log("<color=red>Done actions</color>");
+                fsm.popState();
+                fsm.pushState(m_idleState);
+                m_dataProvider.ActionsFinished();
+                return;
+            }
+
+            PersonalityAction action = (PersonalityAction)m_currentActions.Peek();
+            actionText = action.console;
+            actionColor = new Color(1, 1, 1);
+            DisplayController.instance.ShowOnConsoleAction(actionText);
+            if (action.IsDone())
+            {
+                if (action.CalculateSuccess())
+                {
+                    m_currentActions.Dequeue();
+                    actionColor = new Color(0, 1, 0);
+                    actionText = "Done";
+                    DisplayController.instance.ShowOnConsoleAction(actionText, actionColor);
+                }
+                else
+                {
+                    actionText = "Action failed, repeat";
+                    Debug.Log("FAILED");
+                    DisplayController.instance.ShowOnConsoleAction(actionText, new Color(255, 0, 0));
+                    //StartCoroutine("WaitFor");
+                    //waiting = true;
+                    action.OnReset();
+                }
+
+            }
+
+            if (HasActionPlan())
+            {
+
+                action = (PersonalityAction)m_currentActions.Peek();
+                bool inRange = action.RequiresInRange() ? action.InRange : true;
+                if (inRange)
+                {
+                    bool success = action.Perform(agent);
+
+                    if (!success)
+                    {
+                        fsm.popState();
+                        fsm.pushState(m_idleState);
+                        m_dataProvider.PlanAborted(action);
+                    }
+                }
+                else
+                {
+                    fsm.pushState(m_moveToState);
+                }
             }
             else
             {
-                actionText = "Action failed, repeat";
-                Debug.Log("FAILED");
-                DisplayController.instance.ShowOnConsoleAction("actionText", new Color(255, 0, 0));
-                //WaitForSeconds(1);
-                action.OnReset();
+                fsm.popState();
+                fsm.pushState(m_idleState);
+                m_dataProvider.ActionsFinished();
             }
-            
         }
-
-        if (HasActionPlan()) {
-
-			action = (PersonalityAction)m_currentActions.Peek();
-			bool inRange = action.RequiresInRange() ? action.InRange : true;
-			if(inRange)
-            {
-				bool success = action.Perform(agent);
-
-				if(!success)
-                {
-					fsm.popState();
-					fsm.pushState(m_idleState);
-					m_dataProvider.PlanAborted(action);
-				}
-			}
-			else
-            {
-				fsm.pushState(m_moveToState);
-			}
-		}
-		else
-        {
-			fsm.popState();
-			fsm.pushState(m_idleState);
-			m_dataProvider.ActionsFinished();
-		}
+       
 	}
 
 	public virtual void MoveToState(FSM fsm, GameObject agent) {
@@ -245,6 +256,7 @@ public class Agent : MonoBehaviour
             //FRA to put aside
             Debug.Log("<color=yellow>EQS Event Occurred: Recaculate Plan</color>");
             //5f to secure mood activation
+            Debug.Log(m_eqsEventOccurred.changeToMood);
             DisplayController.instance.ChangeMood(DisplayController.instance.moodDict[m_eqsEventOccurred.changeToMood], 5f);
             fsm.popState(); //move
 			fsm.popState(); //perform
@@ -325,6 +337,12 @@ public class Agent : MonoBehaviour
 	public static string PrettyPrint(GoapAction action) {
 		return action.GetType().Name;
 	}
+
+    IEnumerable WaitFor()
+    {
+        yield return new WaitForSeconds(1f);
+        waiting = false;
+    }
 
 #if UNITY_EDITOR
 

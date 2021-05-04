@@ -44,7 +44,7 @@ public class PersonalityAgent : Agent
         if (firstTime)
         {
             //manage extraversion factor on available actions
-            /*foreach (PersonalityAction action in m_availableActions)
+            foreach (PersonalityAction action in m_availableActions)
             {
                 if (action.interactFlag)
                 {
@@ -52,12 +52,12 @@ public class PersonalityAgent : Agent
                     //print(action.cost + " - " + action.nameAction);
                 }
 
-                if(action.consentNPCs.Count > 0)
+                /*if(action.consentNPCs.Count > 0)
                 {
                     action.cost = GetComponent<BigFivePersonality>().AgreeablenessCostManipulation(action.cost, action.initialCost);
 
-                }
-            }*/
+                }*/
+            }
             firstTime = false;
         }
         

@@ -14739,7 +14739,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efa1fbb2d1b5b624ba2237a51d5403c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 2
+  cost: 4
   eqsCost: 0
   target: {fileID: 0}
   nameAction: Ask

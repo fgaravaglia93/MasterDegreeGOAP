@@ -81,7 +81,7 @@ public class PersonalityAction : GoapAction
             DisplayController.instance.lockMood = false;
 
             //manipulate action cost based on Openness factor
-            //cost = GetComponent<BigFivePersonality>().OpennessCostManipulation(cost,initialCost);
+            cost = GetComponent<BigFivePersonality>().OpennessCostManipulation(cost,initialCost);
 
             //agreeaableness factor > 0 : if the CONSENT is around enter in fear mood 
             //GetComponent<BigFivePersonality>().CheckConsentPeopleAround(consentNPCs);

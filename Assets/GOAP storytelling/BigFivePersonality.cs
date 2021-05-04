@@ -67,6 +67,10 @@ public class BigFivePersonality : MonoBehaviour
         if (container != null)
             containerUI = container[0].gameObject;
 
+        var baloons = children.Where(child => child.tag == "Baloon").ToArray();
+        if (baloons != null)
+            baloon = baloons[0].gameObject;
+
     }
 
     private void Update()

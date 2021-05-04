@@ -57,7 +57,7 @@ public class Mood
             case MoodType.Fear:
                 color = new Color(1f, 0, 1f);
                 durationChange = 1f;
-                successChange = 0.5f;
+                successChange = 0.2f;
                 break;
             case MoodType.Disgust:
                 color = new Color(0, 1f, 0);
