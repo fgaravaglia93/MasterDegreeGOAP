@@ -124,6 +124,8 @@ public class DisplayController : MonoBehaviour
                     gameCamera.enabled = false;
                     displayGOAP.gameObject.SetActive(false);
                     ShowOnConsolePersonality();
+                    displayOCEAN.transform.parent.gameObject.SetActive(true);
+                    moodBar.transform.parent.gameObject.SetActive(true);
 
                     foreach (MoodType moodName in System.Enum.GetValues(typeof(MoodType)))
                     {

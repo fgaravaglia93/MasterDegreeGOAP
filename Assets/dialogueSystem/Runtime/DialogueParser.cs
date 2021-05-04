@@ -28,6 +28,11 @@ namespace DialogueSystem.Runtime
         public bool flagNPC;
         public bool interactable;
         [HideInInspector]
+        public bool flagOCEAN;
+        public bool flagMood;
+        public bool flagGOAP;
+
+        [HideInInspector]
         public bool storyEvent;
 
         void Start()
@@ -62,6 +67,13 @@ namespace DialogueSystem.Runtime
                         }
 
                         //disable elements on display
+                        if (!DisplayController.instance.displayGOAP.active)
+                            flagGOAP = true;
+                        if (!DisplayController.instance.moodBar.transform.parent.gameObject.active)
+                            flagMood = true;
+                        if (!DisplayController.instance.displayOCEAN.transform.parent.gameObject.active)
+                            flagOCEAN = true;
+
                         DisplayController.instance.displayBox.SetActive(false);
                         //disable info mode on NPC
                         DisplayController.instance.interact = true;
@@ -92,6 +104,24 @@ namespace DialogueSystem.Runtime
 
                         //enable elements on display
                         DisplayController.instance.displayBox.SetActive(true);
+                        if (flagGOAP)
+                        {
+                            DisplayController.instance.displayGOAP.SetActive(false);
+                            flagGOAP = false;
+                        }
+                        
+                        if (flagMood)
+                        {
+                            DisplayController.instance.moodBar.transform.parent.gameObject.SetActive(false);
+                            flagMood = false;
+                        }
+
+                        if (flagOCEAN)
+                        {
+                            DisplayController.instance.displayOCEAN.transform.parent.gameObject.SetActive(false);
+                            flagOCEAN = false;
+                        }
+
                         //enable info mode on NPC
                         DisplayController.instance.interact = false;
 

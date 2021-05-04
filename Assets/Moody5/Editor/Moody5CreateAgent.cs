@@ -45,8 +45,8 @@ public class Moody5CreateAgent : EditorWindow
         //isWanderer = EditorGUILayout.Toggle("Wanderer", isWanderer);
         isGOAP = EditorGUILayout.Toggle("GOAP", isGOAP);
 
-        if(isGOAP)
-            GUILayout.Label("Define parameter needed for GOAP", EditorStyles.boldLabel);
+       /* if(isGOAP)
+            GUILayout.Label("Define parameter needed for GOAP", EditorStyles.boldLabel);*/
 
         isDialogue = EditorGUILayout.Toggle("Add Dialogue System", isDialogue);
 

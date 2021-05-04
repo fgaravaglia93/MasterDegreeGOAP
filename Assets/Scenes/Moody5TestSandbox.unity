@@ -10929,6 +10929,9 @@ MonoBehaviour:
   dialogueOnGoing: 0
   flagNPC: 0
   interactable: 0
+  flagOCEAN: 0
+  flagMood: 0
+  flagGOAP: 0
   storyEvent: 0
 --- !u!114 &655728140
 MonoBehaviour:
@@ -11141,6 +11144,9 @@ MonoBehaviour:
   dialogueOnGoing: 0
   flagNPC: 0
   interactable: 0
+  flagOCEAN: 0
+  flagMood: 0
+  flagGOAP: 0
   storyEvent: 0
 --- !u!114 &682106135
 MonoBehaviour:
@@ -12667,6 +12673,9 @@ MonoBehaviour:
   dialogueOnGoing: 0
   flagNPC: 1
   interactable: 0
+  flagOCEAN: 0
+  flagMood: 0
+  flagGOAP: 0
   storyEvent: 0
 --- !u!114 &1037591580
 MonoBehaviour:
@@ -14760,6 +14769,9 @@ MonoBehaviour:
   dialogueOnGoing: 0
   flagNPC: 0
   interactable: 0
+  flagOCEAN: 0
+  flagMood: 0
+  flagGOAP: 0
   storyEvent: 0
 --- !u!114 &1430434055
 MonoBehaviour:
