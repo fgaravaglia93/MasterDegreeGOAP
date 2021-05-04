@@ -239,7 +239,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 70940027}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.04, y: -2.14, z: 0}
+  m_LocalPosition: {x: 1.83, y: -2.14, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1186144745}
@@ -1790,7 +1790,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 379240932}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.21, y: -2.09, z: 0}
+  m_LocalPosition: {x: -0.21, y: -2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1357313359}
@@ -5207,7 +5207,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 444349571}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.01, y: -2.14, z: 0}
+  m_LocalPosition: {x: -0.04, y: -2.14, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 433028335}
@@ -10203,7 +10203,7 @@ GameObject:
   - component: {fileID: 482916319}
   - component: {fileID: 482916320}
   m_Layer: 0
-  m_Name: InteractHorizontal (2)
+  m_Name: InteractHorizontal
   m_TagString: Interact
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10279,7 +10279,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 507995872}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 10.5, y: 2.5, z: 0}
+  m_LocalPosition: {x: 5.5, y: 1.48, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 1933980680}
@@ -10294,11 +10294,11 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 507995872}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 20
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -10456,7 +10456,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 515745026}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 11.95, y: -3.85, z: 0}
+  m_LocalPosition: {x: 11.95, y: -3.81, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 2017549516}
@@ -10738,7 +10738,7 @@ GameObject:
   - component: {fileID: 621039761}
   - component: {fileID: 621039762}
   m_Layer: 0
-  m_Name: InteractVertical (2)
+  m_Name: InteractVertical
   m_TagString: Interact
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14701,6 +14701,7 @@ GameObject:
   - component: {fileID: 1430434070}
   - component: {fileID: 1430434069}
   - component: {fileID: 1430434068}
+  - component: {fileID: 1430434057}
   - component: {fileID: 1430434067}
   - component: {fileID: 1430434066}
   - component: {fileID: 1430434065}
@@ -14711,7 +14712,6 @@ GameObject:
   - component: {fileID: 1430434060}
   - component: {fileID: 1430434059}
   - component: {fileID: 1430434058}
-  - component: {fileID: 1430434057}
   - component: {fileID: 1430434056}
   - component: {fileID: 1430434055}
   - component: {fileID: 1430434054}
@@ -15041,38 +15041,9 @@ MonoBehaviour:
       - 0
       m_outcomeResults: 00
       m_occurred: 0
-    - name: Snape
-      weight: 1
-      radius: 1
-      changeToMood: 4
-      m_influenceType:
-        response: 0
-        responseType: 0
-        costIncrement: 10
-        costModified: 0
-        actionType: StealFromTheWardrobe
-        goal: 
-      m_eventTriggerType: 0
-      trait: {fileID: 11400000, guid: 537122b936b35814c95bf05cef09376a, type: 2}
-      m_testsRuntimeVariables:
-      - name: 'Snape: Tag Test 0'
-        m_numberOfDynamicVariables: 2
-        m_testAngle: 0
-        m_testDistance: 0
-        m_testRaycast: 0
-        m_testTag: 1
-        m_angleTarget: {fileID: 0}
-        m_distanceTarget: {fileID: 0}
-        m_raycastTarget: {fileID: 0}
-        m_tagToCheck: Snape
-      m_testResults:
-      - 0
-      m_outcomeResults: 00
-      m_occurred: 0
     isGOAP: 1
   m_traits:
   - {fileID: 11400000, guid: 1db226b0b48987949ab4f6aa46cda155, type: 2}
-  - {fileID: 11400000, guid: 537122b936b35814c95bf05cef09376a, type: 2}
   m_eqsEventOccurred:
     name: 
     weight: 1
@@ -15866,7 +15837,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1554514716}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 12.99, y: 0.4, z: 0}
+  m_LocalPosition: {x: -10, y: -4.39, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1581715888}
@@ -16048,7 +16019,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1581715887}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.14, y: -1.6, z: 0}
+  m_LocalPosition: {x: -0.14, y: 0.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1554514717}
@@ -18286,7 +18257,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2007026710
 Transform:
   m_ObjectHideFlags: 0
@@ -18352,7 +18323,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2017549515}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.03, y: -0.05, z: 0}
+  m_LocalPosition: {x: -0.03, y: 0.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 515745027}

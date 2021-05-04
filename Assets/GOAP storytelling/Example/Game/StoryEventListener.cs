@@ -33,8 +33,6 @@ public class StoryEventListener : MonoBehaviour
 
     IEnumerator NextEvent()
     {
-        Debug.Log("Hey");
-
         yield return new WaitForSeconds(eventRepetition);
 
         while (narrativeSequence.Count>0)
@@ -42,7 +40,6 @@ public class StoryEventListener : MonoBehaviour
             var occurred = Random.Range(0f, 1f);
             int storyEvent;
             //Inputgetkey u
-            Debug.Log(occurred);
             //occurred > 0.6f
             if (Input.GetKeyDown(KeyCode.U) && !GetComponent<DialogueParser>().dialogueOnGoing)
             {

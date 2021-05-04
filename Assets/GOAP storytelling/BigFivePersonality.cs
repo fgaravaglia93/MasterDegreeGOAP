@@ -64,7 +64,6 @@ public class BigFivePersonality : MonoBehaviour
         var children = GetComponentsInChildren<Transform>();
 
         var container = children.Where(child => child.tag == "ContainerUI").ToArray();
-        Debug.Log(container[0].name);
         if (container != null)
             containerUI = container[0].gameObject;
 

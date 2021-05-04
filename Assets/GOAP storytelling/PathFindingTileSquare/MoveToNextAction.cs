@@ -77,22 +77,24 @@ public class MoveToNextAction : MonoBehaviour
 
     void CheckNode()
     {
+        if(currentNode < path.ToArray().Length)
+        {
+            TileNode n = path.ToArray()[currentNode];
+            if (currentNode > 0)
+                transform.position = path.ToArray()[currentNode - 1].worldPosition;
 
-        TileNode n = path.ToArray()[currentNode];
-        if (currentNode > 0)
-            transform.position = path.ToArray()[currentNode - 1].worldPosition;
-
-        Debug.DrawRay(transform.position, (n.worldPosition - (Vector2)transform.position), Color.green, 2f);
-        RaycastHit2D hit = Physics2D.Linecast(transform.position, n.worldPosition, LayerMask.GetMask("Unwalkable"));
-        currentPositionHolder = n.worldPosition;
-        direction = GetComponent<MovementNPC>().GetTargetDirection(currentPositionHolder);
+            Debug.DrawRay(transform.position, (n.worldPosition - (Vector2)transform.position), Color.green, 2f);
+            RaycastHit2D hit = Physics2D.Linecast(transform.position, n.worldPosition, LayerMask.GetMask("Unwalkable"));
+            currentPositionHolder = n.worldPosition;
+            direction = GetComponent<MovementNPC>().GetTargetDirection(currentPositionHolder);
+        }
     }
         
 
 
     public void PathToNextAction(Transform target)
     {
-
+        this.target = target;
         path = new List<TileNode>();
 
         path = GetPath(transform, target);
@@ -135,11 +137,8 @@ public class MoveToNextAction : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-       
-        if (collision.gameObject.tag == "Wardrobe" || collision.gameObject.tag == "Workstation" || collision.gameObject.tag == "Fridge"
-            || collision.gameObject.tag == "Pot" || collision.gameObject.tag == "Delivery" || collision.gameObject.tag == "Book"
-            || collision.gameObject.tag == "Helper")
-        {
+
+        if(collision.gameObject == target.gameObject){
             //Debug.Log("Collisione"+ collision.gameObject.tag);
             if (collision.gameObject.tag == "Delivery")
             {

@@ -44,7 +44,7 @@ public class PersonalityAgent : Agent
         if (firstTime)
         {
             //manage extraversion factor on available actions
-            foreach (PersonalityAction action in m_availableActions)
+            /*foreach (PersonalityAction action in m_availableActions)
             {
                 if (action.interactFlag)
                 {
@@ -57,7 +57,7 @@ public class PersonalityAgent : Agent
                     action.cost = GetComponent<BigFivePersonality>().AgreeablenessCostManipulation(action.cost, action.initialCost);
 
                 }
-            }
+            }*/
             firstTime = false;
         }
         
@@ -119,6 +119,8 @@ public class PersonalityAgent : Agent
 
         foreach (PersonalityAction action in plan)
         {
+            if (action.nameAction == "Steal")
+                action.console = "Steal from the wardrobe";
             printedPlan += ("\n"+i+") "+(action.console));
             i++;
         }

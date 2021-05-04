@@ -13,6 +13,7 @@ public class StealFromTheWardrobe : PersonalityAction
         AddEffect("potionIsReady", true);
 
         console = console + "Steal from the wardrobe";
+
     }
 
     public override bool RequiresInRange()

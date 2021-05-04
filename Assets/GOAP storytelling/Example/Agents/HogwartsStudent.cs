@@ -18,6 +18,7 @@ public abstract class HogwartsStudent : MonoBehaviour, IGoap
     public bool workstationFree;
     public bool targetReached;
 
+
     
 
     //Emotions and change on actions parameters

@@ -150,7 +150,9 @@ public class Agent : MonoBehaviour
         HashSet<KeyValuePair<string, bool>> worldState = m_dataProvider.getWorldState();
 		Goal goal = m_goalStack.Peek();
 		plan = m_planner.Plan(agent, m_availableActions, worldState, goal.GoalStates);
-        //print(plan.Peek().nameAction);
+        PersonalityAction acti = (PersonalityAction)plan.Peek();
+        //Debug.Log(acti.console);
+        //Debug.Log(acti.nameAction);
         if (plan != null) {
             Debug.Log("<color=blue>Found Plan:</color>" + PrettyPrint(goal.GoalStates));
             m_currentActions = plan;
@@ -198,7 +200,9 @@ public class Agent : MonoBehaviour
             else
             {
                 actionText = "Action failed, repeat";
+                Debug.Log("FAILED");
                 DisplayController.instance.ShowOnConsoleAction("actionText", new Color(255, 0, 0));
+                //WaitForSeconds(1);
                 action.OnReset();
             }
             
