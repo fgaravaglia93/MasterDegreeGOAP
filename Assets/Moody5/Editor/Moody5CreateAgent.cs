@@ -63,13 +63,13 @@ public class Moody5CreateAgent : EditorWindow
             interactH = EditorGUILayout.ObjectField("Interact Horizontal", Resources.Load("Prefab/InteractHorizontal"),  typeof(GameObject), false) as GameObject;
         }
 
-        GUILayout.Space(10);
+        /*GUILayout.Space(10);
         GUILayout.Label("Add existing traits to the Agent", EditorStyles.boldLabel);
         adHocTraits = EditorGUILayout.Toggle("Ad hoc traits", adHocTraits);
         if (adHocTraits)
         {
 
-        }
+        }*/
 
         if (GUILayout.Button("Create NPC"))
         {

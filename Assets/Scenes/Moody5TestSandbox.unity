@@ -12569,7 +12569,7 @@ MonoBehaviour:
     type: 3}
   buttonContainer: {fileID: 1328546706}
   dialogueOnGoing: 0
-  flagNPC: 1
+  flagNPC: 0
   interactable: 0
   flagOCEAN: 0
   flagMood: 0
@@ -14658,7 +14658,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a96604715dde964c9e85e2d47b822c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  narrativeSequence: {fileID: 11400000, guid: 23227d85b3ffd8a4098472a5bc9d0599, type: 2}
+  narrativeSequence: {fileID: 11400000, guid: d619da2b947194d45a3cf9d31620a3fa, type: 2}
   dialogueText: {fileID: 1328546708}
   dialogueFace: {fileID: 1328546707}
   choicePrefab: {fileID: 374353588476221444, guid: 934ad40c5727d594ab2efe41c49d9a95,
@@ -15386,8 +15386,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 4829385596535998522, guid: e6ea0d2da649759419db9a8695007108,
-    type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -15395,7 +15394,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1506624824
@@ -15771,7 +15770,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.03, y: 1}
+    oldSize: {x: 0.48, y: 0.48}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -15819,7 +15818,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: a8642ce35a5530742b484eec8af11865, type: 3}
+  m_Sprite: {fileID: -2500792273583388792, guid: e6ea0d2da649759419db9a8695007108,
+    type: 3}
   m_Color: {r: 0.754717, g: 0, b: 0.1039559, a: 1}
   m_FlipX: 0
   m_FlipY: 0
