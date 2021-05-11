@@ -150,7 +150,6 @@ public class Personality
         newTraitData.m_outcomeResults = new List<bool>();
         newTraitData.m_testResults = new float[newTraitData.trait.EQSTests.Count];
         
-
         for (int i = 0; i < newTraitData.trait.EQSTests.Count; i++)
         {
             //Debug.Log(newTraitData.trait.EQSTests[i].GetType());

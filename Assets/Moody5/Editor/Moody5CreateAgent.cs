@@ -129,6 +129,9 @@ public class Moody5CreateAgent : EditorWindow
             npcToSpawn.GetComponent<PersonalityCommon>().m_personality.isGOAP = false;
         }
 
+        GameObject CanvasNPC = Instantiate(Resources.Load("Prefab/Canvas"), Vector3.zero, Quaternion.identity) as GameObject;
+        CanvasNPC.transform.parent = npcToSpawn.transform;
+
         if (isDialogue)
         {
             //Add Dialogue System Script to the NPC and set default value on the inspector
@@ -142,14 +145,17 @@ public class Moody5CreateAgent : EditorWindow
             npcToSpawn.GetComponent<DialogueParser>().choicePrefab = dialoguePrefab.GetComponentInChildren<Button>();
 
             //add here variables on inspector for the dialogue Parser - Dialogue Container / Face e button prefab
-            GameObject CanvasNPC = Instantiate(Resources.Load("Prefab/Canvas"), Vector3.zero, Quaternion.identity) as GameObject;
             GameObject InteractVertical = Instantiate(interactV, Vector3.zero, Quaternion.identity);
             GameObject InteractHorizontal = Instantiate(interactH, Vector3.zero, Quaternion.identity);
-            CanvasNPC.transform.parent = npcToSpawn.transform;
+
             InteractVertical.transform.parent = npcToSpawn.transform;
             InteractHorizontal.transform.parent = npcToSpawn.transform;
 
         }
+
+        GameObject ParticleSystem = Instantiate(Resources.Load("Prefab/ParticleSystem"), Vector3.zero, Quaternion.identity) as GameObject;
+        ParticleSystem.transform.parent = npcToSpawn.transform;
+
         objectName = "NPC name";
         
         //go.AddComponent(typeof(Animation));

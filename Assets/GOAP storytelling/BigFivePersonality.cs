@@ -45,6 +45,12 @@ public class BigFivePersonality : MonoBehaviour
     [HideInInspector]
     public GameObject baloon;
 
+    void Awake()
+    {
+        if(GetComponentInChildren<ParticleSystem>()!=null)
+            GetComponentInChildren<ParticleSystem>().Stop();
+    }
+
     void Start()
     {
         //Set up mood at the start
