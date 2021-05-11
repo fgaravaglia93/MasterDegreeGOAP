@@ -10844,9 +10844,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   storyComponents:
-  - dialogue: {fileID: 0}
-    trait: {fileID: 0}
-    npcsAffected: []
+  - dialogue: {fileID: 11400000, guid: d97ada8c0cfaad2428f15b8b9bc28900, type: 2}
+    trait: {fileID: 11400000, guid: 537122b936b35814c95bf05cef09376a, type: 2}
+    npcsAffected:
+    - {fileID: 1430434052}
   eventRepetition: 5
 --- !u!4 &655728141
 Transform:

@@ -265,22 +265,30 @@ namespace DialogueSystem.Editor
             var portLabel = generatedPort.contentContainer.Q<Label>("type");
             generatedPort.contentContainer.Remove(portLabel);
 
-            
-
             var outputPortCount = nodeCache.outputContainer.Query("connector").ToList().Count();
             var outputPortName = string.IsNullOrEmpty(overriddenPortName)
                 ? $"Option {outputPortCount + 1}"
                 : overriddenPortName;
-            //Default string to pass at node creation
+
+            //Avoid loss of information when saving without interact with the ports
+            if (outputPortName != "Single")
+            {
+                generatedPort.portName = outputPortName+"_"+savedMoodPort;
+                if(traitSaved != null)
+                    generatedPort.portName += "_"+traitSaved.name;
+            }
+
+            //Default port name at creation
             if (overriddenPortName == "")
                 generatedPort.name = $"Option {outputPortCount + 1}_" + savedMoodPort;
+
+            Debug.Log("Load " + generatedPort.name);
 
             var textField = new TextField()
             {
                 name = string.Empty,
                 value = outputPortName
             };
-            //textField.RegisterValueChangedCallback(evt => generatedPort.portName = evt.newValue);
             generatedPort.contentContainer.Add(new Label("  "));
 
             EnumField moodAnswer = new EnumField(savedMoodPort);

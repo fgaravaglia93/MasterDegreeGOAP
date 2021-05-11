@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a74c0aa5c3437c243b28f0f72899fc53, type: 3}
+  m_Name: provafix
+  m_EditorClassIdentifier: 
+  NodeLinks:
+  - BaseNodeGUID: 8a745938-ff1b-4270-977c-e08b5ece80c7
+    PortName: Next
+    TargetNodeGUID: 6deb279e-d314-4bf3-af23-464438271082
+    changeMoodTo: 0
+    trait: {fileID: 0}
+  - BaseNodeGUID: 6deb279e-d314-4bf3-af23-464438271082
+    PortName: err
+    TargetNodeGUID: 0b0ca558-b78c-4d68-b715-a6f684f89c6d
+    changeMoodTo: 2
+    trait: {fileID: 0}
+  DialogueNodeData:
+  - NodeGUID: 0b0ca558-b78c-4d68-b715-a6f684f89c6d
+    title: Dialogue Node
+    DialogueText: Dialogue Content
+    face: {fileID: 0}
+    mood: 0
+    Position: {x: 724, y: 193}
+  - NodeGUID: 6deb279e-d314-4bf3-af23-464438271082
+    title: eeg
+    DialogueText: ff
+    face: {fileID: 0}
+    mood: 2
+    Position: {x: 279, y: 194}
+  CommentBlockData: []
