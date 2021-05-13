@@ -12,6 +12,7 @@ using UnityEngine.UIElements;
 using Button = UnityEngine.UIElements.Button;
 using ObjectField = UnityEditor.UIElements.ObjectField;
 using EnumField = UnityEditor.UIElements.EnumField;
+using Image = UnityEngine.UIElements.Image;
 
 namespace DialogueSystem.Editor
 {
@@ -175,15 +176,18 @@ namespace DialogueSystem.Editor
 
             var insertImage = new ObjectField();
             insertImage.objectType = (typeof(Sprite));
-            
+
+            Image previewFace = new Image();
+            //previewFace = Resources.Load<Image>("face_3");
+
             if (face != null)
                 insertImage.value = face;
             
-          //  insertImage = tempDialogueNode.face;
+            //insertImage = tempDialogueNode.face;
             tempDialogueNode.mainContainer.Add(insertImage);
+            tempDialogueNode.mainContainer.Add(previewFace);
             tempDialogueNode.mainContainer.Add(insertImage.contentContainer);
            
-            //tempDialogueNode.mainContainer.Add();
 
             //Set Image
             //Sprite spriteFace;
@@ -192,7 +196,6 @@ namespace DialogueSystem.Editor
                     tempDialogueNode.face = (Sprite)evt.newValue;
                     tempDialogueNode.mainContainer.Add(insertImage.contentContainer);
 
-                   
             });
 
             //Set title
@@ -235,6 +238,7 @@ namespace DialogueSystem.Editor
                 }
             });
             tempDialogueNode.mainContainer.Add(moodField);
+            
             //Set Dialogue Text Field
             var textFieldDialogue = new TextField("");
             textFieldDialogue.RegisterValueChangedCallback(evt =>

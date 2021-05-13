@@ -22,7 +22,7 @@ MonoBehaviour:
     PortName: err
     TargetNodeGUID: 0b0ca558-b78c-4d68-b715-a6f684f89c6d
     changeMoodTo: 2
-    trait: {fileID: 0}
+    trait: {fileID: 11400000, guid: 1db226b0b48987949ab4f6aa46cda155, type: 2}
   DialogueNodeData:
   - NodeGUID: 0b0ca558-b78c-4d68-b715-a6f684f89c6d
     title: Dialogue Node
