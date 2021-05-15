@@ -145,7 +145,6 @@ public class Personality
         string pathTrait = "Assets/GOAP storytelling/Example/Traits/" + newTraitData.name + ".asset";
         UnityEngine.Object data = AssetDatabase.LoadAssetAtPath(pathTrait, typeof(Trait));
         newTraitData.trait = (Trait)data;
-
         newTraitData.m_testsRuntimeVariables = new List<TestsRuntimeVariables>();
         newTraitData.m_outcomeResults = new List<bool>();
         newTraitData.m_testResults = new float[newTraitData.trait.EQSTests.Count];

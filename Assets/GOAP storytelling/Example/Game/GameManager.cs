@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance { get { return _instance; } }
 
+    public static bool gameIsPaused;
+
+    public GameObject controlMenu;
 
     private void Awake()
     {
@@ -31,4 +34,31 @@ public class GameManager : MonoBehaviour
                 npc.GetComponent<MovementNPC>().hero = hero.transform;
         }
     }
+
+    private void Update()
+    {
+        //escape = Cancel nell'input settings
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            gameIsPaused = !gameIsPaused;
+            PauseGame();
+        }
+    }
+
+    void PauseGame()
+    {
+        if (gameIsPaused)
+        {
+            controlMenu.SetActive(true);
+            Time.timeScale = 0f;
+            
+
+        }
+        else
+        {
+            controlMenu.SetActive(false);
+            Time.timeScale = 1;
+        }
+    }
+
 }
