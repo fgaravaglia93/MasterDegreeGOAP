@@ -47,23 +47,19 @@ public class DisplayManager : MonoBehaviour
     Vector2 pos;
     RaycastHit2D hit;
 
-    // Start is called before the first frame update
     void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+           if (instance == null)
+           {
+               instance = this;
+           }
+           else
+           {
+               Destroy(gameObject);
+           }
 
         displayBox.SetActive(false);
         dialogueBox.SetActive(false);
-        Cursor.visible = false;
-        
-        interact = false;
     }
 
     void Start()
@@ -92,6 +88,8 @@ public class DisplayManager : MonoBehaviour
         {
             cam.enabled = false;
         }
+
+
 
         gameCamera.enabled = true;
     }
@@ -256,10 +254,4 @@ public class DisplayManager : MonoBehaviour
     {
         print("Il PG è felice");
     }
-    
-    
-
-
-
-
 }

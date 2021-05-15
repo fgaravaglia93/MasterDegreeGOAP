@@ -12,15 +12,18 @@ namespace DialogueSystem.Runtime
     //Here we the change of mood tresholds during dialogues
     public class DialogueParser : MonoBehaviour
     {
+        [HideInInspector]
+        public static DialogueParser instance = null;
+
         [SerializeField]
-        private DialogueContainer narrativeSequence;
+        public DialogueContainer narrativeSequence;
         public TextMeshProUGUI dialogueText;
 
         public GameObject dialogueFace;
         public Button choicePrefab;
         public Transform buttonContainer;
+        public DialogueComponent dialogueNPC;
         
-        //[SerializeField]
         private NodeLinkData dialogueData;
         public bool dialogueOnGoing = false;
         private bool lastBlock = false;
@@ -32,19 +35,27 @@ namespace DialogueSystem.Runtime
         public bool flagMood;
         public bool flagGOAP;
 
-        [HideInInspector]
+        //[HideInInspector]
         public bool storyEvent;
 
-        void Start()
+       void Awake()
         {
-            //Start dialogue from the root node (NodeLinks.First())
-            dialogueData = narrativeSequence.NodeLinks.First();
+            if (instance == null)
+            {
+                instance = this;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+
         }
 
         void Update()
         {
             if(interactable && !dialogueOnGoing)
             {
+                Debug.Log("debug");
 
                 if (Input.GetButtonDown("Enter") || storyEvent)
                 {
@@ -54,16 +65,16 @@ namespace DialogueSystem.Runtime
                     if (!lastBlock)
                     {
                         //stop planning if isGOAP
-                        if (GetComponent<Moody5Agent>() != null)
+                        if (dialogueNPC.GetComponent<Moody5Agent>() != null)
                         {
-                            GetComponent<Moody5Agent>().interaction = true;
+                            dialogueNPC.GetComponent<Moody5Agent>().interaction = true;
                         }
 
                         //look at the hero
-                        if(GetComponent<MovementNPC>() != null)
+                        if(dialogueNPC.GetComponent<MovementNPC>() != null)
                         {
-                            GetComponent<MovementNPC>().firstInteract = true;
-                            GetComponent<MovementNPC>().hero.GetComponent<Movement2D>().interact = true;
+                            dialogueNPC.GetComponent<MovementNPC>().firstInteract = true;
+                            dialogueNPC.GetComponent<MovementNPC>().hero.GetComponent<Movement2D>().interact = true;
                         }
 
                         //disable elements on display
@@ -78,8 +89,7 @@ namespace DialogueSystem.Runtime
                         //disable info mode on NPC
                         DisplayManager.instance.interact = true;
 
-
-
+                        dialogueData = narrativeSequence.NodeLinks.First();
 
                         dialogueOnGoing = true;
                         dialogueFace.transform.parent.gameObject.SetActive(true);
@@ -92,14 +102,14 @@ namespace DialogueSystem.Runtime
                         lastBlock = false;
                         dialogueData = narrativeSequence.NodeLinks.First();
                         //return to planning if isGOAP
-                        if (GetComponent<Moody5Agent>() != null)
-                            GetComponent<Moody5Agent>().interaction = false;
+                        if (dialogueNPC.GetComponent<Moody5Agent>() != null)
+                            dialogueNPC.GetComponent<Moody5Agent>().interaction = false;
 
                         //look up previous direction
-                        if (GetComponent<MovementNPC>() != null)
+                        if (dialogueNPC.GetComponent<MovementNPC>() != null)
                         {
-                            GetComponent<MovementNPC>().hero.GetComponent<Movement2D>().interact = false;
-                            GetComponent<MovementNPC>().backtoMove = true;
+                            dialogueNPC.GetComponent<MovementNPC>().hero.GetComponent<Movement2D>().interact = false;
+                            dialogueNPC.GetComponent<MovementNPC>().backtoMove = true;
                         }
 
                         //enable elements on display
@@ -169,8 +179,6 @@ namespace DialogueSystem.Runtime
                 //se ho trait instanza bottone e dimmi di non istanziare il successivo
                 if (!skip)
                 {
-                    
-
                     if (choice.trait == null)
                     {
                         j++;
@@ -180,7 +188,6 @@ namespace DialogueSystem.Runtime
                     {
                         //check trait, se ce'ho istanzialo
                         //Debug.Log("not trait");
-
                         if (flagNPC)
                         {
                             skip = true;

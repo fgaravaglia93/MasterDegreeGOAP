@@ -78,20 +78,17 @@ public class Movement2D : MonoBehaviour
         if(collision.gameObject.tag == "Interact")
         {
             //Start Dialogue if there is a Dialogue attached to NPC
-            //if(collision.gameObject.transform.parent.GetComponent<DialogueParser>() != null)
-            collision.gameObject.transform.parent.GetComponent<DialogueParser>().interactable = true;
+            collision.gameObject.transform.parent.GetComponent<DialogueComponent>().firstInteract = true;
+            collision.gameObject.transform.parent.GetComponent<DialogueComponent>().interact = true;
+            //collision.gameObject.transform.parent.GetComponent<DialogueParser>().interactable = true;
         }
 
         if (collision.gameObject.tag == "New Trait")
         {
-            
             TraitData traitData = new TraitData();
             traitData.name = "Snape";
             //collision.gameObject.GetComponent<RefToNPC>().NPC.GetComponent<PersonalityAgent>().m_personality.AddTrait(traitData);
-
             collision.gameObject.GetComponent<RefToNPC>().NPC.GetComponent<Moody5Agent>().m_personality.RemoveTrait(traitData.name);
-
-
         }
     }
 
@@ -99,8 +96,10 @@ public class Movement2D : MonoBehaviour
     {
         if (collision.gameObject.tag == "Interact")
         {
-            collision.gameObject.transform.parent.GetComponent<DialogueParser>().interactable = false;
-            //collision.gameObject.GetComponent<DialogueParser>().enabled = true;
+            //collision.gameObject.transform.parent.GetComponent<DialogueParser>().interactable = false;
+            collision.gameObject.transform.parent.GetComponent<DialogueComponent>().interact = false;
+            collision.gameObject.transform.parent.GetComponent<DialogueComponent>().firstInteract = false;
+            DialogueParser.instance.interactable = false;
         }
     }
 }
