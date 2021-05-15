@@ -33,7 +33,7 @@ public class PersonalityAction : GoapAction
             GetComponentInChildren<CompletionBar>().transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
             //GetComponent<BigFivePersonality>().containerUI.GetComponentInChildren<Slider>().gameObject.SetActive(true);
             GetComponentInChildren<CompletionBar>().StartTaskBar(GetComponent<HogwartsStudent>().durationActionInfluence * duration);
-            DisplayController.instance.lockMood = true;
+            DisplayManager.instance.lockMood = true;
         }
         if (Time.time - startTime > duration * GetComponent<HogwartsStudent>().durationActionInfluence)
         {
@@ -78,7 +78,7 @@ public class PersonalityAction : GoapAction
             // Debug.Log("%: "+success+" <= "+percentage+"\nAction done");
 
             //release lock on emotion
-            DisplayController.instance.lockMood = false;
+            DisplayManager.instance.lockMood = false;
 
             //manipulate action cost based on Openness factor
             cost = GetComponent<BigFivePersonality>().OpennessCostManipulation(cost,initialCost);

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DisplayController : MonoBehaviour
+public class DisplayManager : MonoBehaviour
 {
-    public static DisplayController instance = null;
+    public static DisplayManager instance = null;
     
     //defaultCamera = HeroCamera
     public Camera gameCamera;
@@ -24,19 +24,16 @@ public class DisplayController : MonoBehaviour
     public GameObject moodBar;
     public GameObject currentMoodDisplay;
     public GameObject cursor;
-   /* private RenderTexture renderGameScene;
-    public float SmallCameraSize = 4f;*/
-
-    //to redefine later
+ 
     public GameObject npc;
 
-    private Mood currentMood;
+    private MoodBar currentMood;
     private int cooldownSteps = 5; //default with no personality affection
     
     private string spritePathUI = "Sprites/ui_expression_";
     
     [HideInInspector]
-    public Dictionary<MoodType, Mood> moodDict = new Dictionary<MoodType, Mood>();
+    public Dictionary<MoodType, MoodBar> moodDict = new Dictionary<MoodType, MoodBar>();
 
     //Overlay
     [HideInInspector]
@@ -72,23 +69,22 @@ public class DisplayController : MonoBehaviour
     void Start()
     {
         var moodNames = System.Enum.GetNames(typeof(MoodType));
+ 
         //check and instantiate Mood objects to the relative sliders in the Scene UI
         foreach (MoodType moodName in System.Enum.GetValues(typeof(MoodType)))
         {
             foreach (Transform t in moodBar.transform)
             {
-                
                 if (t.name == "Bar" + moodName)
                 {
-                    //Debug.Log("Bar" + moodName);
-                    moodDict.Add(moodName, new Mood(moodName, spritePathUI+moodName, 
-                        t.GetComponentInChildren<Slider>(), npc.GetComponent<BigFivePersonality>().MoodSwitchThreshold(moodName)));
+                    moodDict.Add(moodName, new MoodBar(moodName, spritePathUI + moodName,
+                        t.GetComponentInChildren<Slider>(), npc.GetComponent<MoodController>().MoodSwitchThreshold(moodName, npc.GetComponent<MoodController>().model)));
                     break;
                 }
             }
         }
 
-        moodDict.Add(MoodType.Neutral, new Mood(spritePathUI+MoodType.Neutral));
+        moodDict.Add(MoodType.Neutral, new MoodBar(spritePathUI+MoodType.Neutral));
 
         Camera [] cameras = (Camera [])FindObjectsOfType(typeof(Camera));
         
@@ -131,20 +127,20 @@ public class DisplayController : MonoBehaviour
                     {
                         if (moodName != MoodType.Neutral)
                         {
-                            moodDict[moodName].threshold = npc.GetComponent<BigFivePersonality>().thresholdMoodValues[moodName];
-                            moodDict[moodName].bar.value = npc.GetComponent<BigFivePersonality>().currentMoodValues[moodName];
+                            moodDict[moodName].threshold = npc.GetComponent<MoodController>().thresholdMoodValues[moodName];
+                            moodDict[moodName].bar.value = npc.GetComponent<MoodController>().currentMoodValues[moodName];
                             moodDict[moodName].SetPlaceholder(moodDict[moodName].threshold);
                         }
                     }
 
-                    if (npc.GetComponent<PersonalityAgent>() != null)
+                    if (npc.GetComponent<Moody5Agent>() != null)
                     {
                         displayGOAP.gameObject.SetActive(true);
-                        npc.GetComponent<PersonalityAgent>().displayed = true;
+                        npc.GetComponent<Moody5Agent>().displayed = true;
                         //update console values
-                        ShowOnConsolePlan(npc.GetComponent<PersonalityAgent>().planListText);
-                        ShowOnConsoleAction(npc.GetComponent<PersonalityAgent>().actionText, npc.GetComponent<PersonalityAgent>().actionColor);
-                        ShowOnConsoleGoal(npc.GetComponent<PersonalityAgent>().goalText, npc.GetComponent<PersonalityAgent>().goalColor);
+                        ShowOnConsolePlan(npc.GetComponent<Moody5Agent>().planListText);
+                        ShowOnConsoleAction(npc.GetComponent<Moody5Agent>().actionText, npc.GetComponent<Moody5Agent>().actionColor);
+                        ShowOnConsoleGoal(npc.GetComponent<Moody5Agent>().goalText, npc.GetComponent<Moody5Agent>().goalColor);
                     }
 
                     overlayInUse = true;
@@ -159,9 +155,8 @@ public class DisplayController : MonoBehaviour
             displayBox.gameObject.SetActive(false);
             gameCamera.enabled = true;
             npcOverlayCamera.enabled = false;
-            if(npc.GetComponent<PersonalityAgent>()!=null)
-             npc.GetComponent<PersonalityAgent>().displayed = false;
-
+            if(npc.GetComponent<Moody5Agent>()!=null)
+                npc.GetComponent<Moody5Agent>().displayed = false;
         }
         else { }
     }
@@ -212,11 +207,11 @@ public class DisplayController : MonoBehaviour
         displayOCEAN.transform.GetChild(4).GetComponent<Text>().text = "" + npc.GetComponent<BigFivePersonality>().neuroticism;
     } 
 
-    public void ChangeMood(Mood mood, float increment)
+    public void ChangeMood(MoodBar mood, float increment)
     {   
-        npc.GetComponent<BigFivePersonality>().listenerChange = true;
-        npc.GetComponent<BigFivePersonality>().moodActivation = mood.name;
-        npc.GetComponent<BigFivePersonality>().incrementMood = increment;
+        npc.GetComponent<MoodController>().listenerChange = true;
+        npc.GetComponent<MoodController>().moodActivation = mood.name;
+        npc.GetComponent<MoodController>().incrementMood = increment;
     }
 
     public void ChangeMood(MoodType moodType, float increment)

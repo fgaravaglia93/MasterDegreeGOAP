@@ -99,27 +99,29 @@ public class Moody5CreateAgent : EditorWindow
         npcToSpawn.AddComponent(typeof(SpriteRenderer));
         npcToSpawn.AddComponent(typeof(Animator));
         npcToSpawn.AddComponent(typeof(ReskinAnimator));
-        npcToSpawn.GetComponent<SpriteRenderer>().sprite = sprite;
-        npcToSpawn.GetComponent<SpriteRenderer>().sortingOrder = 2;
-        npcToSpawn.tag = "NPC";
-        npcToSpawn.AddComponent(typeof(BigFivePersonality));
-        npcToSpawn.GetComponent<BigFivePersonality>().openness = openness;
-        npcToSpawn.GetComponent<BigFivePersonality>().consciousness = consciousness;
-        npcToSpawn.GetComponent<BigFivePersonality>().extraversion = extraversion;
-        npcToSpawn.GetComponent<BigFivePersonality>().agreeableness = agreeableness;
-        npcToSpawn.GetComponent<BigFivePersonality>().neuroticism = neuroticism;
         npcToSpawn.AddComponent(typeof(Rigidbody2D));
         npcToSpawn.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
         npcToSpawn.GetComponent<Rigidbody2D>().freezeRotation = true;
         npcToSpawn.AddComponent(typeof(BoxCollider2D));
         npcToSpawn.GetComponent<BoxCollider2D>().size = new Vector2(0.5f, 0.5f);
+        npcToSpawn.GetComponent<SpriteRenderer>().sprite = sprite;
+        npcToSpawn.GetComponent<SpriteRenderer>().sortingOrder = 2;
+        npcToSpawn.tag = "NPC";
+        npcToSpawn.AddComponent(typeof(BigFivePersonality));
+        npcToSpawn.AddComponent(typeof(MoodController));
+        npcToSpawn.GetComponent<BigFivePersonality>().openness = openness;
+        npcToSpawn.GetComponent<BigFivePersonality>().consciousness = consciousness;
+        npcToSpawn.GetComponent<BigFivePersonality>().extraversion = extraversion;
+        npcToSpawn.GetComponent<BigFivePersonality>().agreeableness = agreeableness;
+        npcToSpawn.GetComponent<BigFivePersonality>().neuroticism = neuroticism;
+      
         var camera = (GameObject)Instantiate(Resources.Load("Prefab/NPCCamera"));
         camera.transform.parent = npcToSpawn.transform;
         camera.name = "Camera";
         camera.transform.localPosition = new Vector3(0f, 0f, -10f);
         if (isGOAP)
         {
-            npcToSpawn.AddComponent(typeof(PersonalityAgent));
+            npcToSpawn.AddComponent(typeof(Moody5Agent));
             npcToSpawn.AddComponent(typeof(MovementNPC));
             foreach (Trait trait in traitList)
             {

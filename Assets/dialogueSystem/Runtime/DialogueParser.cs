@@ -54,9 +54,9 @@ namespace DialogueSystem.Runtime
                     if (!lastBlock)
                     {
                         //stop planning if isGOAP
-                        if (GetComponent<PersonalityAgent>() != null)
+                        if (GetComponent<Moody5Agent>() != null)
                         {
-                            GetComponent<PersonalityAgent>().interaction = true;
+                            GetComponent<Moody5Agent>().interaction = true;
                         }
 
                         //look at the hero
@@ -67,16 +67,16 @@ namespace DialogueSystem.Runtime
                         }
 
                         //disable elements on display
-                        if (!DisplayController.instance.displayGOAP.active)
+                        if (!DisplayManager.instance.displayGOAP.active)
                             flagGOAP = true;
-                        if (!DisplayController.instance.moodBar.transform.parent.gameObject.active)
+                        if (!DisplayManager.instance.moodBar.transform.parent.gameObject.active)
                             flagMood = true;
-                        if (!DisplayController.instance.displayOCEAN.transform.parent.gameObject.active)
+                        if (!DisplayManager.instance.displayOCEAN.transform.parent.gameObject.active)
                             flagOCEAN = true;
 
-                        DisplayController.instance.displayBox.SetActive(false);
+                        DisplayManager.instance.displayBox.SetActive(false);
                         //disable info mode on NPC
-                        DisplayController.instance.interact = true;
+                        DisplayManager.instance.interact = true;
 
 
 
@@ -92,8 +92,8 @@ namespace DialogueSystem.Runtime
                         lastBlock = false;
                         dialogueData = narrativeSequence.NodeLinks.First();
                         //return to planning if isGOAP
-                        if (GetComponent<PersonalityAgent>() != null)
-                            GetComponent<PersonalityAgent>().interaction = false;
+                        if (GetComponent<Moody5Agent>() != null)
+                            GetComponent<Moody5Agent>().interaction = false;
 
                         //look up previous direction
                         if (GetComponent<MovementNPC>() != null)
@@ -103,27 +103,27 @@ namespace DialogueSystem.Runtime
                         }
 
                         //enable elements on display
-                        DisplayController.instance.displayBox.SetActive(true);
+                        DisplayManager.instance.displayBox.SetActive(true);
                         if (flagGOAP)
                         {
-                            DisplayController.instance.displayGOAP.SetActive(false);
+                            DisplayManager.instance.displayGOAP.SetActive(false);
                             flagGOAP = false;
                         }
                         
                         if (flagMood)
                         {
-                            DisplayController.instance.moodBar.transform.parent.gameObject.SetActive(false);
+                            DisplayManager.instance.moodBar.transform.parent.gameObject.SetActive(false);
                             flagMood = false;
                         }
 
                         if (flagOCEAN)
                         {
-                            DisplayController.instance.displayOCEAN.transform.parent.gameObject.SetActive(false);
+                            DisplayManager.instance.displayOCEAN.transform.parent.gameObject.SetActive(false);
                             flagOCEAN = false;
                         }
 
                         //enable info mode on NPC
-                        DisplayController.instance.interact = false;
+                        DisplayManager.instance.interact = false;
 
 
                     }
@@ -197,7 +197,7 @@ namespace DialogueSystem.Runtime
 
                 //this will manage the change of mood during interaction by talking
                 if (button != null && choice.changeMoodTo != MoodType.Neutral)
-                    button.onClick.AddListener(() => DisplayController.instance.ChangeMood(choice.changeMoodTo,5f));
+                    button.onClick.AddListener(() => DisplayManager.instance.ChangeMood(choice.changeMoodTo,5f));
                 //button.onClick.AddListener(() => DisplayController.instance.ChangeMoodToJoy());
             }
         }

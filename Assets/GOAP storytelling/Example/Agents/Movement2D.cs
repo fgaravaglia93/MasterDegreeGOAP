@@ -89,7 +89,7 @@ public class Movement2D : MonoBehaviour
             traitData.name = "Snape";
             //collision.gameObject.GetComponent<RefToNPC>().NPC.GetComponent<PersonalityAgent>().m_personality.AddTrait(traitData);
 
-            collision.gameObject.GetComponent<RefToNPC>().NPC.GetComponent<PersonalityAgent>().m_personality.RemoveTrait(traitData.name);
+            collision.gameObject.GetComponent<RefToNPC>().NPC.GetComponent<Moody5Agent>().m_personality.RemoveTrait(traitData.name);
 
 
         }

@@ -64,7 +64,7 @@ public class DramaManager : MonoBehaviour
                         traitData.name = storyC.trait.name;
                         npc.GetComponentInChildren<ParticleSystem>().time = 0;
                         npc.GetComponentInChildren<ParticleSystem>().Play();
-                        npc.GetComponent<PersonalityAgent>().m_personality.AddTrait(traitData);
+                        npc.GetComponent<Moody5Agent>().m_personality.AddTrait(traitData);
                     }
                 }
                 exit = true;

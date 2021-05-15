@@ -82,14 +82,14 @@ public class Agent : MonoBehaviour
         {
             goalText = "Goal:" + m_goalStack.Peek().m_nameGoal;
             goalColor = new Color(1, 1, 1);
-            DisplayController.instance.ShowOnConsoleGoal(goalText);
+            DisplayManager.instance.ShowOnConsoleGoal(goalText);
             m_eqsEventOccurred = m_eqsAgent.Update();
             m_fsm.Update(gameObject);
             if (m_currentActions.Count <= 0)
             {
                 m_goalStack.Remove(m_goalStack.Peek());
                 goalColor = new Color(0, 1, 0);
-                DisplayController.instance.ShowOnConsoleGoal(goalText, goalColor);
+                DisplayManager.instance.ShowOnConsoleGoal(goalText, goalColor);
             }
         }  
 	}
@@ -190,7 +190,7 @@ public class Agent : MonoBehaviour
             PersonalityAction action = (PersonalityAction)m_currentActions.Peek();
             actionText = action.console;
             actionColor = new Color(1, 1, 1);
-            DisplayController.instance.ShowOnConsoleAction(actionText);
+            DisplayManager.instance.ShowOnConsoleAction(actionText);
             if (action.IsDone())
             {
                 if (action.CalculateSuccess())
@@ -198,13 +198,13 @@ public class Agent : MonoBehaviour
                     m_currentActions.Dequeue();
                     actionColor = new Color(0, 1, 0);
                     actionText = "Done";
-                    DisplayController.instance.ShowOnConsoleAction(actionText, actionColor);
+                    DisplayManager.instance.ShowOnConsoleAction(actionText, actionColor);
                 }
                 else
                 {
                     actionText = "Action failed, repeat";
                     Debug.Log("FAILED");
-                    DisplayController.instance.ShowOnConsoleAction(actionText, new Color(255, 0, 0));
+                    DisplayManager.instance.ShowOnConsoleAction(actionText, new Color(255, 0, 0));
                     //StartCoroutine("WaitFor");
                     //waiting = true;
                     action.OnReset();
@@ -253,7 +253,7 @@ public class Agent : MonoBehaviour
             Debug.Log("<color=yellow>EQS Event Occurred: Recaculate Plan</color>");
             //5f to secure mood activation
             Debug.Log(m_eqsEventOccurred.changeToMood);
-            DisplayController.instance.ChangeMood(DisplayController.instance.moodDict[m_eqsEventOccurred.changeToMood], 5f);
+            DisplayManager.instance.ChangeMood(DisplayManager.instance.moodDict[m_eqsEventOccurred.changeToMood], 5f);
             fsm.popState(); //move
 			fsm.popState(); //perform
 			fsm.pushState(m_idleState);

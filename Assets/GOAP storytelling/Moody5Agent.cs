@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class PersonalityAgent : Agent
+public class Moody5Agent : Agent
 {
 
     public bool planning;
@@ -37,6 +37,7 @@ public class PersonalityAgent : Agent
     {
         if(planning && !interaction)
             base.Update();
+
     }
 
     public override void IdleState(FSM fsm, GameObject agent)
@@ -67,12 +68,12 @@ public class PersonalityAgent : Agent
         if(plan != null)
         {
             planListText = PrintPlanActions();
-            DisplayController.instance.ShowOnConsolePlan(planListText);
+            DisplayManager.instance.ShowOnConsolePlan(planListText);
         }
         else
         {
             planListText = "Plan not Found";
-            DisplayController.instance.ShowOnConsolePlan(planListText);
+            DisplayManager.instance.ShowOnConsolePlan(planListText);
         }
     }
 
@@ -82,7 +83,7 @@ public class PersonalityAgent : Agent
         if (m_eqsEventOccurred!=null)
         {
             planListText = "Event occurred. Recalculate plan";
-            DisplayController.instance.ShowOnConsolePlan(planListText);
+            DisplayManager.instance.ShowOnConsolePlan(planListText);
         }
     }
 

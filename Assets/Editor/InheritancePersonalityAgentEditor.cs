@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-[CustomEditor(typeof(PersonalityAgent))]
+[CustomEditor(typeof(Moody5Agent))]
 [CanEditMultipleObjects]
 public class InheritancePersonalityAgentEditor : UnityEditor.Editor
 {

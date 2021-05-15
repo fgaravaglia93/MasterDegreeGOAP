@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Mood
+public class MoodBar
 {
     public MoodType name;
     public float threshold;
@@ -16,14 +16,14 @@ public class Mood
     public float successChange;
 
     //for neutral mood
-    public Mood(string spritePath)
+    public MoodBar(string spritePath)
     {
         name = MoodType.Neutral;
         sprite = Resources.Load<Sprite>(spritePath);
         color = new Color(255, 255, 255);
     }
 
-    public Mood(MoodType moodType, string spritePath, Slider bar, float threshold)
+    public MoodBar(MoodType moodType, string spritePath, Slider bar, float threshold)
     {
         name = moodType;
         this.threshold = threshold;

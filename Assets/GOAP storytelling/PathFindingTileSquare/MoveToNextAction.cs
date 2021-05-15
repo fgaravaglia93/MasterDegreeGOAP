@@ -44,7 +44,7 @@ public class MoveToNextAction : MonoBehaviour
         {
                // transform.position = Vector3.Lerp(transform.position, transform.position, Time.deltaTime * speed);
 
-            if (!GetComponent<PersonalityAgent>().interaction)
+            if (!GetComponent<Moody5Agent>().interaction)
             {
                 if ((transform.position - currentPositionHolder).magnitude > 0.2f)
                 {
