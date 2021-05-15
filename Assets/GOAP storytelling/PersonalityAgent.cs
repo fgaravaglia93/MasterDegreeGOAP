@@ -46,17 +46,18 @@ public class PersonalityAgent : Agent
             //manage extraversion factor on available actions
             foreach (PersonalityAction action in m_availableActions)
             {
-                if (action.interactFlag)
+                if (action.interactAction)
                 {
                     action.cost = GetComponent<BigFivePersonality>().ExtraversionCostManipulation(action.cost, action.initialCost);
                     //print(action.cost + " - " + action.nameAction);
                 }
 
-                /*if(action.consentNPCs.Count > 0)
+                //Manage agreeableness factor by searching for consent NPCs for each action
+                if(action.consentNPCs.Count > 0)
                 {
                     action.cost = GetComponent<BigFivePersonality>().AgreeablenessCostManipulation(action.cost, action.initialCost);
 
-                }*/
+                }
             }
             firstTime = false;
         }
@@ -85,33 +86,7 @@ public class PersonalityAgent : Agent
         }
     }
 
-    /*public override void PerformActionState(FSM fsm, GameObject agent)
-    {
-        PersonalityAction actionSucc = null;
-
-        if (firsHitAction && plan.Peek()!=null)
-        {
-            actionSucc = (PersonalityAction)plan.Peek();
-            string actionName = actionSucc.console;
-           
-        }
-
-        base.PerformActionState(fsm, agent);
-
-        if (actionSucc.CalculateSuccess())
-        {
-            firsHitAction = true;
-           // DisplayController.instance.ShowOnConsoleAction("Done", new Color(0, 255, 0));
-        }
-        else
-        {
-            firsHitAction = false;
-            DisplayController.instance.ShowOnConsoleAction("Action failed, repeat", new Color(255, 0, 0));
-        }
-
-
-    }*/
-
+    //Used to print the list of action to be displayed on the investigative UI
     string PrintPlanActions()
     {
         string printedPlan="Plan Found:";

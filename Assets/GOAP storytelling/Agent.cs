@@ -78,8 +78,6 @@ public class Agent : MonoBehaviour
         //m_eqsEventOccurred = m_eqsAgent.Update();
         //m_fsm.Update(gameObject);
         //Debug.Log("goal cost " + m_goalStack.Peek().maxCostForGoal);
-        //FRA rimozione di un goal dopo che è stato raggiunto
-        //FRA aggiunta di controllo rimozione/aggiunta trait
         if(m_goalStack.Peek() != null)
         {
             goalText = "Goal:" + m_goalStack.Peek().m_nameGoal;
@@ -153,8 +151,6 @@ public class Agent : MonoBehaviour
 		Goal goal = m_goalStack.Peek();
 		plan = m_planner.Plan(agent, m_availableActions, worldState, goal.GoalStates);
         PersonalityAction acti = (PersonalityAction)plan.Peek();
-        //Debug.Log(acti.console);
-        //Debug.Log(acti.nameAction);
         if (plan != null) {
             Debug.Log("<color=blue>Found Plan:</color>" + PrettyPrint(goal.GoalStates));
             m_currentActions = plan;

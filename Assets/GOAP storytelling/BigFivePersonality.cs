@@ -90,6 +90,7 @@ public class BigFivePersonality : MonoBehaviour
                 var moodRef = DisplayController.instance.moodDict[moodActivation];
                 currentMoodValues[moodActivation] += incrementMood;
                 Debug.Log(this.gameObject.name + " - increase - " + currentMoodValues[moodActivation] + " - threshold - " + thresholdMoodValues[moodActivation]);
+
                 if (DisplayController.instance.npc == transform.gameObject)
                 {
                     moodRef.bar.value += incrementMood;

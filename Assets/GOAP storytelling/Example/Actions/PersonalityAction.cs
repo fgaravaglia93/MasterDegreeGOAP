@@ -17,7 +17,7 @@ public class PersonalityAction : GoapAction
     //default 1f = 100% of success
     public float percentageSuccess;
     //default not interact  action
-    public bool interactFlag = false;
+    public bool interactAction = false;
     public List<GameObject> consentNPCs;
 
     private void Start()
