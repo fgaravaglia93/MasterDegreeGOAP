@@ -78,8 +78,8 @@ public class Movement2D : MonoBehaviour
         if(collision.gameObject.tag == "Interact")
         {
             //Start Dialogue if there is a Dialogue attached to NPC
-            collision.gameObject.transform.parent.GetComponent<DialogueComponent>().firstInteract = true;
-            collision.gameObject.transform.parent.GetComponent<DialogueComponent>().interact = true;
+            collision.gameObject.transform.parent.GetComponent<DialogueController>().firstInteract = true;
+            collision.gameObject.transform.parent.GetComponent<DialogueController>().interact = true;
             //collision.gameObject.transform.parent.GetComponent<DialogueParser>().interactable = true;
         }
 
@@ -97,8 +97,8 @@ public class Movement2D : MonoBehaviour
         if (collision.gameObject.tag == "Interact")
         {
             //collision.gameObject.transform.parent.GetComponent<DialogueParser>().interactable = false;
-            collision.gameObject.transform.parent.GetComponent<DialogueComponent>().interact = false;
-            collision.gameObject.transform.parent.GetComponent<DialogueComponent>().firstInteract = false;
+            collision.gameObject.transform.parent.GetComponent<DialogueController>().interact = false;
+            collision.gameObject.transform.parent.GetComponent<DialogueController>().firstInteract = false;
             DialogueParser.instance.interactable = false;
         }
     }

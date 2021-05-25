@@ -27,21 +27,21 @@ public class Moody5CreateAgent : EditorWindow
     Editor editor;
     //add something for the movement
 
-    [MenuItem("Moody5/Create Personality Agent")]
+    [MenuItem("Moody5/Create Personality NPC")]
     public static void ShowWindow()
     {
-        GetWindow(typeof(Moody5CreateAgent), true, "Moody5");
+        GetWindow(typeof(Moody5CreateAgent), true, "Create new NPC with personality");
     }
 
     private void OnGUI()
     {
-        GUILayout.Label("Create new agent with personality", EditorStyles.boldLabel);
+        //GUILayout.Label("Create new NPC with personality", EditorStyles.boldLabel);
         if (objectName == "")
             objectName = "NPC name";
         objectName = EditorGUILayout.TextField("Name", objectName);
         sprite = EditorGUILayout.ObjectField("Sprite", sprite, typeof(Sprite)) as Sprite;
         GUILayout.Space(10);
-        GUILayout.Label("Big 5 personality model", EditorStyles.boldLabel);
+        GUILayout.Label("Big Five personality model", EditorStyles.boldLabel);
         openness = (int)EditorGUILayout.Slider("Openness", openness, -1, 1);
         consciousness = (int)EditorGUILayout.Slider("Consciousness", consciousness, -1, 1);
         extraversion = (int)EditorGUILayout.Slider("Extraversion", extraversion, -1, 1);
@@ -49,9 +49,9 @@ public class Moody5CreateAgent : EditorWindow
         neuroticism = (int)EditorGUILayout.Slider("Neuroticism", neuroticism, -1, 1);
         spawnRadius = EditorGUILayout.FloatField("Spawn Radius", spawnRadius);
         GUILayout.Space(10);
-        isGOAP = EditorGUILayout.Toggle("GOAP", isGOAP);
+        isGOAP = EditorGUILayout.Toggle("GOAP agent", isGOAP);
         GUILayout.Space(10);
-        GUILayout.Label("Add existing traits to the NPC", EditorStyles.boldLabel);
+        //GUILayout.Label("Add existing traits to the NPC", EditorStyles.boldLabel);
         isDialogue = EditorGUILayout.Toggle("Add Dialogue System", isDialogue);
 
         if (isDialogue)
@@ -110,7 +110,7 @@ public class Moody5CreateAgent : EditorWindow
         npcToSpawn.AddComponent(typeof(BigFivePersonality));
         npcToSpawn.AddComponent(typeof(MoodController));
         npcToSpawn.GetComponent<BigFivePersonality>().openness = openness;
-        npcToSpawn.GetComponent<BigFivePersonality>().consciousness = consciousness;
+        npcToSpawn.GetComponent<BigFivePersonality>().conscientiousness = consciousness;
         npcToSpawn.GetComponent<BigFivePersonality>().extraversion = extraversion;
         npcToSpawn.GetComponent<BigFivePersonality>().agreeableness = agreeableness;
         npcToSpawn.GetComponent<BigFivePersonality>().neuroticism = neuroticism;
@@ -148,14 +148,15 @@ public class Moody5CreateAgent : EditorWindow
         if (isDialogue)
         {
             //Add Dialogue System Script to the NPC and set default value on the inspector
-            npcToSpawn.AddComponent(typeof(DialogueParser));
+            npcToSpawn.AddComponent(typeof(DialogueController));
+           /* npcToSpawn.AddComponent(typeof(DialogueParser));
             var dialoguePrefab = GameObject.FindGameObjectWithTag("DialogueContainer");
             if (dialoguePrefab == null)
                 dialoguePrefab = (GameObject)Instantiate(Resources.Load("Prefab/DialogueContainer"));
             npcToSpawn.GetComponent<DialogueParser>().dialogueText = dialoguePrefab.gameObject.transform.GetChild(0).transform.GetComponent<TextMeshProUGUI>();
             npcToSpawn.GetComponent<DialogueParser>().buttonContainer = dialoguePrefab.gameObject.transform.GetChild(1);
             npcToSpawn.GetComponent<DialogueParser>().dialogueFace = dialoguePrefab.gameObject.transform.GetChild(2).gameObject;
-            npcToSpawn.GetComponent<DialogueParser>().choicePrefab = dialoguePrefab.GetComponentInChildren<Button>();
+            npcToSpawn.GetComponent<DialogueParser>().choicePrefab = dialoguePrefab.GetComponentInChildren<Button>();*/
             //add here variables on inspector for the dialogue Parser - Dialogue Container / Face e button prefab
             GameObject InteractVertical = Instantiate(interactV, Vector3.zero, Quaternion.identity);
             GameObject InteractHorizontal = Instantiate(interactH, Vector3.zero, Quaternion.identity);

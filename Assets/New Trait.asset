@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e14358fa30383247ae03e041ee532d1, type: 3}
+  m_Name: New Trait
+  m_EditorClassIdentifier: 
+  name: 
+  EQSTests:
+  - {fileID: 0}
+  - {fileID: 6885614543610929363}
+  - {fileID: 5464739220262880478}
+--- !u!114 &5464739220262880478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 800afe82eadac5846bac7083fbc30e36, type: 3}
+  m_Name: 'New Trait: Angle Test 1'
+  m_EditorClassIdentifier: 
+  isActive: 1
+  weight: 1
+  maxValue: 180
+  scoringEquation: 0
+  resultType: 1
+  target: {fileID: 0}
+--- !u!114 &6885614543610929363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e12eba57af2b44c459255a992750ba8e, type: 3}
+  m_Name: 'New Trait: Distance Test 1'
+  m_EditorClassIdentifier: 
+  isActive: 1
+  weight: 1
+  maxValue: 0
+  scoringEquation: 0
+  resultType: 1
+  target: {fileID: 0}

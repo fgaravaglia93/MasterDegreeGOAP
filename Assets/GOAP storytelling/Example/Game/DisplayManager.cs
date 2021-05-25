@@ -140,14 +140,13 @@ public class DisplayManager : MonoBehaviour
                         ShowOnConsoleAction(npc.GetComponent<Moody5Agent>().actionText, npc.GetComponent<Moody5Agent>().actionColor);
                         ShowOnConsoleGoal(npc.GetComponent<Moody5Agent>().goalText, npc.GetComponent<Moody5Agent>().goalColor);
                     }
-
                     overlayInUse = true;
                 }
             }
           
         }
 
-        else if (Input.GetButtonDown("Escape") && overlayInUse)
+        else if (Input.GetButtonDown("back") && overlayInUse)
         {
             overlayInUse = false;
             displayBox.gameObject.SetActive(false);
@@ -199,7 +198,7 @@ public class DisplayManager : MonoBehaviour
     public void ShowOnConsolePersonality()
     {
         displayOCEAN.transform.GetChild(0).GetComponent<Text>().text = "" +npc.GetComponent<BigFivePersonality>().openness;
-        displayOCEAN.transform.GetChild(1).GetComponent<Text>().text = "" + npc.GetComponent<BigFivePersonality>().consciousness;
+        displayOCEAN.transform.GetChild(1).GetComponent<Text>().text = "" + npc.GetComponent<BigFivePersonality>().conscientiousness;
         displayOCEAN.transform.GetChild(2).GetComponent<Text>().text = "" + npc.GetComponent<BigFivePersonality>().extraversion;
         displayOCEAN.transform.GetChild(3).GetComponent<Text>().text = "" + npc.GetComponent<BigFivePersonality>().agreeableness;
         displayOCEAN.transform.GetChild(4).GetComponent<Text>().text = "" + npc.GetComponent<BigFivePersonality>().neuroticism;
@@ -230,9 +229,9 @@ public class DisplayManager : MonoBehaviour
         ChangeMood(moodDict[MoodType.Joy], 1f);
     }
 
-    public void ChangeMoodToSad()
+    public void ChangeMoodToSadness()
     {
-        ChangeMood(moodDict[MoodType.Sad], 1f);
+        ChangeMood(moodDict[MoodType.Sadness], 1f);
     }
 
     public void ChangeMoodToAngry()

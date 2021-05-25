@@ -252,7 +252,7 @@ namespace DialogueSystem.Editor
                 case "Joy":
                     return MoodType.Joy;
                 case "Sad":
-                    return MoodType.Sad;
+                    return MoodType.Sadness;
                 case "Angry":
                     return MoodType.Angry;
                 case "Fear":

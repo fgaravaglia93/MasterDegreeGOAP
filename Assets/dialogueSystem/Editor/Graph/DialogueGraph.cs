@@ -19,7 +19,7 @@ namespace DialogueSystem.Editor
         private DialogueGraphView _graphView;
         private DialogueContainer _dialogueContainer;
 
-        [MenuItem("Moody5/Dialogue Graph")]
+        [MenuItem("Moody5/Dialogue Graph Editor")]
         public static void CreateGraphViewWindow()
         {
             var window = GetWindow<DialogueGraph>();

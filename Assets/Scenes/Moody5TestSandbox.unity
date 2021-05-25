@@ -1131,7 +1131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openness: 0
-  consciousness: 0
+  conscientiousness: 0
   extraversion: 0
   agreeableness: 0
   neuroticism: 0
@@ -12606,7 +12606,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5c9625071c2a744eb5e9ded560a2695, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  narrativeSequence: {fileID: 11400000, guid: 23227d85b3ffd8a4098472a5bc9d0599, type: 2}
+  dialogue: {fileID: 11400000, guid: 23227d85b3ffd8a4098472a5bc9d0599, type: 2}
   interact: 0
   firstInteract: 0
 --- !u!114 &1037591580
@@ -12733,10 +12733,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openness: 1
-  consciousness: 0
+  conscientiousness: 0
   extraversion: 1
   agreeableness: 0
-  neuroticism: 1
+  neuroticism: -1
 --- !u!212 &1037591586
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -14370,6 +14370,21 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 8943783079962878639, guid: cef1bbaee893fc24bb45057c248ff98c,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8943783079962878639, guid: cef1bbaee893fc24bb45057c248ff98c,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8943783079962878639, guid: cef1bbaee893fc24bb45057c248ff98c,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cef1bbaee893fc24bb45057c248ff98c, type: 3}
 --- !u!224 &1328546706 stripped
@@ -14930,7 +14945,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5c9625071c2a744eb5e9ded560a2695, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  narrativeSequence: {fileID: 11400000, guid: 23227d85b3ffd8a4098472a5bc9d0599, type: 2}
+  dialogue: {fileID: 11400000, guid: c0a9eebac4f0dd14e9d8fed462df9bf0, type: 2}
   interact: 0
   firstInteract: 0
 --- !u!114 &1430434055
@@ -14978,7 +14993,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openness: 0
-  consciousness: 0
+  conscientiousness: 0
   extraversion: 1
   agreeableness: 0
   neuroticism: 1
@@ -19445,6 +19460,11 @@ PrefabInstance:
       propertyPath: buttonContainer
       value: 
       objectReference: {fileID: 1328546706}
+    - target: {fileID: 4416096347521404948, guid: 7309a9340dc80054db7b97989363c0f8,
+        type: 3}
+      propertyPath: flagNPC
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4416096347521404950, guid: 7309a9340dc80054db7b97989363c0f8,
         type: 3}
       propertyPath: m_Name

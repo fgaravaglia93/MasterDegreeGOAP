@@ -4,9 +4,9 @@ using UnityEngine;
 using DialogueSystem.DataContainers;
 using DialogueSystem.Runtime;
 
-public class DialogueComponent : MonoBehaviour
+public class DialogueController : MonoBehaviour
 {
-    public DialogueContainer narrativeSequence;
+    public DialogueContainer dialogue;
  
     public bool interact;
    
@@ -17,7 +17,7 @@ public class DialogueComponent : MonoBehaviour
         if(interact && firstInteract)
         {
             firstInteract = false;
-            DialogueParser.instance.narrativeSequence = narrativeSequence;
+            DialogueParser.instance.narrativeSequence = dialogue;
             DialogueParser.instance.dialogueNPC = this;
             DialogueParser.instance.interactable = true;
         }

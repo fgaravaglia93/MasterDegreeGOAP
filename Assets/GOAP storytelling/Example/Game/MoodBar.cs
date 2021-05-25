@@ -44,7 +44,7 @@ public class MoodBar
                 durationChange = 0.5f;
                 successChange = 1f;
                 break;
-            case MoodType.Sad:
+            case MoodType.Sadness:
                 color = new Color(0, 0, 1f);
                 durationChange = 2f;
                 successChange = 1f;

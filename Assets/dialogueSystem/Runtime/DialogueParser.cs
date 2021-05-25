@@ -22,7 +22,7 @@ namespace DialogueSystem.Runtime
         public GameObject dialogueFace;
         public Button choicePrefab;
         public Transform buttonContainer;
-        public DialogueComponent dialogueNPC;
+        public DialogueController dialogueNPC;
         
         private NodeLinkData dialogueData;
         public bool dialogueOnGoing = false;

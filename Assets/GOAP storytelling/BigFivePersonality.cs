@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public enum MoodType { Neutral, Joy, Sad, Angry, Fear, Disgust }
+public enum MoodType { Neutral, Joy, Sadness, Angry, Fear, Disgust }
 
 public class BigFivePersonality : MonoBehaviour
 {
    
     [Space(10)]
-    [Header("BIG 5 personality model")]
+    [Header("Big Five personality model")]
     [Tooltip("Openness to Experience.\nAgent preference on new actions")]
     [Range(-1, 1)]
     public int openness;
     [Range(-1, 1)]
-    public int consciousness;
+    public int conscientiousness;
     [Range(-1, 1)]
     public int extraversion;
     [Range(-1, 1)]

@@ -43,13 +43,13 @@ public class MoodController : MonoBehaviour
        
         //Set up mood at the start
         currentMoodValues.Add(MoodType.Joy, 0);
-        currentMoodValues.Add(MoodType.Sad, 0);
+        currentMoodValues.Add(MoodType.Sadness, 0);
         currentMoodValues.Add(MoodType.Angry, 0);
         currentMoodValues.Add(MoodType.Fear, 0);
         currentMoodValues.Add(MoodType.Disgust, 0);
         //Set up threshold
         thresholdMoodValues.Add(MoodType.Joy, MoodSwitchThreshold(MoodType.Joy, model));
-        thresholdMoodValues.Add(MoodType.Sad, MoodSwitchThreshold(MoodType.Sad ,model));
+        thresholdMoodValues.Add(MoodType.Sadness, MoodSwitchThreshold(MoodType.Sadness ,model));
         thresholdMoodValues.Add(MoodType.Angry, MoodSwitchThreshold(MoodType.Angry, model));
         thresholdMoodValues.Add(MoodType.Fear, MoodSwitchThreshold(MoodType.Fear, model));
         thresholdMoodValues.Add(MoodType.Disgust, MoodSwitchThreshold(MoodType.Disgust, model));
@@ -151,7 +151,7 @@ public class MoodController : MonoBehaviour
             case MoodType.Joy:
                 threshold -= (model.neuroticism + model.extraversion);
                 break;
-            case MoodType.Sad:
+            case MoodType.Sadness:
                 threshold -= model.neuroticism;
                 break;
             case MoodType.Angry:

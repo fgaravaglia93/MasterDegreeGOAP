@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a74c0aa5c3437c243b28f0f72899fc53, type: 3}
+  m_Name: prova sadness
+  m_EditorClassIdentifier: 
+  NodeLinks:
+  - BaseNodeGUID: 99a3382c-c18d-4cb7-8763-17534dbef771
+    PortName: Next
+    TargetNodeGUID: b34a8718-d915-4945-8c17-81368d6c0e56
+    changeMoodTo: 0
+    trait: {fileID: 0}
+  - BaseNodeGUID: b34a8718-d915-4945-8c17-81368d6c0e56
+    PortName: Option 1
+    TargetNodeGUID: 039f8f4c-361f-41bc-a6d2-4a0f0aae1c54
+    changeMoodTo: 0
+    trait: {fileID: 0}
+  - BaseNodeGUID: b34a8718-d915-4945-8c17-81368d6c0e56
+    PortName: Option 2
+    TargetNodeGUID: d77d8700-0e27-4c8b-bed6-5f02748da855
+    changeMoodTo: 0
+    trait: {fileID: 0}
+  DialogueNodeData:
+  - NodeGUID: 039f8f4c-361f-41bc-a6d2-4a0f0aae1c54
+    title: Dialogue Node
+    DialogueText: Dialogue Content
+    face: {fileID: 0}
+    mood: 0
+    Position: {x: 679, y: 200}
+  - NodeGUID: b34a8718-d915-4945-8c17-81368d6c0e56
+    title: Dialogue Node
+    DialogueText: Dialogue Content
+    face: {fileID: 0}
+    mood: 2
+    Position: {x: 243, y: 240}
+  - NodeGUID: d77d8700-0e27-4c8b-bed6-5f02748da855
+    title: Dialogue Node
+    DialogueText: Dialogue Content
+    face: {fileID: 0}
+    mood: 0
+    Position: {x: 679, y: 351}
+  CommentBlockData: []

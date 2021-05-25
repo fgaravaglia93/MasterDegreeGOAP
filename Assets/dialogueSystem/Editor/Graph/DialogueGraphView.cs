@@ -18,7 +18,7 @@ namespace DialogueSystem.Editor
 {
     public class DialogueGraphView : GraphView
     {
-        public readonly Vector2 DefaultNodeSize = new Vector2(200, 150);
+        public readonly Vector2 DefaultNodeSize = new Vector2(600, 150);
         public readonly Vector2 DefaultCommentBlockSize = new Vector2(300, 200);
         public DialogueNode EntryPointNode;
         public Blackboard Blackboard = new Blackboard();
@@ -150,7 +150,7 @@ namespace DialogueSystem.Editor
                 case MoodType.Angry:
                     tempDialogueNode.Q<VisualElement>("title").style.backgroundColor = new Color(1f, 0f, 0f, 0.91f);
                     break;
-                case MoodType.Sad:
+                case MoodType.Sadness:
                     tempDialogueNode.Q<VisualElement>("title").style.backgroundColor = new Color(0f, 0f, 1f, 0.91f);
                     break;
                 case MoodType.Fear:
@@ -199,12 +199,12 @@ namespace DialogueSystem.Editor
             });
 
             //Set title
-            var textFieldTitle = new TextField("");
+           /* var textFieldTitle = new TextField("");
             textFieldTitle.RegisterValueChangedCallback(evt =>
             {
                 tempDialogueNode.title = evt.newValue;
             });
-            textFieldTitle.SetValueWithoutNotify(tempDialogueNode.title);
+            textFieldTitle.SetValueWithoutNotify(tempDialogueNode.title);*/
 
             //Set field for the associated emotion
             EnumField moodField = new EnumField(mood);
@@ -224,7 +224,7 @@ namespace DialogueSystem.Editor
                     case MoodType.Angry:
                         tempDialogueNode.Q<VisualElement>("title").style.backgroundColor = new Color(1f, 0, 0, 0.91f);
                         break;
-                    case MoodType.Sad:
+                    case MoodType.Sadness:
                         tempDialogueNode.Q<VisualElement>("title").style.backgroundColor = new Color(0f, 0f, 1f, 0.91f);
                         break;
                     case MoodType.Fear:
@@ -248,7 +248,7 @@ namespace DialogueSystem.Editor
             });
             textFieldDialogue.SetValueWithoutNotify(tempDialogueNode.DialogueText);
 
-            tempDialogueNode.mainContainer.Add(textFieldTitle);
+           // tempDialogueNode.mainContainer.Add(textFieldTitle);
             tempDialogueNode.mainContainer.Add(textFieldDialogue);
 
 
