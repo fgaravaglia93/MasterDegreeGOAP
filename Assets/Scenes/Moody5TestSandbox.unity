@@ -354,7 +354,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 7
+  m_MaxValue: 10
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
@@ -5066,7 +5066,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 7
+  m_MaxValue: 10
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
@@ -10847,7 +10847,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 3.1, y: 0}
+  m_AnchoredPosition: {x: 2.7, y: 0}
   m_SizeDelta: {x: 5, y: 15}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &664870047
@@ -11228,7 +11228,7 @@ GameObject:
   - component: {fileID: 703498533}
   - component: {fileID: 703498532}
   m_Layer: 5
-  m_Name: ButtonSad
+  m_Name: ButtonSadness
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12732,10 +12732,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 570396f29e23a4948abbed7e6eba19cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  openness: 1
+  openness: 0
   conscientiousness: 0
-  extraversion: 1
-  agreeableness: 0
+  extraversion: -1
+  agreeableness: -1
   neuroticism: -1
 --- !u!212 &1037591586
 SpriteRenderer:
@@ -12800,8 +12800,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08928be07dc8891459d278c0d25542b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  model: {fileID: 0}
   mood: 0
+  model: {fileID: 0}
   lockMood: 0
   listenerChange: 0
   moodActivation: 0
@@ -13006,7 +13006,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 7
+  m_MaxValue: 10
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
@@ -13434,7 +13434,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 7
+  m_MaxValue: 10
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
@@ -13836,7 +13836,7 @@ GameObject:
   - component: {fileID: 1241124086}
   - component: {fileID: 1241124085}
   m_Layer: 5
-  m_Name: ButtonSad
+  m_Name: ButtonSadness
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13905,7 +13905,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 645872925}
-        m_MethodName: ChangeMoodToSad
+        m_MethodName: ChangeMoodToSadness
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14652,7 +14652,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1386572176}
   m_Layer: 5
-  m_Name: BarSad
+  m_Name: BarSadness
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15397,8 +15397,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08928be07dc8891459d278c0d25542b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  model: {fileID: 0}
   mood: 0
+  model: {fileID: 0}
   lockMood: 0
   listenerChange: 0
   moodActivation: 0
@@ -16625,7 +16625,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 7
+  m_MaxValue: 10
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:

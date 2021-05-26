@@ -35,7 +35,8 @@ public class MoodBar
         
         
         bar.minValue = 0f;
-        bar.maxValue = 7f;
+        //default
+        bar.maxValue = 10f;
 
         switch (moodType)
         {
@@ -72,7 +73,7 @@ public class MoodBar
 
     public void SetPlaceholder(float threshold)
     {
-        placeHolder.localPosition = startPosition + (new Vector3(threshold * 9f, 0f, 0f));
+        placeHolder.localPosition = startPosition + (new Vector3(threshold * 6f, 0f, 0f));
     }
 
 }

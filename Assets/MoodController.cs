@@ -6,6 +6,9 @@ using System.Linq;
 
 public class MoodController : MonoBehaviour
 {
+    public MoodType mood = MoodType.Neutral;
+    private float bigFiveInfluence = 0.2f;
+
     [HideInInspector]
     public BigFivePersonality model;
 
@@ -16,7 +19,7 @@ public class MoodController : MonoBehaviour
     public Dictionary<MoodType, float> currentMoodValues = new Dictionary<MoodType, float>();
     [HideInInspector]
     public Dictionary<MoodType, float> thresholdMoodValues = new Dictionary<MoodType, float>();
-    public MoodType mood = MoodType.Neutral;
+    
     [HideInInspector]
     public bool lockMood = false;
     [HideInInspector]
@@ -144,24 +147,26 @@ public class MoodController : MonoBehaviour
     //Calculate value of each mood threshold depending on the personality model OCEAN 
     public float MoodSwitchThreshold(MoodType mood, BigFivePersonality model)
     {
+
         //default value with no personality
         float threshold = 5f;
+        float maxBar = 10f;
         switch (mood)
         {
             case MoodType.Joy:
-                threshold -= (model.neuroticism + model.extraversion);
+                threshold -= (model.neuroticism * maxBar * bigFiveInfluence + model.extraversion * maxBar * bigFiveInfluence);
                 break;
             case MoodType.Sadness:
-                threshold -= model.neuroticism;
+                threshold -= model.neuroticism * maxBar * bigFiveInfluence;
                 break;
             case MoodType.Angry:
-                threshold -= (model.neuroticism - model.agreeableness);
+                threshold -= (model.neuroticism * maxBar * bigFiveInfluence - model.agreeableness * maxBar * bigFiveInfluence);
                 break;
             case MoodType.Fear:
-                threshold -= model.neuroticism;
+                threshold -= model.neuroticism * maxBar * bigFiveInfluence;
                 break;
             case MoodType.Disgust:
-                threshold -= (model.neuroticism - model.agreeableness);
+                threshold -= (model.neuroticism * maxBar * bigFiveInfluence - model.agreeableness * maxBar * bigFiveInfluence);
                 break;
             default:
                 break;
