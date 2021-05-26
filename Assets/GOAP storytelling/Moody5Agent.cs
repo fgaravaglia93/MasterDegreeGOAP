@@ -45,11 +45,11 @@ public class Moody5Agent : Agent
         if (firstTime)
         {
             //manage extraversion factor on available actions
-            foreach (PersonalityAction action in m_availableActions)
+            foreach (Moody5Action action in m_availableActions)
             {
                 if (action.interactAction)
                 {
-                    action.cost = GetComponent<BigFivePersonality>().ExtraversionCostManipulation(action.cost, action.initialCost);
+                    action.cost = GetComponent<BigFivePersonality>().ExtraversionCostManipulation(action.cost, action.bigFiveWeight);
                     //print(action.cost + " - " + action.nameAction);
                 }
 
@@ -93,7 +93,7 @@ public class Moody5Agent : Agent
         string printedPlan="Plan Found:";
         int i = 1;
 
-        foreach (PersonalityAction action in plan)
+        foreach (Moody5Action action in plan)
         {
             if (action.nameAction == "Steal")
                 action.console = "Steal from the wardrobe";

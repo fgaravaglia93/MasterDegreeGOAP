@@ -3,19 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PersonalityAction : GoapAction
+public class Moody5Action : GoapAction
 {
     private bool performed = false;
     private float startTime = 0;
     public float duration;
-    public float initialCost;
-    
 
     [HideInInspector]
-    public string console = "Action: ";
+    public float initialCost;
+    [HideInInspector]
+    public string console = "";//= "Action: ";
     
     //default 1f = 100% of success
-    public float percentageSuccess;
+    [Range(0,1)]
+    public float probOfSuccess = 1f;
+    
+    //Big Five model influence action cost: cost = cost + bigFiveWeight*cost
+    [Range(0, 1)]
+    public float bigFiveWeight = 0.5f;
     //default not interact  action
     public bool interactAction = false;
     public List<GameObject> consentNPCs;
@@ -29,18 +34,14 @@ public class PersonalityAction : GoapAction
         if (startTime == 0)
         {
             startTime = Time.time;
-            //DisplayController.instance.ShowOnConsole(console);
             GetComponentInChildren<CompletionBar>().transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
-            //GetComponent<BigFivePersonality>().containerUI.GetComponentInChildren<Slider>().gameObject.SetActive(true);
             GetComponentInChildren<CompletionBar>().StartTaskBar(GetComponent<HogwartsStudent>().durationActionInfluence * duration);
             DisplayManager.instance.lockMood = true;
         }
         if (Time.time - startTime > duration * GetComponent<HogwartsStudent>().durationActionInfluence)
         {
             performed = true;
-            //GetComponentInChildren<CompletionBar>().transform.GetChild(2).gameObject.SetActive(true);
             GetComponentInChildren<CompletionBar>().transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
-            //GetComponent<BigFivePersonality>().containerUI.GetComponentInChildren<Slider>().gameObject.SetActive(false);
         }
         return true;
     }
@@ -70,7 +71,7 @@ public class PersonalityAction : GoapAction
 
     public override bool CalculateSuccess()
     {
-        float percentage = percentageSuccess * GetComponent<HogwartsStudent>().successActionInfluence;
+        float percentage = probOfSuccess * GetComponent<HogwartsStudent>().successActionInfluence;
         float success = Random.Range(0.0f,1.0f);
 
         if (success <= percentage)
@@ -81,7 +82,7 @@ public class PersonalityAction : GoapAction
             DisplayManager.instance.lockMood = false;
 
             //manipulate action cost based on Openness factor
-            cost = GetComponent<BigFivePersonality>().OpennessCostManipulation(cost,initialCost);
+            cost = GetComponent<BigFivePersonality>().OpennessCostManipulation(initialCost,bigFiveWeight);
 
             //agreeaableness factor > 0 : if the CONSENT is around enter in fear mood 
             //GetComponent<BigFivePersonality>().CheckConsentPeopleAround(consentNPCs);

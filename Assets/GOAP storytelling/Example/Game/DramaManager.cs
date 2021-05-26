@@ -7,9 +7,12 @@ using DialogueSystem.Runtime;
 [System.Serializable]
  public struct StoryComponent
 {
-    public DialogueContainer dialogue;
+    public DialogueContainer narrative;
     public Trait trait;
+    public MoodType changeMoodTo;
+    public GameObject actor;
     public List<GameObject> npcsAffected;
+
 }
 public class DramaManager : MonoBehaviour
 {
@@ -33,9 +36,14 @@ public class DramaManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine("NextEvent");
+        
+        EventGeneration();
     }
 
+    void EventGeneration()
+    {
+        StartCoroutine("NextEvent");
+    }
 
     IEnumerator NextEvent()
     {
@@ -60,11 +68,16 @@ public class DramaManager : MonoBehaviour
                 {
                     if (npc != null)
                     {
-                        TraitData traitData = new TraitData();
-                        traitData.name = storyC.trait.name;
-                        npc.GetComponentInChildren<ParticleSystem>().time = 0;
-                        npc.GetComponentInChildren<ParticleSystem>().Play();
-                        npc.GetComponent<Moody5Agent>().m_personality.AddTrait(traitData);
+                        if(storyC.trait.name != null)
+                        {
+                            TraitData traitData = new TraitData();
+                            traitData.name = storyC.trait.name;
+                            npc.GetComponentInChildren<ParticleSystem>().time = 0;
+                            npc.GetComponentInChildren<ParticleSystem>().Play();
+                            npc.GetComponent<Moody5Agent>().m_personality.AddTrait(traitData);
+                        }
+
+                        DisplayManager.instance.ChangeMood(storyC.changeMoodTo,5);
                     }
                 }
                 exit = true;

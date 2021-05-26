@@ -179,7 +179,7 @@ public class DisplayManager : MonoBehaviour
 
     public void ShowOnConsoleAction(string text, Color color)
     {
-        displayActionText.GetComponent<Text>().text = text;
+        displayActionText.GetComponent<Text>().text = /*"Action : " + */text;
         displayActionText.GetComponent<Text>().color = color;
     }
 

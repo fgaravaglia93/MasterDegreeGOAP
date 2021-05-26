@@ -150,7 +150,7 @@ public class Agent : MonoBehaviour
         HashSet<KeyValuePair<string, bool>> worldState = m_dataProvider.getWorldState();
 		Goal goal = m_goalStack.Peek();
 		plan = m_planner.Plan(agent, m_availableActions, worldState, goal.GoalStates);
-        PersonalityAction acti = (PersonalityAction)plan.Peek();
+        Moody5Action acti = (Moody5Action)plan.Peek();
         if (plan != null) {
             Debug.Log("<color=blue>Found Plan:</color>" + PrettyPrint(goal.GoalStates));
             m_currentActions = plan;
@@ -187,7 +187,7 @@ public class Agent : MonoBehaviour
                 return;
             }
 
-            PersonalityAction action = (PersonalityAction)m_currentActions.Peek();
+            Moody5Action action = (Moody5Action)m_currentActions.Peek();
             actionText = action.console;
             actionColor = new Color(1, 1, 1);
             DisplayManager.instance.ShowOnConsoleAction(actionText);
@@ -215,7 +215,7 @@ public class Agent : MonoBehaviour
             if (HasActionPlan())
             {
 
-                action = (PersonalityAction)m_currentActions.Peek();
+                action = (Moody5Action)m_currentActions.Peek();
                 bool inRange = action.RequiresInRange() ? action.InRange : true;
                 if (inRange)
                 {

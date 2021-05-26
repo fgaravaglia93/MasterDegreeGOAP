@@ -22,24 +22,22 @@ public class BigFivePersonality : MonoBehaviour
     [Range(-1, 1)]
     public int neuroticism;
 
-    public float OpennessCostManipulation(float cost, float increment)
+    //cost depend by Big Five weight defined by each action (default = 0.5f)
+    public float OpennessCostManipulation(float cost, float bigFiveWeight)
     {
-       //change this depending on what you need
-       cost += increment / 2 * openness;
+       cost += cost * bigFiveWeight * openness;
        return cost;
     }
 
-    public float ExtraversionCostManipulation(float cost, float increment)
+    public float ExtraversionCostManipulation(float cost, float bigFiveWeight)
     {
-        //change this depending on what you need
-        cost -= increment / 2 * extraversion;
+        cost -= cost * bigFiveWeight * extraversion;
         return cost;
     }
 
-    public float AgreeablenessCostManipulation(float cost, float increment)
+    public float AgreeablenessCostManipulation(float cost, float bigFiveWeight)
     {
-        //change this depending on what you need
-        cost += increment / 2 * agreeableness;
+        cost += cost * bigFiveWeight * agreeableness;
         return cost;
     }
 

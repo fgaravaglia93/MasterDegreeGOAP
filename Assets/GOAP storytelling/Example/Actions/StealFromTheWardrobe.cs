@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StealFromTheWardrobe : PersonalityAction
+public class StealFromTheWardrobe : Moody5Action
 {
     
     private Transform targetSteal;

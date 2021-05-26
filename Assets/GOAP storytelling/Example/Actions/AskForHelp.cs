@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AskForHelp : PersonalityAction
+public class AskForHelp : Moody5Action
 {
 
     private Transform targetTake;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ReadFromTheBook : PersonalityAction
+public class ReadFromTheBook : Moody5Action
 {
     private Transform targetTake;
 

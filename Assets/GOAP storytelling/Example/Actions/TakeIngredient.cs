@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TakeIngredient : PersonalityAction
+public class TakeIngredient : Moody5Action
 {
   
     private Transform targetTake;

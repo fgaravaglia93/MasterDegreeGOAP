@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DeliverPotion : PersonalityAction
+public class DeliverPotion : Moody5Action
 {
 
     private Transform targetDeliver;

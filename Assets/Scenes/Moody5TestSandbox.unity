@@ -1166,7 +1166,8 @@ MonoBehaviour:
   duration: 2
   initialCost: 0
   console: 'Action: Ask for help'
-  percentageSuccess: 1
+  probOfSuccess: 0
+  bigFiveWeight: 0.5
   interactAction: 0
   consentNPCs: []
 --- !u!114 &294186937
@@ -1188,7 +1189,8 @@ MonoBehaviour:
   duration: 2
   initialCost: 0
   console: 'Action: Read From TheBook'
-  percentageSuccess: 1
+  probOfSuccess: 0
+  bigFiveWeight: 0.5
   interactAction: 0
   consentNPCs: []
 --- !u!114 &294186938
@@ -1231,7 +1233,8 @@ MonoBehaviour:
   duration: 2
   initialCost: 0
   console: 'Action: Deliver potion'
-  percentageSuccess: 1
+  probOfSuccess: 0
+  bigFiveWeight: 0.5
   interactAction: 0
   consentNPCs: []
 --- !u!114 &294186940
@@ -1253,7 +1256,8 @@ MonoBehaviour:
   duration: 5
   initialCost: 0
   console: 'Action: Prepare ingredient'
-  percentageSuccess: 1
+  probOfSuccess: 0
+  bigFiveWeight: 0.5
   interactAction: 0
   consentNPCs: []
 --- !u!114 &294186941
@@ -1275,7 +1279,8 @@ MonoBehaviour:
   duration: 2
   initialCost: 0
   console: 'Action: Take ingredient'
-  percentageSuccess: 1
+  probOfSuccess: 0
+  bigFiveWeight: 0.5
   interactAction: 0
   consentNPCs: []
 --- !u!114 &294186942
@@ -1297,7 +1302,8 @@ MonoBehaviour:
   duration: 1
   initialCost: 0
   console: 'Action: Take ingredient'
-  percentageSuccess: 1
+  probOfSuccess: 0
+  bigFiveWeight: 0.5
   interactAction: 0
   consentNPCs:
   - {fileID: 1506624821}
@@ -1320,7 +1326,8 @@ MonoBehaviour:
   duration: 2
   initialCost: 0
   console: 'Action: Put in the Pot'
-  percentageSuccess: 1
+  probOfSuccess: 0
+  bigFiveWeight: 0.5
   interactAction: 0
   consentNPCs: []
 --- !u!114 &294186944
@@ -14994,7 +15001,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   openness: 0
   conscientiousness: 0
-  extraversion: 1
+  extraversion: -1
   agreeableness: 0
   neuroticism: 1
 --- !u!114 &1430434058
@@ -15016,8 +15023,9 @@ MonoBehaviour:
   duration: 2
   initialCost: 0
   console: 'Action: Ask for help'
-  percentageSuccess: 1
-  interactAction: 0
+  probOfSuccess: 1
+  bigFiveWeight: 0.5
+  interactAction: 1
   consentNPCs: []
 --- !u!114 &1430434059
 MonoBehaviour:
@@ -15038,7 +15046,8 @@ MonoBehaviour:
   duration: 2
   initialCost: 0
   console: 'Action: Read From TheBook'
-  percentageSuccess: 1
+  probOfSuccess: 1
+  bigFiveWeight: 0.5
   interactAction: 0
   consentNPCs: []
 --- !u!114 &1430434060
@@ -15081,7 +15090,8 @@ MonoBehaviour:
   duration: 2
   initialCost: 0
   console: 'Action: Deliver potion'
-  percentageSuccess: 1
+  probOfSuccess: 1
+  bigFiveWeight: 0.5
   interactAction: 0
   consentNPCs: []
 --- !u!114 &1430434062
@@ -15103,7 +15113,8 @@ MonoBehaviour:
   duration: 5
   initialCost: 0
   console: 'Action: Prepare ingredient'
-  percentageSuccess: 1
+  probOfSuccess: 1
+  bigFiveWeight: 0.5
   interactAction: 0
   consentNPCs: []
 --- !u!114 &1430434063
@@ -15125,7 +15136,8 @@ MonoBehaviour:
   duration: 2
   initialCost: 0
   console: 'Action: Take ingredient'
-  percentageSuccess: 1
+  probOfSuccess: 1
+  bigFiveWeight: 0.5
   interactAction: 0
   consentNPCs: []
 --- !u!114 &1430434064
@@ -15147,7 +15159,8 @@ MonoBehaviour:
   duration: 1
   initialCost: 0
   console: 'Action: Take ingredient'
-  percentageSuccess: 1
+  probOfSuccess: 1
+  bigFiveWeight: 0.5
   interactAction: 0
   consentNPCs:
   - {fileID: 1506624821}
@@ -15170,7 +15183,8 @@ MonoBehaviour:
   duration: 2
   initialCost: 0
   console: 'Action: Put in the Pot'
-  percentageSuccess: 1
+  probOfSuccess: 1
+  bigFiveWeight: 0.5
   interactAction: 0
   consentNPCs: []
 --- !u!114 &1430434066
@@ -18242,7 +18256,8 @@ MonoBehaviour:
   duration: 2
   initialCost: 0
   console: 'Action: Ask for help'
-  percentageSuccess: 1
+  probOfSuccess: 0
+  bigFiveWeight: 0.5
   interactAction: 0
   consentNPCs: []
 --- !u!114 &1964688093
@@ -18264,7 +18279,8 @@ MonoBehaviour:
   duration: 2
   initialCost: 0
   console: 'Action: Read From TheBook'
-  percentageSuccess: 1
+  probOfSuccess: 0
+  bigFiveWeight: 0.5
   interactAction: 0
   consentNPCs: []
 --- !u!114 &1964688094
@@ -18306,7 +18322,8 @@ MonoBehaviour:
   duration: 2
   initialCost: 0
   console: 'Action: Deliver potion'
-  percentageSuccess: 1
+  probOfSuccess: 0
+  bigFiveWeight: 0.5
   interactAction: 0
   consentNPCs: []
 --- !u!114 &1964688096
@@ -18328,7 +18345,8 @@ MonoBehaviour:
   duration: 5
   initialCost: 0
   console: 'Action: Prepare ingredient'
-  percentageSuccess: 1
+  probOfSuccess: 0
+  bigFiveWeight: 0.5
   interactAction: 0
   consentNPCs: []
 --- !u!114 &1964688097
@@ -18350,7 +18368,8 @@ MonoBehaviour:
   duration: 2
   initialCost: 0
   console: 'Action: Take ingredient'
-  percentageSuccess: 1
+  probOfSuccess: 0
+  bigFiveWeight: 0.5
   interactAction: 0
   consentNPCs: []
 --- !u!114 &1964688098
@@ -18372,7 +18391,8 @@ MonoBehaviour:
   duration: 1
   initialCost: 0
   console: 'Action: Take ingredient'
-  percentageSuccess: 1
+  probOfSuccess: 0
+  bigFiveWeight: 0.5
   interactAction: 0
   consentNPCs:
   - {fileID: 0}
@@ -18395,7 +18415,8 @@ MonoBehaviour:
   duration: 2
   initialCost: 0
   console: 'Action: Put in the Pot'
-  percentageSuccess: 1
+  probOfSuccess: 0
+  bigFiveWeight: 0.5
   interactAction: 0
   consentNPCs: []
 --- !u!114 &1964688100

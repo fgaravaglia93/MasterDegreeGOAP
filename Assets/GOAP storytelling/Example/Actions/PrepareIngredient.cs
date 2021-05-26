@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PrepareIngredient : PersonalityAction
+public class PrepareIngredient : Moody5Action
 {
 
     private Transform targetPrepare;
