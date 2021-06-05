@@ -34,7 +34,7 @@ public class MovementNPC : MonoBehaviour
             animator.SetBool("isWalking", true);
             //look at player
             MoveD4(DirectionD4(hero.position), 0);
-            Debug.Log(hero.position);
+            //Debug.Log(hero.position);
             firstInteract = false;
             animator.SetBool("isWalking", false);
         }

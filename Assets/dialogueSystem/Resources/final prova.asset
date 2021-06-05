@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a74c0aa5c3437c243b28f0f72899fc53, type: 3}
+  m_Name: final prova
+  m_EditorClassIdentifier: 
+  NodeLinks:
+  - BaseNodeGUID: cea7ae89-c0c8-46da-bc9b-88b315e22f9b
+    PortName: Next
+    TargetNodeGUID: 40e9590c-516a-41c2-b446-80fa678d927e
+    changeMoodTo: 0
+    trait: {fileID: 0}
+  - BaseNodeGUID: 40e9590c-516a-41c2-b446-80fa678d927e
+    PortName: Option 1
+    TargetNodeGUID: 678c5442-c7f3-4d13-9d85-f524a3ec4be8
+    changeMoodTo: 1
+    trait: {fileID: 0}
+  - BaseNodeGUID: 40e9590c-516a-41c2-b446-80fa678d927e
+    PortName: Option 2
+    TargetNodeGUID: b0c82351-0a4d-4b0b-b0da-36c9b989bf0e
+    changeMoodTo: 0
+    trait: {fileID: 0}
+  - BaseNodeGUID: 40e9590c-516a-41c2-b446-80fa678d927e
+    PortName: Option 3
+    TargetNodeGUID: 4cc246a1-3340-4fa8-918c-5f4f32be364d
+    changeMoodTo: 0
+    trait: {fileID: 0}
+  DialogueNodeData:
+  - NodeGUID: 40e9590c-516a-41c2-b446-80fa678d927e
+    title: Dialogue Node
+    DialogueText: Dialogue Content
+    face: {fileID: 0}
+    mood: 0
+    Position: {x: 294, y: 128}
+  - NodeGUID: 4cc246a1-3340-4fa8-918c-5f4f32be364d
+    title: Dialogue Node
+    DialogueText: Dialogue Content 3
+    face: {fileID: 0}
+    mood: 0
+    Position: {x: 767, y: 432}
+  - NodeGUID: b0c82351-0a4d-4b0b-b0da-36c9b989bf0e
+    title: Dialogue Node
+    DialogueText: Dialogue Content 2
+    face: {fileID: 0}
+    mood: 2
+    Position: {x: 770, y: 291}
+  - NodeGUID: 678c5442-c7f3-4d13-9d85-f524a3ec4be8
+    title: Dialogue Node
+    DialogueText: Dialogue Content 1
+    face: {fileID: 0}
+    mood: 5
+    Position: {x: 783, y: 151}
+  - NodeGUID: 9a2bd986-66cd-432c-a9a3-de7846ce9e90
+    title: Dialogue Node
+    DialogueText: Dialogue Content 4
+    face: {fileID: 0}
+    mood: 0
+    Position: {x: 767, y: 558}
+  CommentBlockData: []

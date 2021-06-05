@@ -46,6 +46,7 @@ public class Agent : MonoBehaviour
     public Color goalColor;
     [HideInInspector]
     public Color actionColor;
+    
 
     bool waiting;
 
@@ -74,7 +75,7 @@ public class Agent : MonoBehaviour
 
     public virtual void Update() {
 
-        //vecchio
+        
         //m_eqsEventOccurred = m_eqsAgent.Update();
         //m_fsm.Update(gameObject);
         //Debug.Log("goal cost " + m_goalStack.Peek().maxCostForGoal);
@@ -89,6 +90,8 @@ public class Agent : MonoBehaviour
             {
                 m_goalStack.Remove(m_goalStack.Peek());
                 goalColor = new Color(0, 1, 0);
+                //Goal reached --> Set NPC mood to Joy
+                DisplayManager.instance.ChangeMood(gameObject, MoodType.Joy, 10f);
                 DisplayManager.instance.ShowOnConsoleGoal(goalText, goalColor);
             }
         }  
@@ -203,7 +206,6 @@ public class Agent : MonoBehaviour
                 else
                 {
                     actionText = "Action failed, repeat";
-                    Debug.Log("FAILED");
                     DisplayManager.instance.ShowOnConsoleAction(actionText, new Color(255, 0, 0));
                     //StartCoroutine("WaitFor");
                     //waiting = true;
@@ -246,14 +248,20 @@ public class Agent : MonoBehaviour
 	public virtual void MoveToState(FSM fsm, GameObject agent) {
 
         if(m_eqsEventOccurred!=null) {
-            //FRA
             GetComponent<MoveToNextAction>().followPath = false;
             GetComponent<HogwartsStudent>().pathCalculated = false;
-            //FRA to put aside
             Debug.Log("<color=yellow>EQS Event Occurred: Recaculate Plan</color>");
-            //5f to secure mood activation
-            Debug.Log(m_eqsEventOccurred.changeToMood);
-            DisplayManager.instance.ChangeMood(DisplayManager.instance.moodDict[m_eqsEventOccurred.changeToMood], 5f);
+            var traitText = GetComponent<MoodController>().textTrait;
+            var traitColor = GetComponent<MoodController>().colorTrait;
+            traitText = m_eqsEventOccurred.name;
+            traitColor = new Color(0, 1, 0);
+            DisplayManager.instance.ShowOnConsoleTraitAdHoc(traitText, traitColor);
+            GetComponent<MoodController>().textTrait = "Trait ad hoc";
+            GetComponent<MoodController>().colorTrait = new Color(1, 1, 1);
+            
+            //10f to secure mood activation
+            //Debug.Log(m_eqsEventOccurred.changeToMood);
+            DisplayManager.instance.ChangeMood(gameObject, DisplayManager.instance.moodDict[m_eqsEventOccurred.changeToMood], 10f);
             fsm.popState(); //move
 			fsm.popState(); //perform
 			fsm.pushState(m_idleState);
@@ -340,9 +348,12 @@ public class Agent : MonoBehaviour
         waiting = false;
     }
 
+  
+
+
 #if UNITY_EDITOR
 
-	private void OnDrawGizmos() {
+    private void OnDrawGizmos() {
 
 		if(m_personality!=null && m_personality.m_traitDatas != null) {
 			foreach(TraitData traitData in m_personality.m_traitDatas) {

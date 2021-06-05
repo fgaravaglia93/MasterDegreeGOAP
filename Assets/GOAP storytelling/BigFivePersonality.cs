@@ -50,7 +50,7 @@ public class BigFivePersonality : MonoBehaviour
             foreach (GameObject consent in consentNPCs)
                 if (hit.name == consent.name)
                 {
-                    DisplayManager.instance.ChangeMood(MoodType.Fear, 5);
+                    DisplayManager.instance.ChangeMood(gameObject, MoodType.Fear, 5);
                     return true;
                 }
             

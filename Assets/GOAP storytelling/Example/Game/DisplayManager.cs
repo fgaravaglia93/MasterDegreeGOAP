@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 public class DisplayManager : MonoBehaviour
 {
@@ -14,13 +15,14 @@ public class DisplayManager : MonoBehaviour
     public GameObject dialogueBox;
     public GameObject displayGOAP;
     public GameObject displayOCEAN;
+    public GameObject displaySwitchMood;
 
     [HideInInspector]
     public Camera npcOverlayCamera;
     public GameObject displayConsoleText;
     public GameObject displayGoalText;
     public GameObject displayActionText;
-
+    public GameObject displayTraitAdhoc;
     public GameObject moodBar;
     public GameObject currentMoodDisplay;
     public GameObject cursor;
@@ -29,9 +31,11 @@ public class DisplayManager : MonoBehaviour
 
     private MoodBar currentMood;
     private int cooldownSteps = 5; //default with no personality affection
-    
+    //Manage baloons sprite
     private string spritePathUI = "Sprites/ui_expression_";
-    
+    //Manage facial expression codes
+    private string spritePathFace = "Dialogue/Faceset/";
+
     [HideInInspector]
     public Dictionary<MoodType, MoodBar> moodDict = new Dictionary<MoodType, MoodBar>();
 
@@ -89,8 +93,6 @@ public class DisplayManager : MonoBehaviour
             cam.enabled = false;
         }
 
-
-
         gameCamera.enabled = true;
     }
 
@@ -117,6 +119,7 @@ public class DisplayManager : MonoBehaviour
                     npcOverlayCamera.enabled = true;
                     gameCamera.enabled = false;
                     displayGOAP.gameObject.SetActive(false);
+                    displayTraitAdhoc.gameObject.SetActive(true);
                     ShowOnConsolePersonality();
                     displayOCEAN.transform.parent.gameObject.SetActive(true);
                     moodBar.transform.parent.gameObject.SetActive(true);
@@ -150,6 +153,7 @@ public class DisplayManager : MonoBehaviour
         {
             overlayInUse = false;
             displayBox.gameObject.SetActive(false);
+            displayTraitAdhoc.gameObject.SetActive(false);
             gameCamera.enabled = true;
             npcOverlayCamera.enabled = false;
             if(npc.GetComponent<Moody5Agent>()!=null)
@@ -195,6 +199,17 @@ public class DisplayManager : MonoBehaviour
         displayGoalText.GetComponent<Text>().color = color;
     }
 
+    public void ShowOnConsoleTraitAdHoc(string text)
+    {
+        displayTraitAdhoc.GetComponent<Text>().text = text;
+    }
+
+    public void ShowOnConsoleTraitAdHoc(string text, Color color)
+    {
+        displayTraitAdhoc.GetComponent<Text>().text = text;
+        displayTraitAdhoc.GetComponent<Text>().color = color;
+    }
+
     public void ShowOnConsolePersonality()
     {
         displayOCEAN.transform.GetChild(0).GetComponent<Text>().text = "" +npc.GetComponent<BigFivePersonality>().openness;
@@ -204,53 +219,57 @@ public class DisplayManager : MonoBehaviour
         displayOCEAN.transform.GetChild(4).GetComponent<Text>().text = "" + npc.GetComponent<BigFivePersonality>().neuroticism;
     } 
 
-    public void ChangeMood(MoodBar mood, float increment)
+    public void ChangeMood(GameObject npcMood, MoodBar mood, float increment)
     {   
-        npc.GetComponent<MoodController>().listenerChange = true;
-        npc.GetComponent<MoodController>().moodActivation = mood.name;
-        npc.GetComponent<MoodController>().incrementMood = increment;
+        npcMood.GetComponent<MoodController>().listenerChange = true;
+        npcMood.GetComponent<MoodController>().moodActivation = mood.name;
+        npcMood.GetComponent<MoodController>().incrementMood = increment;
+        npcMood.GetComponent<DialogueController>().face = GetFace(npc.GetComponent<DialogueController>().face.name, (int)npc.GetComponent<MoodController>().mood);
+
     }
 
-    public void ChangeMood(MoodType moodType, float increment)
+    public void ChangeMood(GameObject npcMood, MoodType moodType, float increment)
     {
         if (moodType == MoodType.Neutral)
-            ChangeMood(MoodType.Neutral, increment);
+            ChangeMood(npcMood, MoodType.Neutral, increment);
         else
-            ChangeMood(moodDict[moodType], increment);
+            ChangeMood(npcMood, moodDict[moodType], increment);
     }
 
- 
-    //Cursor
-
+    //Get NPC Face expression associated to a moodindex
+    public Sprite GetFace(string rootName, int code)
+    {
+        rootName = rootName.Remove(rootName.Length - 2);
+        Sprite[] all = Resources.LoadAll<Sprite>(spritePathFace + rootName);
+        //Debug.Log(all[code].name);
+        return all[code];
+    }
     //TO REMOVE (Used to test by buttons)
 
-    public void ChangeMoodToJoy()
+    public void ChangeMoodToJoy(GameObject npcMood)
     {
-        ChangeMood(moodDict[MoodType.Joy], 1f);
+        ChangeMood(npcMood, moodDict[MoodType.Joy], 1f);
     }
 
-    public void ChangeMoodToSadness()
+    public void ChangeMoodToSadness(GameObject npcMood)
     {
-        ChangeMood(moodDict[MoodType.Sadness], 1f);
+        ChangeMood(npcMood, moodDict[MoodType.Sadness], 1f);
     }
 
-    public void ChangeMoodToAngry()
+    public void ChangeMoodToAngry(GameObject npcMood)
     {
-        ChangeMood(moodDict[MoodType.Angry], 1f);
+        ChangeMood(npcMood, moodDict[MoodType.Angry], 1f);
     }
 
-    public void ChangeMoodToFear()
+    public void ChangeMoodToFear(GameObject npcMood)
     {
-        ChangeMood(moodDict[MoodType.Fear], 1f);
+        ChangeMood(npcMood, moodDict[MoodType.Fear], 1f);
     }
 
-    public void ChangeMoodToDisgust()
+    public void ChangeMoodToDisgust(GameObject npcMood)
     {
-        ChangeMood(moodDict[MoodType.Disgust], 1f);
+        ChangeMood(npcMood, moodDict[MoodType.Disgust], 1f);
     }
 
-    public void DisplayChange()
-    {
-        print("Il PG è felice");
-    }
+    
 }

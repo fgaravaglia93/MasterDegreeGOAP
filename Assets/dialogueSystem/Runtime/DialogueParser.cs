@@ -28,12 +28,19 @@ namespace DialogueSystem.Runtime
         public bool dialogueOnGoing = false;
         private bool lastBlock = false;
 
+        [HideInInspector]
         public bool flagNPC;
+        [HideInInspector]
         public bool interactable;
         [HideInInspector]
         public bool flagOCEAN;
+        [HideInInspector]
         public bool flagMood;
+        [HideInInspector]
         public bool flagGOAP;
+
+
+        private Sprite face;
 
         //[HideInInspector]
         public bool storyEvent;
@@ -55,7 +62,6 @@ namespace DialogueSystem.Runtime
         {
             if(interactable && !dialogueOnGoing)
             {
-                Debug.Log("debug");
 
                 if (Input.GetButtonDown("Enter") || storyEvent)
                 {
@@ -93,7 +99,7 @@ namespace DialogueSystem.Runtime
 
                         dialogueOnGoing = true;
                         dialogueFace.transform.parent.gameObject.SetActive(true);
-                        StartDialogue(dialogueData.TargetNodeGUID);
+                        StartDialogue(dialogueData.TargetNodeGUID, dialogueNPC.GetComponent<MoodController>().mood);
 
                     }
                     else
@@ -134,20 +140,18 @@ namespace DialogueSystem.Runtime
 
                         //enable info mode on NPC
                         DisplayManager.instance.interact = false;
-
-
                     }
                 }
             }
         }
 
-        public void StartDialogue(string dialogueDataGUID)
+        public void StartDialogue(string dialogueDataGUID, MoodType changeTo)
         {
             var text = narrativeSequence.DialogueNodeData.Find(x => x.NodeGUID == dialogueDataGUID).DialogueText;
             var choices = narrativeSequence.NodeLinks.Where(x => x.BaseNodeGUID == dialogueDataGUID);
-            var face = narrativeSequence.DialogueNodeData.Find(x => x.NodeGUID == dialogueDataGUID).face;
-
-            // dialogueText.text = ProcessProperties(text);
+            //Manage NPC expression
+            dialogueFace.GetComponent<Image>().sprite = dialogueNPC.face;
+            var face = DisplayManager.instance.GetFace(dialogueNPC.face.name, (int)changeTo);
             dialogueText.text = text;
             dialogueFace.GetComponent<Image>().sprite = face;
             var buttons = buttonContainer.GetComponentsInChildren<Button>();
@@ -166,7 +170,6 @@ namespace DialogueSystem.Runtime
                 
             //This handle the trait option
 
-            //serve un sistema più avanzato per indicare la tranform
             int j = 0;
             bool skip = false;
             Button button = null;
@@ -174,7 +177,6 @@ namespace DialogueSystem.Runtime
             foreach (NodeLinkData choice in choices)
             {
                 //Debug.Log(choice.PortName);
-                //buttonContainer.Translate(new Vector3(300 * j, 0f, 0f), Space.World);
 
                 //se ho trait instanza bottone e dimmi di non istanziare il successivo
                 if (!skip)
@@ -194,9 +196,7 @@ namespace DialogueSystem.Runtime
                             j++;
                             button = InstanciateButtonChoice(choice, nChoices, j);
                         }
-
                     }
-
 
                 }
                 else
@@ -204,35 +204,27 @@ namespace DialogueSystem.Runtime
 
                 //this will manage the change of mood during interaction by talking
                 if (button != null && choice.changeMoodTo != MoodType.Neutral)
-                    button.onClick.AddListener(() => DisplayManager.instance.ChangeMood(choice.changeMoodTo,5f));
-                //button.onClick.AddListener(() => DisplayController.instance.ChangeMoodToJoy());
+                    button.onClick.AddListener(() => DisplayManager.instance.ChangeMood(dialogueNPC.gameObject, choice.changeMoodTo,10f));
             }
         }
 
+        //Instantiate a node in the right position depending on the number of choices
         private Button InstanciateButtonChoice(NodeLinkData choice, int nChoices, int j)
-        {
+        {   
             Button button = Instantiate(choicePrefab, buttonContainer);
             var rectTransform = button.GetComponent<RectTransform>();
             if (nChoices == 1)
                 button.GetComponent<RectTransform>().anchoredPosition =
-                new Vector3(buttonContainer.GetComponent<RectTransform>().anchoredPosition.x + 600, buttonContainer.GetComponent<RectTransform>().anchoredPosition.y - 50f, 0f);
+                new Vector3(buttonContainer.GetComponent<RectTransform>().anchoredPosition.x -100, buttonContainer.GetComponent<RectTransform>().anchoredPosition.y - 50f, 0f);
             else
                 button.GetComponent<RectTransform>().anchoredPosition =
-                new Vector3(buttonContainer.GetComponent<RectTransform>().anchoredPosition.x + 100 * j, buttonContainer.GetComponent<RectTransform>().anchoredPosition.x -50f, 0f);
+                new Vector3(buttonContainer.GetComponent<RectTransform>().anchoredPosition.x -100 + 100 * (j-1), buttonContainer.GetComponent<RectTransform>().anchoredPosition.x -50f, 0f);
 
             button.GetComponentInChildren<TextMeshProUGUI>().text = choice.PortName;
-            button.onClick.AddListener(() => StartDialogue(choice.TargetNodeGUID));
+            button.onClick.AddListener(() => StartDialogue(choice.TargetNodeGUID,choice.changeMoodTo));
             return button;
         }
 
-    /*  private string ProcessProperties(string text)
-        {
-            foreach (var exposedProperty in dialogue.ExposedProperties)
-            {
-                  text = text.Replace($"[{exposedProperty.PropertyName}]", exposedProperty.PropertyValue);
-             }
-          return text;
-         }*/
     }
     
 }

@@ -22,7 +22,6 @@ namespace DialogueSystem.Editor
         public readonly Vector2 DefaultCommentBlockSize = new Vector2(300, 200);
         public DialogueNode EntryPointNode;
         public Blackboard Blackboard = new Blackboard();
-        //public List<ExposedProperty> ExposedProperties { get; private set; } = new List<ExposedProperty>();
         private NodeSearchWindow _searchWindow;
         public DialogueGraphView(DialogueGraph editorWindow)
         {
@@ -51,13 +50,6 @@ namespace DialogueSystem.Editor
                 SearchWindow.Open(new SearchWindowContext(context.screenMousePosition), _searchWindow);
         }
 
-
-        /*public void ClearBlackBoardAndExposedProperties()
-        {
-            ExposedProperties.Clear();
-            Blackboard.Clear();
-        }*/
-
         public Group CreateCommentBlock(Rect rect, CommentBlockData commentBlockData = null)
         {
             if (commentBlockData == null)
@@ -71,39 +63,6 @@ namespace DialogueSystem.Editor
             group.SetPosition(rect);
             return group;
         }
-
-        /*public void AddPropertyToBlackBoard(ExposedProperty property, bool loadMode = false)
-        {
-            var localPropertyName = property.PropertyName;
-            var localPropertyValue = property.PropertyValue;
-            if (!loadMode)
-            {
-                while (ExposedProperties.Any(x => x.PropertyName == localPropertyName))
-                    localPropertyName = $"{localPropertyName}(1)";
-            }
-
-            var item = ExposedProperty.CreateInstance();
-            item.PropertyName = localPropertyName;
-            item.PropertyValue = localPropertyValue;
-            ExposedProperties.Add(item);
-
-            var container = new VisualElement();
-            var field = new BlackboardField { text = localPropertyName, typeText = "string" };
-            container.Add(field);
-
-            var propertyValueTextField = new TextField("Value:")
-            {
-                value = localPropertyValue
-            };
-            propertyValueTextField.RegisterValueChangedCallback(evt =>
-            {
-                var index = ExposedProperties.FindIndex(x => x.PropertyName == item.PropertyName);
-                ExposedProperties[index].PropertyValue = evt.newValue;
-            });
-            var sa = new BlackboardRow(field, propertyValueTextField);
-            container.Add(sa);
-            Blackboard.Add(container);
-        }*/
 
         public override List<Port> GetCompatiblePorts(Port startPort, NodeAdapter nodeAdapter)
         {
@@ -184,19 +143,19 @@ namespace DialogueSystem.Editor
                 insertImage.value = face;
             
             //insertImage = tempDialogueNode.face;
-            tempDialogueNode.mainContainer.Add(insertImage);
+          /*  tempDialogueNode.mainContainer.Add(insertImage);
             tempDialogueNode.mainContainer.Add(previewFace);
-            tempDialogueNode.mainContainer.Add(insertImage.contentContainer);
+            tempDialogueNode.mainContainer.Add(insertImage.contentContainer);*/
            
 
             //Set Image
             //Sprite spriteFace;
-            insertImage.RegisterValueChangedCallback(evt =>
+           /* insertImage.RegisterValueChangedCallback(evt =>
             {
                     tempDialogueNode.face = (Sprite)evt.newValue;
                     tempDialogueNode.mainContainer.Add(insertImage.contentContainer);
 
-            });
+            });*/
 
             //Set title
            /* var textFieldTitle = new TextField("");
@@ -210,6 +169,7 @@ namespace DialogueSystem.Editor
             EnumField moodField = new EnumField(mood);
             moodField.value = tempDialogueNode.mood;
 
+            //Change Color on selecting moodField
             moodField.RegisterValueChangedCallback(evt =>
             {
                 tempDialogueNode.mood = (MoodType)evt.newValue;
@@ -261,7 +221,7 @@ namespace DialogueSystem.Editor
             return tempDialogueNode;
         }
 
-
+        //This manage information of a specific Choice Port
         public void AddChoicePort(DialogueNode nodeCache, string overriddenPortName = "", MoodType savedMoodPort = MoodType.Neutral, Trait traitSaved
             = null)
         {
@@ -274,7 +234,7 @@ namespace DialogueSystem.Editor
                 ? $"Option {outputPortCount + 1}"
                 : overriddenPortName;
 
-            //Avoid loss of information when saving without interact with the ports
+            //Avoid loss of information when saving a node without interact with the ports
             if (outputPortName != "Single")
             {
                 generatedPort.portName = outputPortName+"_"+savedMoodPort;
@@ -286,13 +246,13 @@ namespace DialogueSystem.Editor
             if (overriddenPortName == "")
                 generatedPort.name = $"Option {outputPortCount + 1}_" + savedMoodPort;
 
-            Debug.Log("Load " + generatedPort.name);
 
             var textField = new TextField()
             {
                 name = string.Empty,
                 value = outputPortName
             };
+
             generatedPort.contentContainer.Add(new Label("  "));
 
             EnumField moodAnswer = new EnumField(savedMoodPort);
@@ -323,9 +283,10 @@ namespace DialogueSystem.Editor
                      generatedPort.portName = evt.newValue + "_" + moodName;
                 else
                     generatedPort.portName = evt.newValue + "_" + moodName + "_" + traitName;
-                Debug.Log("Stringa passata text: " + generatedPort.portName);
+                //Debug.Log("Stringa passata text: " + generatedPort.portName);
             });
 
+            //Mood Field Port
             moodAnswer.RegisterValueChangedCallback(evt =>
             {
                 moodName = (MoodType)evt.newValue;
@@ -335,9 +296,10 @@ namespace DialogueSystem.Editor
                     generatedPort.portName = outputPortName + "_" + moodName;
                 else
                     generatedPort.portName = outputPortName + "_" + moodName + "_" + traitName;
-                Debug.Log("Stringa passata mood: "+ generatedPort.portName);
+                //Debug.Log("Stringa passata mood: "+ generatedPort.portName);
             });
 
+            //Trait Field Port
             insertTrait.RegisterValueChangedCallback(evt =>
             {
                 if (evt.newValue != null)
@@ -348,7 +310,7 @@ namespace DialogueSystem.Editor
                 }
                 else
                     generatedPort.portName = outputPortName + "_" + moodName;
-                Debug.Log("Stringa passata Trait: " + generatedPort.portName);
+                //Debug.Log("Stringa passata Trait: " + generatedPort.portName);
 
             });
 

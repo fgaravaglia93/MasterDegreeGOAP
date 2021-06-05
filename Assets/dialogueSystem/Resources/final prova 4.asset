@@ -10,41 +10,41 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a74c0aa5c3437c243b28f0f72899fc53, type: 3}
-  m_Name: Dialogue 2
+  m_Name: final prova 4
   m_EditorClassIdentifier: 
   NodeLinks:
-  - BaseNodeGUID: 16459e5b-a3ec-43db-a67c-80151dc78b74
+  - BaseNodeGUID: 1621c28d-5e58-4ec6-aa57-e695e83a0c7b
     PortName: Next
-    TargetNodeGUID: 0d342c80-f310-452a-8d5a-798e4726829a
+    TargetNodeGUID: 1f28038e-10f0-4ad3-a68a-d87d4a1252f9
     changeMoodTo: 0
     trait: {fileID: 0}
-  - BaseNodeGUID: 0d342c80-f310-452a-8d5a-798e4726829a
-    PortName: Option 1
-    TargetNodeGUID: 69c770a9-f861-4f42-b4d0-0aa53cda91a9
-    changeMoodTo: 0
+  - BaseNodeGUID: 1f28038e-10f0-4ad3-a68a-d87d4a1252f9
+    PortName: joy
+    TargetNodeGUID: 2b649987-3363-47e4-946a-b4907d660cad
+    changeMoodTo: 1
     trait: {fileID: 0}
-  - BaseNodeGUID: 0d342c80-f310-452a-8d5a-798e4726829a
-    PortName: Option 2
-    TargetNodeGUID: c2ee0d98-4cef-4b35-a033-ea1fecea2107
+  - BaseNodeGUID: 1f28038e-10f0-4ad3-a68a-d87d4a1252f9
+    PortName: neutral
+    TargetNodeGUID: ec66eebc-6670-48ca-916f-82bcf91dd674
     changeMoodTo: 0
     trait: {fileID: 0}
   DialogueNodeData:
-  - NodeGUID: 0d342c80-f310-452a-8d5a-798e4726829a
+  - NodeGUID: 2b649987-3363-47e4-946a-b4907d660cad
+    title: Dialogue Node
+    DialogueText: Dialogue Content
+    face: {fileID: 0}
+    mood: 1
+    Position: {x: 702, y: 321}
+  - NodeGUID: ec66eebc-6670-48ca-916f-82bcf91dd674
+    title: Dialogue Node
+    DialogueText: Dialogue Content 2
+    face: {fileID: 0}
+    mood: 0
+    Position: {x: 711, y: 167}
+  - NodeGUID: 1f28038e-10f0-4ad3-a68a-d87d4a1252f9
     title: Dialogue Node
     DialogueText: Dialogue Content
     face: {fileID: 0}
     mood: 0
-    Position: {x: 354, y: 178}
-  - NodeGUID: 69c770a9-f861-4f42-b4d0-0aa53cda91a9
-    title: Dialogue Node
-    DialogueText: Dialogue Content
-    face: {fileID: 0}
-    mood: 0
-    Position: {x: 823, y: 180}
-  - NodeGUID: c2ee0d98-4cef-4b35-a033-ea1fecea2107
-    title: Dialogue Node
-    DialogueText: Dialogue Content
-    face: {fileID: 0}
-    mood: 0
-    Position: {x: 855, y: 391}
+    Position: {x: 258, y: 158}
   CommentBlockData: []

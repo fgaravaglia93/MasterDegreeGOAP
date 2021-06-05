@@ -10,30 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a74c0aa5c3437c243b28f0f72899fc53, type: 3}
-  m_Name: New Dialogue
+  m_Name: final prova 3
   m_EditorClassIdentifier: 
   NodeLinks:
-  - BaseNodeGUID: 34549040-78c0-497b-97c5-aeb0c5047b0b
+  - BaseNodeGUID: 1621c28d-5e58-4ec6-aa57-e695e83a0c7b
     PortName: Next
-    TargetNodeGUID: 5cfc154c-d0d1-49f2-9163-6b092aff8307
-    changeMoodTo: 0
-    trait: {fileID: 0}
-  - BaseNodeGUID: 5cfc154c-d0d1-49f2-9163-6b092aff8307
-    PortName: Option 1
-    TargetNodeGUID: 4ab9adc6-4edd-4488-a19c-02c6dcefc4ef
+    TargetNodeGUID: 1f28038e-10f0-4ad3-a68a-d87d4a1252f9
     changeMoodTo: 0
     trait: {fileID: 0}
   DialogueNodeData:
-  - NodeGUID: 5cfc154c-d0d1-49f2-9163-6b092aff8307
+  - NodeGUID: 1f28038e-10f0-4ad3-a68a-d87d4a1252f9
     title: Dialogue Node
     DialogueText: Dialogue Content
     face: {fileID: 0}
     mood: 0
-    Position: {x: 317, y: 127}
-  - NodeGUID: 4ab9adc6-4edd-4488-a19c-02c6dcefc4ef
-    title: Dialogue Node
-    DialogueText: Dialogue Content
-    face: {fileID: 0}
-    mood: 0
-    Position: {x: 742, y: 55}
+    Position: {x: 264, y: 150}
   CommentBlockData: []

@@ -10,30 +10,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a74c0aa5c3437c243b28f0f72899fc53, type: 3}
-  m_Name: single
+  m_Name: final prova 2
   m_EditorClassIdentifier: 
   NodeLinks:
-  - BaseNodeGUID: fd2a421b-02c2-476a-a38e-c2cc4aeb00dd
+  - BaseNodeGUID: 1621c28d-5e58-4ec6-aa57-e695e83a0c7b
     PortName: Next
-    TargetNodeGUID: 257cf65b-7aa4-49d7-818d-546d1f559ed7
+    TargetNodeGUID: 1f28038e-10f0-4ad3-a68a-d87d4a1252f9
     changeMoodTo: 0
     trait: {fileID: 0}
-  - BaseNodeGUID: 257cf65b-7aa4-49d7-818d-546d1f559ed7
-    PortName: ffff
-    TargetNodeGUID: fd18a215-9548-4eed-b21f-e90093c95ab2
-    changeMoodTo: 0
-    trait: {fileID: 11400000, guid: 1db226b0b48987949ab4f6aa46cda155, type: 2}
+  - BaseNodeGUID: 1f28038e-10f0-4ad3-a68a-d87d4a1252f9
+    PortName: Option 1
+    TargetNodeGUID: 2b649987-3363-47e4-946a-b4907d660cad
+    changeMoodTo: 1
+    trait: {fileID: 0}
   DialogueNodeData:
-  - NodeGUID: 257cf65b-7aa4-49d7-818d-546d1f559ed7
+  - NodeGUID: 1f28038e-10f0-4ad3-a68a-d87d4a1252f9
     title: Dialogue Node
     DialogueText: Dialogue Content
     face: {fileID: 0}
     mood: 0
-    Position: {x: 247, y: 231}
-  - NodeGUID: fd18a215-9548-4eed-b21f-e90093c95ab2
+    Position: {x: 264, y: 150}
+  - NodeGUID: 2b649987-3363-47e4-946a-b4907d660cad
     title: Dialogue Node
     DialogueText: Dialogue Content
     face: {fileID: 0}
-    mood: 0
-    Position: {x: 661, y: 229}
+    mood: 1
+    Position: {x: 702, y: 321}
   CommentBlockData: []

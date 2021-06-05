@@ -72,7 +72,10 @@ namespace DialogueSystem.Editor
 
                 //generate 
                 var message = connectedSockets[i].output.portName.Split(new char[] { '_', '_' });
-                Debug.Log(connectedSockets[i].output.portName);
+                
+                
+                //Debug.Log(connectedSockets[i].output.portName);
+                //Saving Root Node
                 if (message[0] == "Next")
                 {
                     dialogueContainerObject.NodeLinks.Add(new NodeLinkData
@@ -83,12 +86,15 @@ namespace DialogueSystem.Editor
 
                     });
                 }
+                //Saving Dialogue Nodes
                 else
                 {
                     MoodType changeTo = MoodType.Neutral;
                     Trait traitTo = null;
+                    //Get The mood of ther port
                     if(message.Length>=2)
                         changeTo = ConvertMoodFromString(message[1]);
+                    //Get the trait of the port
                     if(message.Length >= 3)
                         traitTo = ConvertTraitFromString(message[2]);
 
@@ -111,7 +117,8 @@ namespace DialogueSystem.Editor
                     NodeGUID = node.GUID,
                     title = node.title,
                     DialogueText = node.DialogueText,
-                    face = node.face,
+                    //face = node.face,
+                    face = null,
                     mood = node.mood,
                     Position = node.GetPosition().position
                 });
@@ -120,11 +127,6 @@ namespace DialogueSystem.Editor
             return true;
         }
 
-        /*private void SaveExposedProperties(DialogueContainer dialogueContainer)
-        {
-            dialogueContainer.ExposedProperties.Clear();
-            dialogueContainer.ExposedProperties.AddRange(_graphView.ExposedProperties);
-        }*/
 
         private void SaveCommentBlocks(DialogueContainer dialogueContainer)
         {
@@ -147,7 +149,7 @@ namespace DialogueSystem.Editor
             _dialogueContainer = Resources.Load<DialogueContainer>(fileName);
             if (_dialogueContainer == null)
             {
-                EditorUtility.DisplayDialog("File Not Found", "Target Narrative Data does not exist!", "OK");
+                EditorUtility.DisplayDialog("File Not Found", "Target Dialogue Data does not exist!", "OK");
                 return;
             }
 
@@ -244,6 +246,7 @@ namespace DialogueSystem.Editor
             }
         }
 
+        //Get MoodType associated to an answer
         private MoodType ConvertMoodFromString(string moodString)
         {
 
@@ -264,11 +267,13 @@ namespace DialogueSystem.Editor
             }
         }
 
+        //Get Trait associated to an answer
         public Trait ConvertTraitFromString(string traitFile)
         {
             //remove space char at start and at the end
             traitFile = traitFile.TrimStart();
             traitFile = traitFile.TrimEnd();
+            //Load the trait associated to the port
             string pathTrait = "Assets/GOAP storytelling/Example/Traits/" + traitFile + ".asset";
             UnityEngine.Object data = AssetDatabase.LoadAssetAtPath(pathTrait, typeof(Trait));
             Trait trait = data as Trait;

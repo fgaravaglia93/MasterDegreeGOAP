@@ -84,7 +84,16 @@ public class Moody5Agent : Agent
         {
             planListText = "Event occurred. Recalculate plan";
             DisplayManager.instance.ShowOnConsolePlan(planListText);
+            StartCoroutine("TraitAdHocHighlight");
         }
+    }
+
+    public IEnumerable TraitAdHocHighlight()
+    {
+        Debug.Log(GetComponent<MoodController>().textTrait);
+        yield return new WaitForSeconds(1f);
+        DisplayManager.instance.ShowOnConsoleTraitAdHoc(GetComponent<MoodController>().textTrait, GetComponent<MoodController>().colorTrait);
+
     }
 
     //Used to print the list of action to be displayed on the investigative UI

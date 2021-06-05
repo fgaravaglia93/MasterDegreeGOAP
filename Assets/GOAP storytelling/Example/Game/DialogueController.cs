@@ -12,6 +12,8 @@ public class DialogueController : MonoBehaviour
    
     public  bool firstInteract;
 
+    public Sprite face;
+
     void Update()
     {
         if(interact && firstInteract)

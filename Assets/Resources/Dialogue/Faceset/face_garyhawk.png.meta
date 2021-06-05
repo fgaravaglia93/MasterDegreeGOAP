@@ -3,101 +3,23 @@ guid: 65f8a2b27e962884496ba55e671b2369
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4877067339641310479
-    second: face_1_0
+      213: -2237787016482705224
+    second: face_garyhawk_0
   - first:
-      213: -2076528217041376470
-    second: face_1_1
+      213: 6225423347043704394
+    second: face_garyhawk_1
   - first:
-      213: 8758228996247068411
-    second: face_1_2
+      213: 80991787081353071
+    second: face_garyhawk_2
   - first:
-      213: -172984324358734071
-    second: face_1_3
+      213: -1809319995669417876
+    second: face_garyhawk_3
   - first:
-      213: -2125013130175267435
-    second: face_1_4
+      213: -8869980560656019364
+    second: face_garyhawk_4
   - first:
-      213: 699234150653440350
-    second: face_1_5
-  - first:
-      213: -7263353430866503324
-    second: face_1_6
-  - first:
-      213: -2696472371236024658
-    second: face_1_7
-  - first:
-      213: -1190497144792724062
-    second: face_1_8
-  - first:
-      213: -4891708208944799882
-    second: face_1_9
-  - first:
-      213: 1001922987471062076
-    second: face_1_10
-  - first:
-      213: 2251249430605818619
-    second: face_1_11
-  - first:
-      213: 7603667465778101647
-    second: face_1_12
-  - first:
-      213: -9127668812090381304
-    second: face_1_13
-  - first:
-      213: -3476904115970720405
-    second: face_1_14
-  - first:
-      213: -4709772759496272719
-    second: face_1_15
-  - first:
-      213: -7665202913135139059
-    second: face_1_16
-  - first:
-      213: -7963207525952250467
-    second: face_1_17
-  - first:
-      213: 8724787846253656446
-    second: face_1_18
-  - first:
-      213: 10847905568708346
-    second: face_1_19
-  - first:
-      213: 825228824539215298
-    second: face_1_20
-  - first:
-      213: -4584663299478428181
-    second: face_1_21
-  - first:
-      213: -466218859921099804
-    second: face_1_22
-  - first:
-      213: 7498853880772514149
-    second: face_1_23
-  - first:
-      213: 1595107618337210808
-    second: face_1_24
-  - first:
-      213: 2913023551731325828
-    second: face_1_25
-  - first:
-      213: 8133883109170414510
-    second: face_1_26
-  - first:
-      213: -3809551315266184759
-    second: face_1_27
-  - first:
-      213: -1907092648516177780
-    second: face_1_28
-  - first:
-      213: 3280534266081618456
-    second: face_1_29
-  - first:
-      213: -6380898629015362454
-    second: face_1_30
-  - first:
-      213: 8874732852073646762
-    second: face_1_31
+      213: -5413615374347014357
+    second: face_garyhawk_5
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -183,7 +105,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: face_1_0
+      name: face_garyhawk_0
       rect:
         serializedVersion: 2
         x: 0
@@ -197,14 +119,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1f2350b281d215cb0800000000000000
-      internalID: -4877067339641310479
+      spriteID: 8b031979098c1f0e0800000000000000
+      internalID: -2237787016482705224
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: face_1_1
+      name: face_garyhawk_1
       rect:
         serializedVersion: 2
         x: 144
@@ -218,14 +140,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a2b6c29a690be23e0800000000000000
-      internalID: -2076528217041376470
+      spriteID: a4e96f8ec85256650800000000000000
+      internalID: 6225423347043704394
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: face_1_2
+      name: face_garyhawk_2
       rect:
         serializedVersion: 2
         x: 288
@@ -239,14 +161,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bfe15d67eda7b8970800000000000000
-      internalID: 8758228996247068411
+      spriteID: f6745bae99dbf1100800000000000000
+      internalID: 80991787081353071
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: face_1_3
+      name: face_garyhawk_3
       rect:
         serializedVersion: 2
         x: 432
@@ -260,14 +182,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 90ff2ea6caf699df0800000000000000
-      internalID: -172984324358734071
+      spriteID: c60fc15dc0104e6e0800000000000000
+      internalID: -1809319995669417876
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: face_1_4
+      name: face_garyhawk_4
       rect:
         serializedVersion: 2
         x: 0
@@ -281,14 +203,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 59dbcd021df6282e0800000000000000
-      internalID: -2125013130175267435
+      spriteID: c505a7ddcaf77e480800000000000000
+      internalID: -8869980560656019364
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: face_1_5
+      name: face_garyhawk_5
       rect:
         serializedVersion: 2
         x: 144
@@ -302,8 +224,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e51358c51cd24b900800000000000000
-      internalID: 699234150653440350
+      spriteID: b2fe375ef79fed4b0800000000000000
+      internalID: -5413615374347014357
       vertices: []
       indices: 
       edges: []
@@ -311,7 +233,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 2ccd1482bd03e724ebc6e00d04e36683
+    spriteID: 46fffa7d75051834589021caa8dca7b8
     internalID: 0
     vertices: []
     indices: 

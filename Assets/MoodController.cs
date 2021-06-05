@@ -32,6 +32,10 @@ public class MoodController : MonoBehaviour
     public GameObject containerUI;
     [HideInInspector]
     public GameObject baloon;
+    [HideInInspector]
+    public string textTrait;
+    [HideInInspector]
+    public Color colorTrait;
 
     void Awake()
     {
@@ -43,7 +47,6 @@ public class MoodController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       
         //Set up mood at the start
         currentMoodValues.Add(MoodType.Joy, 0);
         currentMoodValues.Add(MoodType.Sadness, 0);
@@ -81,7 +84,7 @@ public class MoodController : MonoBehaviour
             {
                 var moodRef = DisplayManager.instance.moodDict[moodActivation];
                 currentMoodValues[moodActivation] += incrementMood;
-                Debug.Log(this.gameObject.name + " - increase - " + currentMoodValues[moodActivation] + " - threshold - " + thresholdMoodValues[moodActivation]);
+                //Debug.Log(this.gameObject.name + " - increase - " + currentMoodValues[moodActivation] + " - threshold - " + thresholdMoodValues[moodActivation]);
 
                 if (DisplayManager.instance.npc == transform.gameObject)
                 {
@@ -106,10 +109,12 @@ public class MoodController : MonoBehaviour
 
                 }
                 listenerChange = false;
+
+                //To define specific behavior for NPCs based on the current Mood
+                //MoodBehavior();
             }
         }
     }
-
 
     IEnumerator CooldownEmotion()
     {
@@ -173,6 +178,32 @@ public class MoodController : MonoBehaviour
         }
         return threshold;
     }
+
+    //Extend to define specific NPC behavior in the current mood
+    private void MoodBehavior()
+    {
+        switch (mood)
+        {
+            case MoodType.Joy:
+                //Define Joy Behavior
+                break;
+            case MoodType.Sadness:
+                //Define Sadness Behavior
+                break;
+            case MoodType.Angry:
+                //Define Angry Behavior
+                break;
+            case MoodType.Fear:
+                //Define Fear Behavior
+                break;
+            case MoodType.Disgust:
+                //define Disgust Behavior
+                break;
+            default:
+                break;
+        }
+    }
+       
 
     private void OnMouseOver()
     {
