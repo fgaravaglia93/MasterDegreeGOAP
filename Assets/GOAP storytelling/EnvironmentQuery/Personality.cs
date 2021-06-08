@@ -147,11 +147,12 @@ public class Personality
         newTraitData.trait = (Trait)data;
         newTraitData.m_testsRuntimeVariables = new List<TestsRuntimeVariables>();
         newTraitData.m_outcomeResults = new List<bool>();
+
         newTraitData.m_testResults = new float[newTraitData.trait.EQSTests.Count];
         
         for (int i = 0; i < newTraitData.trait.EQSTests.Count; i++)
         {
-            //Debug.Log(newTraitData.trait.EQSTests[i].GetType());
+            Debug.Log(newTraitData.trait.EQSTests[i].GetType());
             newTraitData.m_testsRuntimeVariables.Add(new TestsRuntimeVariables(newTraitData.trait, newTraitData.trait.EQSTests[i].name, newTraitData.trait.EQSTests[i].GetType(), null));
             newTraitData.m_outcomeResults.Add(false);
         }

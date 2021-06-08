@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a74c0aa5c3437c243b28f0f72899fc53, type: 3}
+  m_Name: quattro scelte
+  m_EditorClassIdentifier: 
+  NodeLinks:
+  - BaseNodeGUID: 1621c28d-5e58-4ec6-aa57-e695e83a0c7b
+    PortName: Next
+    TargetNodeGUID: 1f28038e-10f0-4ad3-a68a-d87d4a1252f9
+    changeMoodTo: 0
+    trait: {fileID: 0}
+  - BaseNodeGUID: 1f28038e-10f0-4ad3-a68a-d87d4a1252f9
+    PortName: Option 1
+    TargetNodeGUID: 2b649987-3363-47e4-946a-b4907d660cad
+    changeMoodTo: 1
+    trait: {fileID: 0}
+  - BaseNodeGUID: 1f28038e-10f0-4ad3-a68a-d87d4a1252f9
+    PortName: Option 2
+    TargetNodeGUID: 438e0643-3ebc-443a-b2d7-bc61a2912193
+    changeMoodTo: 0
+    trait: {fileID: 0}
+  - BaseNodeGUID: 1f28038e-10f0-4ad3-a68a-d87d4a1252f9
+    PortName: Option 3
+    TargetNodeGUID: 4b350563-c68d-4766-a518-ca35b8cc4742
+    changeMoodTo: 0
+    trait: {fileID: 0}
+  - BaseNodeGUID: 1f28038e-10f0-4ad3-a68a-d87d4a1252f9
+    PortName: Option 4
+    TargetNodeGUID: bdb984b7-7003-4ece-a7ac-a25b4a66b765
+    changeMoodTo: 0
+    trait: {fileID: 0}
+  DialogueNodeData:
+  - NodeGUID: 2b649987-3363-47e4-946a-b4907d660cad
+    title: Dialogue Node
+    DialogueText: Dialogue Content
+    face: {fileID: 0}
+    mood: 1
+    Position: {x: 702, y: 321}
+  - NodeGUID: 438e0643-3ebc-443a-b2d7-bc61a2912193
+    title: Dialogue Node
+    DialogueText: Dialogue Content
+    face: {fileID: 0}
+    mood: 0
+    Position: {x: 594, y: 428}
+  - NodeGUID: 4b350563-c68d-4766-a518-ca35b8cc4742
+    title: Dialogue Node
+    DialogueText: Dialogue Content
+    face: {fileID: 0}
+    mood: 0
+    Position: {x: 653, y: 813}
+  - NodeGUID: bdb984b7-7003-4ece-a7ac-a25b4a66b765
+    title: Dialogue Node
+    DialogueText: Dialogue Content
+    face: {fileID: 0}
+    mood: 0
+    Position: {x: 403, y: 526}
+  - NodeGUID: 1f28038e-10f0-4ad3-a68a-d87d4a1252f9
+    title: Dialogue Node
+    DialogueText: Dialogue Content
+    face: {fileID: 0}
+    mood: 0
+    Position: {x: 173, y: 244}
+  CommentBlockData: []

@@ -53,14 +53,17 @@ MonoBehaviour:
   dialogueBox: {fileID: 0}
   displayGOAP: {fileID: 0}
   displayOCEAN: {fileID: 0}
+  displaySwitchMood: {fileID: 0}
   npcOverlayCamera: {fileID: 0}
   displayConsoleText: {fileID: 0}
   displayGoalText: {fileID: 0}
   displayActionText: {fileID: 0}
+  displayTraitAdhoc: {fileID: 0}
   moodBar: {fileID: 0}
   currentMoodDisplay: {fileID: 0}
   cursor: {fileID: 0}
   npc: {fileID: 0}
+  moodIntensity: 4
   overlayInUse: 0
   interact: 0
   lockMood: 0

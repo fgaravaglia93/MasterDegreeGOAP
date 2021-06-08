@@ -13,7 +13,7 @@ public class MoodController : MonoBehaviour
     public BigFivePersonality model;
 
     private string spritePathBaloon = "Sprites/ui_baloon_";
-    private float stepCooldown = 3f;
+    private float stepCooldown = 2f; // seconds
     private int cooldownSteps = 5; //default with no personality affection
     [HideInInspector]
     public Dictionary<MoodType, float> currentMoodValues = new Dictionary<MoodType, float>();
@@ -47,7 +47,7 @@ public class MoodController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //Set up mood at the start
+        //Set up mood intensity at the start
         currentMoodValues.Add(MoodType.Joy, 0);
         currentMoodValues.Add(MoodType.Sadness, 0);
         currentMoodValues.Add(MoodType.Angry, 0);
@@ -80,9 +80,10 @@ public class MoodController : MonoBehaviour
 
         if (listenerChange)
         {
+            var moodRef = DisplayManager.instance.moodDict[moodActivation];
+
             if (!lockMood)
             {
-                var moodRef = DisplayManager.instance.moodDict[moodActivation];
                 currentMoodValues[moodActivation] += incrementMood;
                 //Debug.Log(this.gameObject.name + " - increase - " + currentMoodValues[moodActivation] + " - threshold - " + thresholdMoodValues[moodActivation]);
 
@@ -90,29 +91,41 @@ public class MoodController : MonoBehaviour
                 {
                     moodRef.bar.value += incrementMood;
                 }
-
-                if (currentMoodValues[moodActivation] >= thresholdMoodValues[moodActivation])
+            }
+            
+            if (currentMoodValues[moodActivation] >= thresholdMoodValues[moodActivation])
+            {
+                
+                lockMood = true;
+                mood = moodActivation;
+                GetComponent<HogwartsStudent>().durationActionInfluence = moodRef.durationChange;
+                GetComponent<HogwartsStudent>().successActionInfluence = moodRef.successChange;
+                baloon.transform.GetComponent<Image>().sprite = Resources.Load<Sprite>(spritePathBaloon + moodRef.name);
+                baloon.transform.GetComponent<Image>().color = new Color(255, 255, 255, 0.75f);
+                StopCoroutine("CooldownEmotion");
+                StartCoroutine("CooldownEmotion");
+                //is this displayed?
+                if (DisplayManager.instance.npc == gameObject)
                 {
-                    mood = moodActivation;
-                    GetComponent<HogwartsStudent>().durationActionInfluence = moodRef.durationChange;
-                    GetComponent<HogwartsStudent>().successActionInfluence = moodRef.successChange;
-                    baloon.transform.GetComponent<Image>().sprite = Resources.Load<Sprite>(spritePathBaloon + moodRef.name);
-                    baloon.transform.GetComponent<Image>().color = new Color(255, 255, 255, 0.75f);
-                    StopCoroutine("CooldownEmotion");
-                    StartCoroutine("CooldownEmotion");
-                    //is this displayed?
-                    if (DisplayManager.instance.npc == this)
+                    DisplayManager.instance.currentMoodDisplay.GetComponent<Image>().sprite = moodRef.sprite;
+                    DisplayManager.instance.currentMoodDisplay.GetComponent<Image>().color = moodRef.color;
+                }
+                foreach (MoodType moodName in System.Enum.GetValues(typeof(MoodType)))
+                    if (moodName != moodActivation && moodName != MoodType.Neutral)
                     {
-                        DisplayManager.instance.currentMoodDisplay.GetComponent<Image>().sprite = moodRef.sprite;
-                        DisplayManager.instance.currentMoodDisplay.GetComponent<Image>().color = moodRef.color;
+                        currentMoodValues[moodActivation] = 0;
+                        if (DisplayManager.instance.npc == transform.gameObject)
+                        {
+                            DisplayManager.instance.moodDict[moodName].bar.value = 0;
+                        }
                     }
 
-                }
-                listenerChange = false;
-
-                //To define specific behavior for NPCs based on the current Mood
-                //MoodBehavior();
             }
+            listenerChange = false;
+
+            //To define specific behavior for NPCs based on the current Mood
+            //MoodBehavior();
+            
         }
     }
 
@@ -121,31 +134,36 @@ public class MoodController : MonoBehaviour
         var moodToCooldown = moodActivation;
         int cooldownSteps = (int)currentMoodValues[moodToCooldown];
         int i = 0;
+        Debug.Log(i+"-"+cooldownSteps);
         while (i < cooldownSteps)
         {
             yield return new WaitForSeconds(stepCooldown);
-            if (!lockMood)
+          
+            i++;
+            currentMoodValues[moodToCooldown] -= incrementMood;
+            //Debug.Log(this.gameObject.name + " - cooldown - " + currentMoodValues[moodToCooldown]);
+            var moodRef = DisplayManager.instance.moodDict[moodToCooldown];
+            if (DisplayManager.instance.npc == transform.gameObject)
             {
-                i++;
-                currentMoodValues[moodToCooldown] -= incrementMood;
-                //Debug.Log(this.gameObject.name + " - cooldown - " + currentMoodValues[moodToCooldown]);
-                var moodRef = DisplayManager.instance.moodDict[moodToCooldown];
-                if (DisplayManager.instance.npc == transform.gameObject) { }
                 moodRef.bar.value -= incrementMood;
-                if (currentMoodValues[moodToCooldown] < thresholdMoodValues[moodToCooldown])
+
+            }
+
+            if (currentMoodValues[moodToCooldown] < thresholdMoodValues[moodToCooldown])
+            {
+                lockMood = false;
+                mood = MoodType.Neutral;
+                GetComponent<HogwartsStudent>().durationActionInfluence = 1f;
+                GetComponent<HogwartsStudent>().successActionInfluence = 1f;
+                baloon.transform.GetComponent<Image>().color = new Color(255, 255, 255, 0);
+                baloon.transform.GetComponent<Image>().sprite = null;
+                if (DisplayManager.instance.npc == gameObject)
                 {
-                    mood = MoodType.Neutral;
-                    GetComponent<HogwartsStudent>().durationActionInfluence = 1f;
-                    GetComponent<HogwartsStudent>().successActionInfluence = 1f;
-                    baloon.transform.GetComponent<Image>().color = new Color(255, 255, 255, 0);
-                    baloon.transform.GetComponent<Image>().sprite = null;
-                    if (DisplayManager.instance.npc == this)
-                    {
-                        DisplayManager.instance.currentMoodDisplay.GetComponent<Image>().sprite = DisplayManager.instance.moodDict[MoodType.Neutral].sprite;
-                        DisplayManager.instance.currentMoodDisplay.GetComponent<Image>().color = DisplayManager.instance.moodDict[MoodType.Neutral].color;
-                    }
+                    DisplayManager.instance.currentMoodDisplay.GetComponent<Image>().sprite = DisplayManager.instance.moodDict[MoodType.Neutral].sprite;
+                    DisplayManager.instance.currentMoodDisplay.GetComponent<Image>().color = DisplayManager.instance.moodDict[MoodType.Neutral].color;
                 }
             }
+
         }
     }
 

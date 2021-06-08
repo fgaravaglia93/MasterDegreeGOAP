@@ -215,10 +215,10 @@ namespace DialogueSystem.Runtime
             var rectTransform = button.GetComponent<RectTransform>();
             if (nChoices == 1)
                 button.GetComponent<RectTransform>().anchoredPosition =
-                new Vector3(buttonContainer.GetComponent<RectTransform>().anchoredPosition.x -100, buttonContainer.GetComponent<RectTransform>().anchoredPosition.y - 50f, 0f);
+                new Vector3(buttonContainer.GetComponent<RectTransform>().anchoredPosition.x -150, buttonContainer.GetComponent<RectTransform>().anchoredPosition.y - 50f, 0f);
             else
                 button.GetComponent<RectTransform>().anchoredPosition =
-                new Vector3(buttonContainer.GetComponent<RectTransform>().anchoredPosition.x -100 + 100 * (j-1), buttonContainer.GetComponent<RectTransform>().anchoredPosition.x -50f, 0f);
+                new Vector3(buttonContainer.GetComponent<RectTransform>().anchoredPosition.x -150 + 150 * (j-1), buttonContainer.GetComponent<RectTransform>().anchoredPosition.x -50f, 0f);
 
             button.GetComponentInChildren<TextMeshProUGUI>().text = choice.PortName;
             button.onClick.AddListener(() => StartDialogue(choice.TargetNodeGUID,choice.changeMoodTo));

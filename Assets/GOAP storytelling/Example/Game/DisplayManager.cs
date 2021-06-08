@@ -26,8 +26,10 @@ public class DisplayManager : MonoBehaviour
     public GameObject moodBar;
     public GameObject currentMoodDisplay;
     public GameObject cursor;
- 
     public GameObject npc;
+
+    [Range(1,10)]
+    public int moodIntensity;
 
     private MoodBar currentMood;
     private int cooldownSteps = 5; //default with no personality affection
@@ -246,29 +248,29 @@ public class DisplayManager : MonoBehaviour
     }
     //TO REMOVE (Used to test by buttons)
 
-    public void ChangeMoodToJoy(GameObject npcMood)
+    public void ChangeMoodToJoy()
     {
-        ChangeMood(npcMood, moodDict[MoodType.Joy], 1f);
+        ChangeMood(npc, moodDict[MoodType.Joy], moodIntensity);
     }
 
-    public void ChangeMoodToSadness(GameObject npcMood)
+    public void ChangeMoodToSadness()
     {
-        ChangeMood(npcMood, moodDict[MoodType.Sadness], 1f);
+        ChangeMood(npc, moodDict[MoodType.Sadness], moodIntensity);
     }
 
-    public void ChangeMoodToAngry(GameObject npcMood)
+    public void ChangeMoodToAngry()
     {
-        ChangeMood(npcMood, moodDict[MoodType.Angry], 1f);
+        ChangeMood(npc, moodDict[MoodType.Angry], moodIntensity);
     }
 
-    public void ChangeMoodToFear(GameObject npcMood)
+    public void ChangeMoodToFear()
     {
-        ChangeMood(npcMood, moodDict[MoodType.Fear], 1f);
+        ChangeMood(npc, moodDict[MoodType.Fear], moodIntensity);
     }
 
-    public void ChangeMoodToDisgust(GameObject npcMood)
+    public void ChangeMoodToDisgust()
     {
-        ChangeMood(npcMood, moodDict[MoodType.Disgust], 1f);
+        ChangeMood(npc, moodDict[MoodType.Disgust], moodIntensity);
     }
 
     

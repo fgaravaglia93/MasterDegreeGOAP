@@ -24,6 +24,7 @@ public class Moody5CreateAgent : EditorWindow
     GameObject interactV;
     GameObject interactH;
     Sprite sprite;
+    Sprite face;
     Editor editor;
     //add something for the movement
 
@@ -56,6 +57,7 @@ public class Moody5CreateAgent : EditorWindow
 
         if (isDialogue)
         {
+            face = EditorGUILayout.ObjectField("Face", face, typeof(Sprite)) as Sprite;
             interactV = EditorGUILayout.ObjectField("Interact Vertical", Resources.Load("Prefab/InteractVertical"), typeof(GameObject), false) as GameObject;
             interactH = EditorGUILayout.ObjectField("Interact Horizontal", Resources.Load("Prefab/InteractHorizontal"), typeof(GameObject), false) as GameObject;
         }
@@ -96,6 +98,7 @@ public class Moody5CreateAgent : EditorWindow
         Vector2 spawnPos = new Vector2(spawnCircle.x, spawnCircle.y);
         GameObject npcToSpawn = new GameObject(objectName);
         npcToSpawn.transform.position = spawnPos;
+        npcToSpawn.transform.localScale.Set(2, 2, 1);
         npcToSpawn.AddComponent(typeof(SpriteRenderer));
         npcToSpawn.AddComponent(typeof(Animator));
         npcToSpawn.AddComponent(typeof(ReskinAnimator));
@@ -109,6 +112,7 @@ public class Moody5CreateAgent : EditorWindow
         npcToSpawn.tag = "NPC";
         npcToSpawn.AddComponent(typeof(BigFivePersonality));
         npcToSpawn.AddComponent(typeof(MoodController));
+
         npcToSpawn.GetComponent<BigFivePersonality>().openness = openness;
         npcToSpawn.GetComponent<BigFivePersonality>().conscientiousness = consciousness;
         npcToSpawn.GetComponent<BigFivePersonality>().extraversion = extraversion;
@@ -127,7 +131,7 @@ public class Moody5CreateAgent : EditorWindow
             {
                 TraitData traitData = new TraitData();
                 traitData.name = trait.name;
-                //npcToSpawn.GetComponent<PersonalityAgent>().m_personality.AddTrait(traitData);
+                //npcToSpawn.GetComponent<Moody5Agent>().m_personality.AddTrait(traitData);
             }
         }
         else
@@ -149,14 +153,8 @@ public class Moody5CreateAgent : EditorWindow
         {
             //Add Dialogue System Script to the NPC and set default value on the inspector
             npcToSpawn.AddComponent(typeof(DialogueController));
-           /* npcToSpawn.AddComponent(typeof(DialogueParser));
-            var dialoguePrefab = GameObject.FindGameObjectWithTag("DialogueContainer");
-            if (dialoguePrefab == null)
-                dialoguePrefab = (GameObject)Instantiate(Resources.Load("Prefab/DialogueContainer"));
-            npcToSpawn.GetComponent<DialogueParser>().dialogueText = dialoguePrefab.gameObject.transform.GetChild(0).transform.GetComponent<TextMeshProUGUI>();
-            npcToSpawn.GetComponent<DialogueParser>().buttonContainer = dialoguePrefab.gameObject.transform.GetChild(1);
-            npcToSpawn.GetComponent<DialogueParser>().dialogueFace = dialoguePrefab.gameObject.transform.GetChild(2).gameObject;
-            npcToSpawn.GetComponent<DialogueParser>().choicePrefab = dialoguePrefab.GetComponentInChildren<Button>();*/
+            npcToSpawn.GetComponent<DialogueController>().face = face;
+           
             //add here variables on inspector for the dialogue Parser - Dialogue Container / Face e button prefab
             GameObject InteractVertical = Instantiate(interactV, Vector3.zero, Quaternion.identity);
             GameObject InteractHorizontal = Instantiate(interactH, Vector3.zero, Quaternion.identity);
