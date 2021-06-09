@@ -50,6 +50,8 @@ public class DisplayManager : MonoBehaviour
     //Used to lock emotions
     [HideInInspector]
     public bool lockMood = false;
+    [HideInInspector]
+    public bool toClick;
     Vector2 pos;
     RaycastHit2D hit;
 
@@ -71,7 +73,7 @@ public class DisplayManager : MonoBehaviour
     void Start()
     {
         var moodNames = System.Enum.GetNames(typeof(MoodType));
- 
+        toClick = false;
         //check and instantiate Mood objects to the relative sliders in the Scene UI
         foreach (MoodType moodName in System.Enum.GetValues(typeof(MoodType)))
         {
@@ -104,64 +106,85 @@ public class DisplayManager : MonoBehaviour
         Vector2 cursorPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         cursor.transform.position = cursorPos;
         //mouse over NPC
-        if (Input.GetMouseButtonDown(0) && !overlayInUse)
+        if (Input.GetMouseButtonDown(0) && toClick)
         {
             pos = Input.mousePosition;
-            pos = gameCamera.ScreenToWorldPoint(pos);
+            if(overlayInUse)
+                pos = npcOverlayCamera.ScreenToWorldPoint(pos);
+            else
+                pos = gameCamera.ScreenToWorldPoint(pos);
             hit = Physics2D.Raycast(pos, Vector2.zero);
-
             if (!interact)
             {
-                if (hit && (hit.collider.gameObject.CompareTag("NPC") || hit.collider.transform.parent.gameObject.CompareTag("NPC")))
+                Debug.Log(hit.collider.gameObject.name);
+
+                if (hit && (hit.collider.gameObject.CompareTag("NPC") || hit.collider.transform.parent.gameObject.CompareTag("NPC"))) 
                 {
-                    Debug.Log("Click");
-                    displayBox.gameObject.SetActive(true);
                     npc = hit.transform.gameObject;
-                    npcOverlayCamera = npc.GetComponentInChildren<Camera>();
-                    npcOverlayCamera.enabled = true;
-                    gameCamera.enabled = false;
-                    displayGOAP.gameObject.SetActive(false);
-                    displayTraitAdhoc.gameObject.SetActive(true);
-                    ShowOnConsolePersonality();
-                    displayOCEAN.transform.parent.gameObject.SetActive(true);
-                    moodBar.transform.parent.gameObject.SetActive(true);
-
-                    foreach (MoodType moodName in System.Enum.GetValues(typeof(MoodType)))
+                    Debug.Log("Click");
+                    if (npc.GetComponent<MoodController>().overlayInUse)
                     {
-                        if (moodName != MoodType.Neutral)
+                        //Togli overlay
+                        overlayInUse = false;
+                        displayBox.gameObject.SetActive(false);
+                        displayTraitAdhoc.gameObject.SetActive(false);
+                        gameCamera.enabled = true;
+                        npcOverlayCamera.enabled = false;
+                        npc.GetComponent<MoodController>().overlayInUse = false;
+                        if (npc.GetComponent<Moody5Agent>() != null)
+                            npc.GetComponent<Moody5Agent>().displayed = false;
+                    }
+                    else
+                    {
+                        if (overlayInUse)
                         {
-                            moodDict[moodName].threshold = npc.GetComponent<MoodController>().thresholdMoodValues[moodName];
-                            moodDict[moodName].bar.value = npc.GetComponent<MoodController>().currentMoodValues[moodName];
-                            moodDict[moodName].SetPlaceholder(moodDict[moodName].threshold);
+                            //Togli overlay NPC
+                            overlayInUse = false;
+                            displayBox.gameObject.SetActive(false);
+                            displayTraitAdhoc.gameObject.SetActive(false);
+                            gameCamera.enabled = true;
+                            npcOverlayCamera.enabled = false;
+                            npc.GetComponent<MoodController>().overlayInUse = false;
+                            if (npc.GetComponent<Moody5Agent>() != null)
+                                npc.GetComponent<Moody5Agent>().displayed = false;
                         }
-                    }
 
-                    if (npc.GetComponent<Moody5Agent>() != null)
-                    {
-                        displayGOAP.gameObject.SetActive(true);
-                        npc.GetComponent<Moody5Agent>().displayed = true;
-                        //update console values
-                        ShowOnConsolePlan(npc.GetComponent<Moody5Agent>().planListText);
-                        ShowOnConsoleAction(npc.GetComponent<Moody5Agent>().actionText, npc.GetComponent<Moody5Agent>().actionColor);
-                        ShowOnConsoleGoal(npc.GetComponent<Moody5Agent>().goalText, npc.GetComponent<Moody5Agent>().goalColor);
+                        Debug.Log("Click attiva");
+                        npc.GetComponent<MoodController>().overlayInUse = true;
+                        displayBox.gameObject.SetActive(true);
+                        npcOverlayCamera = npc.GetComponentInChildren<Camera>();
+                        npcOverlayCamera.enabled = true;
+                        gameCamera.enabled = false;
+                        displayGOAP.gameObject.SetActive(false);
+                        displayTraitAdhoc.gameObject.SetActive(true);
+                        ShowOnConsolePersonality();
+                        displayOCEAN.transform.parent.gameObject.SetActive(true);
+                        moodBar.transform.parent.gameObject.SetActive(true);
+
+                        foreach (MoodType moodName in System.Enum.GetValues(typeof(MoodType)))
+                        {
+                            if (moodName != MoodType.Neutral)
+                            {
+                                moodDict[moodName].threshold = npc.GetComponent<MoodController>().thresholdMoodValues[moodName];
+                                moodDict[moodName].bar.value = npc.GetComponent<MoodController>().currentMoodValues[moodName];
+                                moodDict[moodName].SetPlaceholder(moodDict[moodName].threshold);
+                            }
+                        }
+
+                        if (npc.GetComponent<Moody5Agent>() != null)
+                        {
+                            displayGOAP.gameObject.SetActive(true);
+                            npc.GetComponent<Moody5Agent>().displayed = true;
+                            //update console values
+                            ShowOnConsolePlan(npc.GetComponent<Moody5Agent>().planListText);
+                            ShowOnConsoleAction(npc.GetComponent<Moody5Agent>().actionText, npc.GetComponent<Moody5Agent>().actionColor);
+                            ShowOnConsoleGoal(npc.GetComponent<Moody5Agent>().goalText, npc.GetComponent<Moody5Agent>().goalColor);
+                        }
+                        overlayInUse = true;
                     }
-                    overlayInUse = true;
                 }
             }
-          
         }
-
-        else if (Input.GetButtonDown("back") && overlayInUse)
-        {
-            overlayInUse = false;
-            displayBox.gameObject.SetActive(false);
-            displayTraitAdhoc.gameObject.SetActive(false);
-            gameCamera.enabled = true;
-            npcOverlayCamera.enabled = false;
-            if(npc.GetComponent<Moody5Agent>()!=null)
-                npc.GetComponent<Moody5Agent>().displayed = false;
-        }
-        else { }
     }
 
 

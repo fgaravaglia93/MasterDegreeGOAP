@@ -18,10 +18,14 @@ public class DialogueController : MonoBehaviour
     {
         if(interact && firstInteract)
         {
-            firstInteract = false;
-            DialogueParser.instance.narrativeSequence = dialogue;
-            DialogueParser.instance.dialogueNPC = this;
-            DialogueParser.instance.interactable = true;
+            if(dialogue != null)
+            {
+                firstInteract = false;
+                DialogueParser.instance.narrativeSequence = dialogue;
+                DialogueParser.instance.dialogueNPC = this;
+                DialogueParser.instance.interactable = true;
+            }
+          
         }
 
     }

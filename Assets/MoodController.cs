@@ -16,6 +16,8 @@ public class MoodController : MonoBehaviour
     private float stepCooldown = 2f; // seconds
     private int cooldownSteps = 5; //default with no personality affection
     [HideInInspector]
+    public bool overlayInUse;
+    [HideInInspector]
     public Dictionary<MoodType, float> currentMoodValues = new Dictionary<MoodType, float>();
     [HideInInspector]
     public Dictionary<MoodType, float> thresholdMoodValues = new Dictionary<MoodType, float>();
@@ -47,6 +49,7 @@ public class MoodController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        overlayInUse = false;
         //Set up mood intensity at the start
         currentMoodValues.Add(MoodType.Joy, 0);
         currentMoodValues.Add(MoodType.Sadness, 0);
@@ -95,7 +98,6 @@ public class MoodController : MonoBehaviour
             
             if (currentMoodValues[moodActivation] >= thresholdMoodValues[moodActivation])
             {
-                
                 lockMood = true;
                 mood = moodActivation;
                 GetComponent<HogwartsStudent>().durationActionInfluence = moodRef.durationChange;
@@ -134,7 +136,7 @@ public class MoodController : MonoBehaviour
         var moodToCooldown = moodActivation;
         int cooldownSteps = (int)currentMoodValues[moodToCooldown];
         int i = 0;
-        Debug.Log(i+"-"+cooldownSteps);
+        //Debug.Log(i+"-"+cooldownSteps);
         while (i < cooldownSteps)
         {
             yield return new WaitForSeconds(stepCooldown);
@@ -225,11 +227,14 @@ public class MoodController : MonoBehaviour
 
     private void OnMouseOver()
     {
+        DisplayManager.instance.toClick = true;
         DisplayManager.instance.cursor.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/ui_cursor_investigate");
     }
     private void OnMouseExit()
     {
         DisplayManager.instance.cursor.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/ui_cursor");
+        DisplayManager.instance.toClick = false;
+
     }
 
 }

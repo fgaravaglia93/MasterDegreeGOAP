@@ -1101,6 +1101,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1443960011113128103, guid: 934ad40c5727d594ab2efe41c49d9a95,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 1443960011113128103, guid: 934ad40c5727d594ab2efe41c49d9a95,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 16
+      objectReference: {fileID: 0}
     - target: {fileID: 3183366739968224458, guid: 934ad40c5727d594ab2efe41c49d9a95,
         type: 3}
       propertyPath: m_Name
@@ -10370,7 +10380,7 @@ GameObject:
   - component: {fileID: 675127962}
   - component: {fileID: 675127964}
   - component: {fileID: 675127963}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12201,6 +12211,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mood: 0
   model: {fileID: 0}
+  overlayInUse: 0
   lockMood: 0
   listenerChange: 0
   moodActivation: 0
@@ -12815,7 +12826,7 @@ GameObject:
   - component: {fileID: 1199933525}
   - component: {fileID: 1199933524}
   - component: {fileID: 1199933523}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: ControlsUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12851,7 +12862,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -12880,7 +12891,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_TargetDisplay: 0
 --- !u!224 &1199933526
 RectTransform:
@@ -13491,7 +13502,7 @@ RectTransform:
   m_GameObject: {fileID: 1318844432}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1640201800}
   m_Father: {fileID: 1199933526}
@@ -13499,8 +13510,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 490, y: 270}
+  m_AnchoredPosition: {x: 0, y: -0.000060081}
+  m_SizeDelta: {x: 800, y: 442.72736}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1318844434
 MonoBehaviour:
@@ -13522,7 +13533,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 82cbaf813cd8b644c8b1e8c0ae76d732, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -14241,7 +14252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5c9625071c2a744eb5e9ded560a2695, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogue: {fileID: 0}
+  dialogue: {fileID: 11400000, guid: ba24bd19347a39549bcb282f44142140, type: 2}
   interact: 0
   firstInteract: 0
   face: {fileID: -2237787016482705224, guid: 65f8a2b27e962884496ba55e671b2369, type: 3}
@@ -14554,6 +14565,7 @@ MonoBehaviour:
   planning: 1
   interaction: 0
   displayed: 0
+  goapInteraction: {fileID: 11400000, guid: 6386503b02c046a4f948b71188eda383, type: 2}
 --- !u!114 &1430434067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14703,6 +14715,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mood: 0
   model: {fileID: 0}
+  overlayInUse: 0
   lockMood: 0
   listenerChange: 0
   moodActivation: 0
@@ -15606,7 +15619,7 @@ GameObject:
   - component: {fileID: 1640201803}
   - component: {fileID: 1640201802}
   - component: {fileID: 1640201801}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Quit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15630,8 +15643,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 7.2, y: -103.1}
-  m_SizeDelta: {x: 300, y: 100}
+  m_AnchoredPosition: {x: 16, y: -155}
+  m_SizeDelta: {x: 496.20386, y: 194.04807}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1640201801
 MonoBehaviour:
@@ -17881,6 +17894,11 @@ PrefabInstance:
       propertyPath: npc
       value: 
       objectReference: {fileID: 1430434052}
+    - target: {fileID: 1042873238957989536, guid: 0aa4f97f1c516e547b4b8d29a73450fa,
+        type: 3}
+      propertyPath: heroCamera
+      value: 
+      objectReference: {fileID: 1933980682}
     - target: {fileID: 1042873238957989537, guid: 0aa4f97f1c516e547b4b8d29a73450fa,
         type: 3}
       propertyPath: m_Name

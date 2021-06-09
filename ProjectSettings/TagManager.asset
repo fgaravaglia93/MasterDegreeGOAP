@@ -72,3 +72,6 @@ TagManager:
   - name: Cursor
     uniqueID: 3417721155
     locked: 0
+  - name: UI control
+    uniqueID: 4211673361
+    locked: 0

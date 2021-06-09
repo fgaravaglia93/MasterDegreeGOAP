@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DialogueSystem.DataContainers;
 
 
 public class Moody5Agent : Agent
@@ -16,8 +17,10 @@ public class Moody5Agent : Agent
     bool firsHitAction;
 
     bool traitChange;
+    public DialogueContainer goapInteraction;
     
-    //used to be shown on overlay UI
+    
+    //used on overlay UI
     /*[HideInInspector]
     public string planListText;
     [HideInInspector]
