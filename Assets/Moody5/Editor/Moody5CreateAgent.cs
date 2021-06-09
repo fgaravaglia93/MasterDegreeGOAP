@@ -102,11 +102,12 @@ public class Moody5CreateAgent : EditorWindow
         npcToSpawn.AddComponent(typeof(SpriteRenderer));
         npcToSpawn.AddComponent(typeof(Animator));
         npcToSpawn.AddComponent(typeof(ReskinAnimator));
+        npcToSpawn.GetComponent<ReskinAnimator>().spriteSheetName = objectName;
         npcToSpawn.AddComponent(typeof(Rigidbody2D));
         npcToSpawn.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
         npcToSpawn.GetComponent<Rigidbody2D>().freezeRotation = true;
         npcToSpawn.AddComponent(typeof(BoxCollider2D));
-        npcToSpawn.GetComponent<BoxCollider2D>().size = new Vector2(0.5f, 0.5f);
+        npcToSpawn.GetComponent<BoxCollider2D>().size = new Vector2(1f, 1f);
         npcToSpawn.GetComponent<SpriteRenderer>().sprite = sprite;
         npcToSpawn.GetComponent<SpriteRenderer>().sortingOrder = 2;
         npcToSpawn.tag = "NPC";
@@ -146,7 +147,7 @@ public class Moody5CreateAgent : EditorWindow
                // npcToSpawn.GetComponent<PersonalityCommon>().m_personality.AddTrait(traitData);
             }
         }
-        GameObject CanvasNPC = Instantiate(Resources.Load("Prefab/Canvas"), Vector3.zero, Quaternion.identity) as GameObject;
+        GameObject CanvasNPC = Instantiate(Resources.Load("Prefab/Canvas"), npcToSpawn.transform.position, Quaternion.identity) as GameObject;
         CanvasNPC.transform.parent = npcToSpawn.transform;
 
         if (isDialogue)
@@ -156,13 +157,13 @@ public class Moody5CreateAgent : EditorWindow
             npcToSpawn.GetComponent<DialogueController>().face = face;
            
             //add here variables on inspector for the dialogue Parser - Dialogue Container / Face e button prefab
-            GameObject InteractVertical = Instantiate(interactV, Vector3.zero, Quaternion.identity);
-            GameObject InteractHorizontal = Instantiate(interactH, Vector3.zero, Quaternion.identity);
+            GameObject InteractVertical = Instantiate(interactV, npcToSpawn.transform.position, Quaternion.identity);
+            GameObject InteractHorizontal = Instantiate(interactH, npcToSpawn.transform.position, Quaternion.identity);
             InteractVertical.transform.parent = npcToSpawn.transform;
             InteractHorizontal.transform.parent = npcToSpawn.transform;
 
         }
-        GameObject ParticleSystem = Instantiate(Resources.Load("Prefab/ParticleSystem"), Vector3.zero, Quaternion.identity) as GameObject;
+        GameObject ParticleSystem = Instantiate(Resources.Load("Prefab/ParticleSystem"), npcToSpawn.transform.position, Quaternion.identity) as GameObject;
         ParticleSystem.transform.parent = npcToSpawn.transform;
         objectName = "NPC name";
     }

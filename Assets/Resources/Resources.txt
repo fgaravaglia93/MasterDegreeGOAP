@@ -1,7 +1,8 @@
 Resources
-Sprite/ contiene tutte le sprites usate per UI e per la parte di game
 
 Convenzioni:
 tile_npc_<Mood.moodname>
 ui_expression_<Mood.moodname>
 tile_npc_<GameObjectName>
+
+face_name_0 Neutral 1/Joy 2/Sad 3/Angry 4/Fear 5/Disgust

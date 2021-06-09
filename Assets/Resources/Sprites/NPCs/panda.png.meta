@@ -1,43 +1,79 @@
 fileFormatVersion: 2
-guid: 22631f59bca050f4fbe80c55a3386de1
+guid: cd856a5ace5811c459de5309a5890c90
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7269050836185784415
-    second: Mewra_0
+      213: -3385415037828575978
+    second: panda_0
   - first:
-      213: 6240473092739962123
-    second: Mewra_1
+      213: -2826276934171303176
+    second: panda_1
   - first:
-      213: 8604510380411154076
-    second: Mewra_2
+      213: -3921670906842482960
+    second: panda_2
   - first:
-      213: 6482302444455747575
-    second: Mewra_3
+      213: -1270062873251881712
+    second: panda_3
   - first:
-      213: -712335345345632743
-    second: Mewra_4
+      213: -8712639508818270344
+    second: panda_4
   - first:
-      213: 2346950645557571319
-    second: Mewra_5
+      213: -7131238476452929038
+    second: panda_5
   - first:
-      213: 5292977425575491939
-    second: Mewra_6
+      213: -7058860071805216819
+    second: panda_6
   - first:
-      213: 4764653598308575960
-    second: Mewra_7
+      213: 7628799636190984027
+    second: panda_7
   - first:
-      213: -7852054960574945003
-    second: Mewra_8
+      213: -9081159568030872845
+    second: panda_8
   - first:
-      213: -2405191145951620028
-    second: Mewra_9
+      213: -275549204482373089
+    second: panda_9
   - first:
-      213: -2009644450535153017
-    second: Mewra_10
+      213: 5393147903149783378
+    second: panda_10
   - first:
-      213: -6828160303041292078
-    second: Mewra_11
+      213: -4466823345277068125
+    second: panda_11
+  - first:
+      213: 680443601874989546
+    second: panda_12
+  - first:
+      213: -382302092576276167
+    second: panda_13
+  - first:
+      213: -2549947761875771755
+    second: panda_14
+  - first:
+      213: 3630219579120683443
+    second: panda_15
+  - first:
+      213: -7302541762583711122
+    second: panda_16
+  - first:
+      213: 3479601212635079136
+    second: panda_17
+  - first:
+      213: -3606161494559017159
+    second: panda_18
+  - first:
+      213: -1368320752846215018
+    second: panda_19
+  - first:
+      213: -2902472775898302877
+    second: panda_20
+  - first:
+      213: -500142524221436184
+    second: panda_21
+  - first:
+      213: -6931010826716487558
+    second: panda_22
+  - first:
+      213: 2571497186383963813
+    second: panda_23
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -123,7 +159,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Mewra_0
+      name: panda_0
       rect:
         serializedVersion: 2
         x: 0
@@ -137,14 +173,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1afd3ee07c42f1b90800000000000000
-      internalID: -7269050836185784415
+      spriteID: 61d46f4b5f69401d0800000000000000
+      internalID: -3385415037828575978
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mewra_1
+      name: panda_1
       rect:
         serializedVersion: 2
         x: 48
@@ -158,14 +194,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b051623e63d9a9650800000000000000
-      internalID: 6240473092739962123
+      spriteID: 8f2e6d54a1c07c8d0800000000000000
+      internalID: -2826276934171303176
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mewra_2
+      name: panda_2
       rect:
         serializedVersion: 2
         x: 96
@@ -179,14 +215,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c9e61923a9c596770800000000000000
-      internalID: 8604510380411154076
+      spriteID: 0f67baf861d6399c0800000000000000
+      internalID: -3921670906842482960
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mewra_3
+      name: panda_3
       rect:
         serializedVersion: 2
         x: 0
@@ -200,14 +236,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7ff5e608ab3c5f950800000000000000
-      internalID: 6482302444455747575
+      spriteID: 01dd86dbb84df5ee0800000000000000
+      internalID: -1270062873251881712
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mewra_4
+      name: panda_4
       rect:
         serializedVersion: 2
         x: 48
@@ -221,14 +257,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 916e7bb07c64d16f0800000000000000
-      internalID: -712335345345632743
+      spriteID: 8776adc378c761780800000000000000
+      internalID: -8712639508818270344
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mewra_5
+      name: panda_5
       rect:
         serializedVersion: 2
         x: 96
@@ -242,14 +278,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7fe25dd6d2b029020800000000000000
-      internalID: 2346950645557571319
+      spriteID: 2f1ec6a7360c80d90800000000000000
+      internalID: -7131238476452929038
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mewra_6
+      name: panda_6
       rect:
         serializedVersion: 2
         x: 0
@@ -263,14 +299,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 369b697dcee647940800000000000000
-      internalID: 5292977425575491939
+      spriteID: dc79cd40a24e90e90800000000000000
+      internalID: -7058860071805216819
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mewra_7
+      name: panda_7
       rect:
         serializedVersion: 2
         x: 48
@@ -284,14 +320,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8da28f414337f1240800000000000000
-      internalID: 4764653598308575960
+      spriteID: b57fac999d0fed960800000000000000
+      internalID: 7628799636190984027
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mewra_8
+      name: panda_8
       rect:
         serializedVersion: 2
         x: 96
@@ -305,14 +341,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 51926168d95e70390800000000000000
-      internalID: -7852054960574945003
+      spriteID: 3fa41e6ac7d39f180800000000000000
+      internalID: -9081159568030872845
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mewra_9
+      name: panda_9
       rect:
         serializedVersion: 2
         x: 0
@@ -326,14 +362,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 44493a0656b0f9ed0800000000000000
-      internalID: -2405191145951620028
+      spriteID: f1acfac557d0d2cf0800000000000000
+      internalID: -275549204482373089
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mewra_10
+      name: panda_10
       rect:
         serializedVersion: 2
         x: 48
@@ -347,14 +383,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7826401150f4c14e0800000000000000
-      internalID: -2009644450535153017
+      spriteID: 259b26c917f48da40800000000000000
+      internalID: 5393147903149783378
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mewra_11
+      name: panda_11
       rect:
         serializedVersion: 2
         x: 96
@@ -368,8 +404,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2d8dccba1608d31a0800000000000000
-      internalID: -6828160303041292078
+      spriteID: 3ac965e65d7a202c0800000000000000
+      internalID: -4466823345277068125
       vertices: []
       indices: 
       edges: []
@@ -377,7 +413,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 6163179cbc3ceb84686eb47cf6539fea
     internalID: 0
     vertices: []
     indices: 
