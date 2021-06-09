@@ -173,7 +173,7 @@ public class Personality
 
     public void RemoveTrait(string name)
     {
-        Debug.Log("Collisione Trait");
+        //Debug.Log("Collisione Trait");
         bool found = false;
         int i = 0;
         foreach (TraitData traitData in m_traitDatas)

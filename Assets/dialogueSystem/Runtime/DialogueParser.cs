@@ -30,8 +30,7 @@ namespace DialogueSystem.Runtime
         private bool lastBlock = false;
         string answer;
 
-        [HideInInspector]
-        public bool flagNPC;
+
         [HideInInspector]
         public bool interactable;
         [HideInInspector]
@@ -191,15 +190,15 @@ namespace DialogueSystem.Runtime
             //This handle the trait option
 
             int j = 0;
-            bool skip = false;
+            //bool skip = false;
             Button button = null;
            
             foreach (NodeLinkData choice in choices)
             {
                 //Debug.Log(choice.PortName);
 
-                //se ho trait instanza bottone e dimmi di non istanziare il successivo
-                if (!skip)
+                //Same button for different traits
+                /*if (!skip)
                 {
                     if (choice.trait == null)
                     {
@@ -221,10 +220,17 @@ namespace DialogueSystem.Runtime
 
                 }
                 else
-                    skip = false;
+                    skip = false;*/
 
+                //version Activate mood if trait
+                
+                j++;
+                var present = true;
+                button = InstanciateButtonChoice(choice, nChoices, j);
+                if(choice.trait!=null)
+                    present = CheckTrait(choice.trait);
                 //this will manage the change of mood during interaction by talking
-                if (button != null && choice.changeMoodTo != MoodType.Neutral)
+                if (button != null && choice.changeMoodTo != MoodType.Neutral && present)
                     button.onClick.AddListener(() => DisplayManager.instance.ChangeMood(dialogueNPC.gameObject, choice.changeMoodTo,10f));
             }
         }
@@ -296,14 +302,35 @@ namespace DialogueSystem.Runtime
                 button.onClick.AddListener(() => EndDialogue());
 
             }
-
-
             return button;
         }
 
-        private bool CheckTrait()
+        //Check if a NPC have a certain trait
+        private bool CheckTrait(Trait toCheck)
         {
-            return true;
+            List<Trait> traits;
+            List<TraitData> traitDatas;
+            if (dialogueNPC.GetComponent<Moody5Agent>()!= null)
+            {
+                traits = dialogueNPC.GetComponent<Moody5Agent>().m_traits;
+                foreach (Trait trait in traits)
+                {
+                    if (trait.name == toCheck.name)
+                        return true;
+                }
+            }
+           
+            if(dialogueNPC.GetComponent<PersonalityCommon>() != null)
+            {
+                traitDatas = dialogueNPC.GetComponent<PersonalityCommon>().m_personality.m_traitDatas;
+                foreach (TraitData traitData in traitDatas)
+                {
+                    if (traitData.trait.name == toCheck.name)
+                        return true;
+                }
+            }
+
+            return false;
         }
         
         private void EndDialogue()

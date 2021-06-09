@@ -5,12 +5,14 @@ using UnityEngine;
 public class PersonalityCommon : MonoBehaviour
 {
     public Personality m_personality;
-
-    [HideInInspector]
-    void awake()
+    
+    void Awake()
     {
         m_personality.Init();
-
     }
+
 }
+
+
+    
 
